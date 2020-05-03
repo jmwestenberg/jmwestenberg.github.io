@@ -5,7 +5,7 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
@@ -13,7 +13,122 @@
     </image>
     
     <item>
-      <title>Embedding Tweets in Markdown</title>
+      <title>Mapping with Leaflet</title>
+      <link>/post/mapping-with-leaflet/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/mapping-with-leaflet/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;This post assumes a basic knowledge of R.&lt;/p&gt;
+&lt;p&gt;Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I was
+looking into some political economy questions regarding schools and state government.
+The shapefiles I will be using are the lower and upper legislatures for the state of
+Wisconsin. The points I will be mapping in the second post of this series will be specific
+school locations.&lt;/p&gt;
+&lt;p&gt;The goal of this post is to explain how to make an interactive map as below.
+This map allows user interaction: zooming in and out, clicking on areas
+to show details of that area, removing or adding of layers (top right corner).&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-3.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;The main libraries we will be using are &lt;a href=&#34;https://cran.r-project.org/web/packages/tigris/tigris.pdf&#34;&gt;tigris&lt;/a&gt;
+and &lt;a href=&#34;https://cran.r-project.org/web/packages/leaflet/leaflet.pdf&#34;&gt;leaflet&lt;/a&gt;.
+Let’s start by loading these packages and then downloading the lower and upper legislative
+district shapefiles via tigris.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tigris)                                                          # 1
+library(leaflet)                                                         # 2
+WiscoCdUpper&amp;lt;-state_legislative_districts(state=&amp;quot;WI&amp;quot;, house = &amp;quot;upper&amp;quot;,   # 3
+  year=2013, cb=TRUE)                                                    # 4
+WiscoCdLower&amp;lt;-state_legislative_districts(state=&amp;quot;WI&amp;quot;, house = &amp;quot;lower&amp;quot;,   # 5
+  year=2013, cb=TRUE)                                                    # 6
+centerLNG&amp;lt;--90                                                           # 7
+centerLAT&amp;lt;-44.8                                                          # 8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The arguments arguments are fairly self explanatory:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;state&lt;/strong&gt;: the state that you want to retrieve shapefiles for. Accepts State FIPS or state abbreviation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;house&lt;/strong&gt;: indicates which legislative districts you want. Takes lower or upper as an argument&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;year&lt;/strong&gt;: the districts that were active in this year&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;cb&lt;/strong&gt;: an argument for adjusting level of detail. FALSE is default and is the high detail map. TRUE returns a less detailed map.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The variables centerLNG and centerLAT are longitude and latitude coordinate that I will be using to center my map around.&lt;/p&gt;
+&lt;p&gt;The interactive mapping package I use is leaflet, it will allow us to layer different shapefiles
+over a base map.&lt;/p&gt;
+&lt;p&gt;I first want to store this information that will be popping up to a vector to feed into leaflet’s
+command. Now within our spatial polygon data frame, we can access the ID of each shape. these
+take the form of SSDDD where SS is a two digit state FIPS code, and DDD is a 3 digit district
+number.&lt;/p&gt;
+&lt;pre class=&#34;r numCode R numberLines&#34;&gt;&lt;code&gt;districtinfo &amp;lt;- paste0(&amp;quot;Lower District: &amp;quot;, substr(WiscoCdLower$GEOID, 3, 5))  # 1
+mapcolors&amp;lt;-rainbow(length(WiscoCdLower@data$GEOID))                           # 2
+rnum&amp;lt;-sample(nrow(WiscoCdLower@data))                                         # 3
+pal &amp;lt;- colorFactor(mapcolors[rnum], WiscoCdLower@data$GEOID)                  # 4
+lowermap&amp;lt;-leaflet(options = leafletOptions(minZoom = 4)) %&amp;gt;%                  # 5
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;, group = &amp;quot;base&amp;quot;) %&amp;gt;%                    # 6
+  setView(centerLNG, centerLAT, zoom = 6) %&amp;gt;%                                 # 7
+  setMaxBounds(-94, 41, -85, 48) %&amp;gt;%                                          # 8
+  addPolygons(data = WiscoCdLower, color = &amp;quot;white&amp;quot;, weight = 2,               # 9
+    fillColor = ~pal(GEOID), fillOpacity = 0.5, popup = districtinfo,        # 10
+    group = &amp;quot;Lower&amp;quot;) %&amp;gt;%                                                     # 11
+  addLayersControl(baseGroups = c(&amp;quot;base&amp;quot;), overlayGroups = c(&amp;quot;Lower&amp;quot;))       # 12&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Going line by line:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Define the text that we want to appear in the information when users click an area of the map&lt;/li&gt;
+&lt;li&gt;Define a vector of colors with length equal to the number of districts&lt;/li&gt;
+&lt;li&gt;Since our code in line 2 would have similar colors next to each other, I want to shuffle the colors
+to make it look better (more info &lt;a href=&#34;https://campus.datacamp.com/courses/machine-learning-with-caret-in-r/regression-models-fitting-them-and-evaluating-their-performance?ex=6&#34;&gt;here&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Create a dataframe with color information and an id for each district.&lt;/li&gt;
+&lt;li&gt;Leaflet conveniently allows for piping. To start the map generation, lets limit users to only be able to zoom out so far.&lt;/li&gt;
+&lt;li&gt;This provides a base map where we will lay our other shapes on top of. We can label this so we can refer to
+it later (in line 12).&lt;/li&gt;
+&lt;li&gt;This sets the initial view, centered on a latitude and longitude point with a certain initial zoom&lt;/li&gt;
+&lt;li&gt;To restrict the user from venturing too far from your area of interest you can restrict the frame of the map.
+To see this, try to pull the map in any direction, you can’t get too far until it bounces you back to a relevant frame.&lt;/li&gt;
+&lt;li&gt;Here is where we layer our district shapefile on top of that base map we established in line 6.
+Leaflet recognizes the Spatial Polygon Dataframe as such and knows how to handle it. The color option sets the
+color of the border of the districts and the weight is how thick these borders are.&lt;/li&gt;
+&lt;li&gt;Continuing with the district shapefile options. To fill the shapes with different colors,
+we use the colors we generated in lines 2-4. The fillOpacity command allows you to adjust
+how much you can see through the shape. Notice how you can still make out information on
+the base map? That’s because we set this option to less than 1. The popup option is telling
+leaflet we want to see districtinfo for the area we are clicking on in the map.&lt;/li&gt;
+&lt;li&gt;We can label this layer as “Lower”, this allows us to refer to it in the layers control below.&lt;/li&gt;
+&lt;li&gt;Lastly, this layer control allows us to tell leaflet that we want the “base” to always be
+visible on the map, but we can add/remove “Lower”. To see this in the map below click the icon
+in the upper right corner. Notice how we can uncheck and recheck “Lower”? But we can’t do that
+with the base map.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;div id=&#34;htmlwidget-2&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-6.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+We can then add an additional layer to this map with the upper house as well.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;districtinfo &amp;lt;- paste0(&amp;quot;Lower District: &amp;quot;, substr(WiscoCdLower$GEOID,3,5),  # 1
+  &amp;quot; &amp;lt;br&amp;gt; &amp;quot;, &amp;quot;Upper District: &amp;quot;, substr(WiscoCdUpper$GEOID,3,5))             # 2
+loweranduppermap&amp;lt;-leaflet(options = leafletOptions(minZoom = 4)) %&amp;gt;%        # 3
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;, group = &amp;quot;base&amp;quot;) %&amp;gt;%                  # 4
+  setView(centerLNG, centerLAT, zoom = 6) %&amp;gt;%                               # 5
+  setMaxBounds(-94, 41, -85, 48) %&amp;gt;%                                        # 6
+  addPolygons(data = WiscoCdLower, color = &amp;quot;white&amp;quot;, weight = 2,             # 7
+    fillColor = ~pal(GEOID), fillOpacity = 0.5,                             # 8
+    popup = districtinfo, group = &amp;quot;Lower&amp;quot;) %&amp;gt;%                              # 9
+  addPolygons(data = WiscoCdUpper, weight =2, opacity = 1,                 # 10
+    color = &amp;quot;black&amp;quot;, fill = FALSE, group = &amp;quot;Upper&amp;quot;) %&amp;gt;%                    # 11
+  addLayersControl(baseGroups = c(&amp;quot;base&amp;quot;),                                 # 12
+    overlayGroups = c(&amp;quot;Upper&amp;quot;, &amp;quot;Lower&amp;quot;))                                   # 13&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are only a few changes we needed to make. In line 1 and 2 we define our pop up
+to show information on both the lower and upper legislative districts. In lines 10 and 11
+we add in the upper house as an additional layer. Setting fill to false we can just have the
+boundary of the upper legislative districts, this will allow us to see through to the lower
+legislative district layer. And lastly in line 12 and 13 we add our upper legislative districts
+into the map. Notice if you open the layer control in the map below (upper right corner), you
+can now check/uncheck both the lower and the upper legislative districts.&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-3&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-3&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-8.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Tweets in Markdown Posts</title>
       <link>/post/figuring-out-embedding-tweets/</link>
       <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/post/figuring-out-embedding-tweets/</guid>
@@ -32,7 +147,7 @@ April 29, 2020&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;script&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;When including that code in the blog we get the following:&lt;/p&gt;
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Been experimenting with Hugo Academic and hosting through github. Happy to say I finally have an up and running site &lt;a href=&#34;https://t.co/NK2vLKMo9U&#34;&gt;https://t.co/NK2vLKMo9U&lt;/a&gt; and dare I say it was actually enjoyable to make!&lt;/p&gt;&amp;mdash; Joe Westenberg (@jmwestenberg) &lt;a href=&#34;https://twitter.com/jmwestenberg/status/1255621184365920258?ref_src=twsrc%5Etfw&#34;&gt;April 29, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;p&gt;This was a fairly simple solution and ideally I&amp;rsquo;d like to figure out how to get something that looks more like a tweet. Supposedly you can also embed a live twitter feed on a personal webpage. Both of these tasks are getting added to another day&amp;rsquo;s to-do list.&lt;/p&gt;
+&lt;p&gt;Now this point caused more than a little confusion at first. When building the website locally, the tweet looked nothing like the way it does above, it was simply blocked out text. To be honest, I had temporarily given up on how to make it look as it does above, I figured I would post what I had. When I actually made the page live online, voila!&lt;/p&gt;
 </description>
     </item>
     

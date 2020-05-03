@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-05-01T08:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/talk/</loc>
     <lastmod>2020-05-01T08:00:00+00:00</lastmod>
   </url>
@@ -18,12 +13,17 @@
   </url>
   
   <url>
-    <loc>/post/figuring-out-embedding-tweets/</loc>
-    <lastmod>2020-04-29T14:41:20-05:00</lastmod>
+    <loc>/post/mapping-with-leaflet/</loc>
+    <lastmod>2020-05-02T17:39:17-05:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-05-02T17:39:17-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/figuring-out-embedding-tweets/</loc>
     <lastmod>2020-04-29T14:41:20-05:00</lastmod>
   </url>
   
@@ -100,6 +100,21 @@
   <url>
     <loc>/publication/journal-article/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
   
   <url>
