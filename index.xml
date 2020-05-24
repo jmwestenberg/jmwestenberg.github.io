@@ -13,6 +13,74 @@
     </image>
     
     <item>
+      <title>Project Part 1</title>
+      <link>/courses/introintecon/example1/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
+      <guid>/courses/introintecon/example1/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;Pick a WTO dispute case from their &lt;a href=&#34;https://www.wto.org/english/tratop_e/dispu_e/find_dispu_cases_e.htm&#34;&gt;website&lt;/a&gt; (Will require some searching!) Report the following:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Who are the 2 main countries?&lt;/li&gt;
+&lt;li&gt;What is (are) the main sector(s) in question? Ensure that a specific good is mentioned, this will be important for the rest of the project.&lt;/li&gt;
+&lt;li&gt;What is the time frame of the case? When was it first brought to the WTO? When did it resolve?&lt;/li&gt;
+&lt;li&gt;Define, in general, what is the violation? Some cases may be clear, others may be filled with technical jargon. (Hint: Its probably in your best interest to find one not filled with jargon!)&lt;/li&gt;
+&lt;li&gt;Ensure that you can find the &lt;a href=&#34;https://comtrade.un.org/data/&#34;&gt;trade flow data&lt;/a&gt; for this good for the five years leading up to the case, while the case is active and five years after it has been resolved.&lt;/li&gt;
+&lt;li&gt;Include a link to the WTO dispute case.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Data Collection: For each of the two main countries collect the following data for each of the +/- 5 years of the dispute.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Total Exports&lt;/li&gt;
+&lt;li&gt;Total Imports&lt;/li&gt;
+&lt;li&gt;GDP&lt;/li&gt;
+&lt;li&gt;Total exports to the other main country&lt;/li&gt;
+&lt;li&gt;Now within the main sector in question:
+&lt;ul&gt;
+&lt;li&gt;Exports of both countries&lt;/li&gt;
+&lt;li&gt;Imports of both countries&lt;/li&gt;
+&lt;li&gt;Exports to the other main country&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Project Part 2</title>
+      <link>/courses/introintecon/example2/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
+      <guid>/courses/introintecon/example2/</guid>
+      <description>&lt;h3 id=&#34;first-draft&#34;&gt;First Draft&lt;/h3&gt;
+&lt;p&gt;1000 words. Address points below as well as a description of your case from part 1 of the project. All figures should be included in the paper and clearly labeled.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Plot: For each of the 2 main countries plot for the +/- 5 years of the dispute&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Trade-to-GDP ratio&lt;/li&gt;
+&lt;li&gt;One main country&amp;rsquo;s share of other&amp;rsquo;s in total exports&lt;/li&gt;
+&lt;li&gt;Within the main sector
+&lt;ul&gt;
+&lt;li&gt;Exports&lt;/li&gt;
+&lt;li&gt;Imports&lt;/li&gt;
+&lt;li&gt;Exports to the other main country&lt;/li&gt;
+&lt;li&gt;One main country&amp;rsquo;s share in other&amp;rsquo;s exports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Does this violation in general go against the WTO’s primary purpose &lt;a href=&#34;https://www.wto.org/english/thewto_e/whatis_e/wto_dg_stat_e.htm&#34;&gt;“to open trade for
+the benefit of all”&lt;/a&gt;? Using the material we learned this semester argue how this violation impacts trade.&lt;/li&gt;
+&lt;li&gt;Given the plots you have made with various trade statistics. Which (if any) are relevant for your case and why?&lt;/li&gt;
+&lt;li&gt;How many other cases have there been which these two countries were main complainants/respondents? Are many of these cases around the same time of your case? If so, how many?&lt;/li&gt;
+&lt;li&gt;Was there a final ruling of this case? If not what ruling would you make as a WTO official?
+If there was, do you agree with it? Support your answer with data and the economics we have learned.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Redistricting and Economic Outcomes</title>
       <link>/talk/example/</link>
       <pubDate>Fri, 01 May 2020 08:00:00 +0000</pubDate>
