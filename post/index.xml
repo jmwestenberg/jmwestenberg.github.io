@@ -127,44 +127,5 @@ can now check/uncheck both the lower and the upper legislative districts.&lt;/p&
 </description>
     </item>
     
-    <item>
-      <title>Using Tweets in Markdown Posts</title>
-      <link>/post/figuring-out-embedding-tweets/</link>
-      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/figuring-out-embedding-tweets/</guid>
-      <description>&lt;p&gt;As an aspiring user of #econtwitter, I figured I would investigate how to embed tweets within a blog post.&lt;/p&gt;
-&lt;p&gt;Utilizing the hugo academic framework, I can directly put .html code within the body of the blog&amp;rsquo;s code. Twitter has a nice built in feature to simply extract html code for the tweet. It should look something like this.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;blockquote&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;twitter-tweet&amp;#34;&lt;/span&gt;&amp;gt;
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dir&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ltr&amp;#34;&lt;/span&gt;&amp;gt;
-Been experimenting with Hugo Academic and hosting through github. 
-Happy to say I finally have an up and running site 
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://t.co/NK2vLKMo9U&amp;#34;&lt;/span&gt;&amp;gt;https://t.co/NK2vLKMo9U&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt; 
-and dare I say it was actually enjoyable to make!&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;&amp;amp;mdash; 
-Joe Westenberg (@jmwestenberg) 
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://twitter.com/jmwestenberg/status/1255621184365920258?ref_src=twsrc%5Etfw&amp;#34;&lt;/span&gt;&amp;gt;
-April 29, 2020&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;blockquote&lt;/span&gt;&amp;gt; 
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;script&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://platform.twitter.com/widgets.js&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;
-&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;script&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When including that code in the blog we get the following:&lt;/p&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Been experimenting with Hugo Academic and hosting through github. Happy to say I finally have an up and running site &lt;a href=&#34;https://t.co/NK2vLKMo9U&#34;&gt;https://t.co/NK2vLKMo9U&lt;/a&gt; and dare I say it was actually enjoyable to make!&lt;/p&gt;&amp;mdash; Joe Westenberg (@jmwestenberg) &lt;a href=&#34;https://twitter.com/jmwestenberg/status/1255621184365920258?ref_src=twsrc%5Etfw&#34;&gt;April 29, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;p&gt;Now this point caused more than a little confusion at first. When building the website locally, the tweet looked nothing like the way it does above, it was simply blocked out text. To be honest, I had temporarily given up on how to make it look as it does above, I figured I would post what I had. When I actually made the page live online, voila!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>/post/20200428/</link>
-      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/post/20200428/</guid>
-      <description>
-
-
-&lt;p&gt;I started the journey with creating a website this past winter. With the stay-at-home orders and being back in Wisconsin, where its still rarely above 45 degrees, I decided to actually put the finishing touches
-on it and experimenting with how to publish it online.&lt;/p&gt;
-&lt;p&gt;While I knew about and had been using Hugo Academic since the winter to slowly create content, I just recently learned that with github, you can host your own website for free! Being an economist though, I have to
-note that the website isn’t actually free, I put many hours into debugging, but now I am finally at a point to make it public!&lt;/p&gt;
-</description>
-    </item>
-    
   </channel>
 </rss>
