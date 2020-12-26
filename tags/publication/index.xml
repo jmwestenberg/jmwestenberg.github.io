@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications | Joseph M. Westenberg</title>
-    <link>/publication/</link>
-      <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
-    <description>Publications</description>
+    <title>Publication | Joseph M. Westenberg</title>
+    <link>/tags/publication/</link>
+      <atom:link href="/tags/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publication</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2020</copyright><lastBuildDate>Sat, 01 Jun 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png</url>
-      <title>Publications</title>
-      <link>/publication/</link>
+      <title>Publication</title>
+      <link>/tags/publication/</link>
     </image>
     
     <item>

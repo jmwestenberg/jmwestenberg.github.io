@@ -8,8 +8,58 @@
   </url>
   
   <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/beverly-mendoza/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/nikita-lopatin/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/international-trade/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2020-05-02T17:39:17-05:00</lastmod>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/political-economy/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/section-301/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/sect_301/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,48 +83,13 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/international-trade/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/io/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/political-economy/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/current-project/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/courses/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/david-schaffer/</loc>
+    <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -83,7 +98,12 @@
   </url>
   
   <url>
-    <loc>/authors/david-schaffer/</loc>
+    <loc>/tags/labor-economics/</loc>
+    <lastmod>2019-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/publication/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -94,11 +114,6 @@
   
   <url>
     <loc>/publication/</loc>
-    <lastmod>2019-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/source-themes/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
