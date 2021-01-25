@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Joseph M. Westenberg</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Mon, 25 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png</url>
       <title>Joseph M. Westenberg</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Lesson 0</title>
       <link>/courses/intror/lesson0/</link>
-      <pubDate>Sun, 24 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson0/</guid>
       <description>
 
@@ -49,7 +49,7 @@ print(first_dataframe)                # 2&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Lesson 1</title>
       <link>/courses/intror/lesson1/</link>
-      <pubDate>Sun, 24 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson1/</guid>
       <description>
 
