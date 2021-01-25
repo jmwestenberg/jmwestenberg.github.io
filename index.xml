@@ -13,10 +13,10 @@
     </image>
     
     <item>
-      <title>Example Page 1</title>
-      <link>/courses/example/lesson0/</link>
+      <title>Lesson 0.1</title>
+      <link>/courses/rcourse/lesson0/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/example/lesson0/</guid>
+      <guid>/courses/rcourse/lesson0/</guid>
       <description>
 
 
@@ -47,10 +47,10 @@ print(first_dataframe)                # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Example Page 2</title>
-      <link>/courses/example/lesson1/</link>
+      <title>Lesson 1.1</title>
+      <link>/courses/rcourse/lesson1/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/example/lesson1/</guid>
+      <guid>/courses/rcourse/lesson1/</guid>
       <description>
 
 

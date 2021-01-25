@@ -28,11 +28,13 @@
   
     
   
-  <meta name="description" content="Project OrganizationBefore we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:
-raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.scripts: Where we will save all of our R-scripts in this folderprocessed_data: If we want to save some intermediate data steps between raw data and our output.">
+  <meta name="description" content="Getting Started in RI assume you have R installed and running. There are plenty of guides online on how to do this.
+Let’s first define some arrays within R.
+These can be numeric based, in this case integer.
+A&lt;-c(5,6,7) # 1B&lt;-c(7,8,9) # 2Let’s dig into what is going on a bit more. We are telling R to define a vector, this is the c( ) part, with elements 1,2,3 and give that vector a name A.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/courses/example/lesson1/">
+  <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson0/">
 
   
 
@@ -252,7 +254,7 @@
   <link rel="icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/courses/example/lesson1/">
+  <link rel="canonical" href="/courses/rcourse/lesson0/">
 
   
   
@@ -269,10 +271,12 @@
   <meta property="twitter:creator" content="@jmwestenberg">
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
-  <meta property="og:url" content="/courses/example/lesson1/">
-  <meta property="og:title" content="Example Page 2 | Joseph M. Westenberg">
-  <meta property="og:description" content="Project OrganizationBefore we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:
-raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.scripts: Where we will save all of our R-scripts in this folderprocessed_data: If we want to save some intermediate data steps between raw data and our output."><meta property="og:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png">
+  <meta property="og:url" content="/courses/rcourse/lesson0/">
+  <meta property="og:title" content="Lesson 0.1 | Joseph M. Westenberg">
+  <meta property="og:description" content="Getting Started in RI assume you have R installed and running. There are plenty of guides online on how to do this.
+Let’s first define some arrays within R.
+These can be numeric based, in this case integer.
+A&lt;-c(5,6,7) # 1B&lt;-c(7,8,9) # 2Let’s dig into what is going on a bit more. We are telling R to define a vector, this is the c( ) part, with elements 1,2,3 and give that vector a name A."><meta property="og:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png">
   <meta property="twitter:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -297,7 +301,7 @@
 
 
 
-  <title>Example Page 2 | Joseph M. Westenberg</title>
+  <title>Lesson 0.1 | Joseph M. Westenberg</title>
 
 </head>
 
@@ -655,20 +659,29 @@
   
   
   <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/courses/example/">Syllabus</a>
+    <a class="docs-toc-link" href="/courses/rcourse/">Introduction</a>
 
   </div>
   
   <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/courses/example/lesson0/">Example Topic</a>
+    <a class="docs-toc-link" href="/courses/rcourse/lesson0/">Lesson 0</a>
+    <ul class="nav docs-sidenav">
+      
+      <li class="active">
+        <a href="/courses/rcourse/lesson0/">Lesson 0.1</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/rcourse/lesson1/">Lesson 1</a>
     <ul class="nav docs-sidenav">
       
       <li >
-        <a href="/courses/example/lesson0/">Tips 1-2</a>
-      </li>
-      
-      <li class="active">
-        <a href="/courses/example/lesson1/">Tips 3-4</a>
+        <a href="/courses/rcourse/lesson1/">Lesson 1.1</a>
       </li>
       
     </ul>
@@ -688,34 +701,34 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Example Page 2</h1>
+          <h1>Lesson 0.1</h1>
 
           <div class="article-style">
             
 
 
-<div id="project-organization" class="section level2">
-<h2>Project Organization</h2>
-<p>Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:</p>
-<ul>
-<li>raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.</li>
-<li>scripts: Where we will save all of our R-scripts in this folder</li>
-<li>processed_data: If we want to save some intermediate data steps between raw data and our output.</li>
-<li>tables: Any tex tables we generate we will save to this folder</li>
-<li>figures: Any figures we generate we will save to this folder</li>
-<li>tex: Where we can have our paper and/or presentations</li>
-</ul>
-<p>You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out <a href="https://econ-project-templates.readthedocs.io/en/stable/index.html">Templates for Reproducible Research Projects in Economics</a>.)</p>
-<p>My project folder now looks like this:
-<strong>Insert image of folder</strong></p>
-</div>
-<div id="getting-data" class="section level2">
-<h2>Getting Data</h2>
-<p>Let’s start by downloading <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU#">Senate data from MIT Election Lab’s website</a>. Let’s choose the csv format and save it in your raw_data folder. Next let’s download <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2">House of Representatives data from MIT Election Lab</a> again in csv format.</p>
-</div>
-<div id="reading-in-the-data" class="section level2">
-<h2>Reading in the data</h2>
-<p>Let’s open up a blank R script.</p>
+<div id="getting-started-in-r" class="section level2">
+<h2>Getting Started in R</h2>
+<p>I assume you have R installed and running. There are plenty of guides online on how to do this.</p>
+<p>Let’s first define some arrays within R.</p>
+<p>These can be numeric based, in this case integer.</p>
+<pre class="r numCode R numberLines"><code>A&lt;-c(5,6,7)  # 1
+B&lt;-c(7,8,9)  # 2</code></pre>
+<p>Let’s dig into what is going on a bit more. We are telling R to define a vector, this is the c( ) part, with elements 1,2,3 and give that vector a name A. The backwards arrow tells R what is the name and what is the element we are defining.</p>
+<p>We can make character based vectors as well.</p>
+<pre class="r numCode R numberLines"><code>C&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)  # 1
+D&lt;-c(&quot;d&quot;, &quot;e&quot;, &quot;f&quot;)  # 2</code></pre>
+<p>We can then combine these vectors into a dataframe (this is relevant for when we start thinking about reading in/manipulating actual data). Since all of our vectors are length three, we can easily create a dataframe (think a matrix) where our column names will be the name of the vectors, and the rows will be the elements of the vectors.</p>
+<pre class="r numCode R numberLines"><code>first_dataframe&lt;-data.frame(A,B,C,D)  # 1
+print(first_dataframe)                # 2</code></pre>
+<pre><code>##   A B C D
+## 1 5 7 a d
+## 2 6 8 b e
+## 3 7 9 c f</code></pre>
+<p>Now first_dataframe is going to be of similar format as we will typically have when we read in data from excel files into R.</p>
+<pre class="r numCode R numberLines"><code>print(first_dataframe[1,])  # 1</code></pre>
+<pre><code>##   A B C D
+## 1 5 7 a d</code></pre>
 </div>
 
           </div>
@@ -732,10 +745,9 @@
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Previous</div>
-    <a href="/courses/example/lesson0/" rel="next">Example Page 1</a>
+    <div class="meta-nav">Next</div>
+    <a href="/courses/rcourse/lesson1/" rel="prev">Lesson 1.1</a>
   </div>
-  
   
 </div>
 
@@ -756,7 +768,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5cexample%5clesson1.html">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses%5crcourse%5clesson0.html">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

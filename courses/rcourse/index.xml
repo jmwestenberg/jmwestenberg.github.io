@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Syllabus | Joseph M. Westenberg</title>
-    <link>/courses/example/</link>
-      <atom:link href="/courses/example/index.xml" rel="self" type="application/rss+xml" />
+    <link>/courses/rcourse/</link>
+      <atom:link href="/courses/rcourse/index.xml" rel="self" type="application/rss+xml" />
     <description>Syllabus</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png</url>
       <title>Syllabus</title>
-      <link>/courses/example/</link>
+      <link>/courses/rcourse/</link>
     </image>
     
     <item>
-      <title>Example Page 1</title>
-      <link>/courses/example/lesson0/</link>
+      <title>Lesson 0.1</title>
+      <link>/courses/rcourse/lesson0/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/example/lesson0/</guid>
+      <guid>/courses/rcourse/lesson0/</guid>
       <description>
 
 
@@ -47,10 +47,10 @@ print(first_dataframe)                # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Example Page 2</title>
-      <link>/courses/example/lesson1/</link>
+      <title>Lesson 1.1</title>
+      <link>/courses/rcourse/lesson1/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/example/lesson1/</guid>
+      <guid>/courses/rcourse/lesson1/</guid>
       <description>
 
 
