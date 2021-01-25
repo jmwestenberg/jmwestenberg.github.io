@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>E203: Intro to International Economics | Joseph M. Westenberg</title>
+    <title>Syllabus | Joseph M. Westenberg</title>
     <link>/courses/intror/</link>
       <atom:link href="/courses/intror/index.xml" rel="self" type="application/rss+xml" />
-    <description>E203: Intro to International Economics</description>
+    <description>Syllabus</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png</url>
-      <title>E203: Intro to International Economics</title>
+      <title>Syllabus</title>
       <link>/courses/intror/</link>
     </image>
     
     <item>
-      <title>lesson0</title>
+      <title>Example Page 1</title>
       <link>/courses/intror/lesson0/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson0/</guid>
@@ -47,7 +47,7 @@ print(first_dataframe)                # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>lesson1</title>
+      <title>Example Page 2</title>
       <link>/courses/intror/lesson1/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson1/</guid>
