@@ -1,0 +1,29 @@
+---
+# Course title, summary, and position.
+linktitle: "Introduction to Coding in R for Economists"
+summary: This 3 lecture workshop was put together for Economists at IU to teach basic skills in R.
+weight: 1
+
+# Page metadata.
+title: "Introduction to Coding in R for Economists"
+date: "2021-01-24T00:00:00Z"
+lastmod: "2021-01-24T00:00:00Z"
+draft: false  # Is this a draft? true/false
+type: docs  # Do not modify.
+
+# Add menu entry to sidebar.
+# - name: Declare this menu item as a parent with ID `name`.
+# - weight: Position of link in menu.
+menu: 
+  r:
+    name: Summary 
+    weight: 1
+---
+
+## Objectives
+The goal of these short courses are to give graduate students a very prelimenary introduction into coding in R. While having an 'instructor' teach you these things may be helpful, in my belief, coding, like math, you have to learn by doing. So I highly encourage following these notes, but then play around with the code. Change things and see how it changes the output. I think this is the best way to learn.
+
+Over the next 3 'sessions' we will be solving out an economic problem. The goal will be to start with an economic question: BLAH BLAH. Then use R to pull the data we will use. Clean this data. Analyze the data, creating summary statistics and plots. Then we will run some basic regressions. We will be doing this all while learning file pathing and how to export graphics and tables from R into LaTex.
+
+## Data and Question
+We will be using MIT Election Lab's data on US Senate and House Elections. We will be loosely investigating if elections have become safer for incumbents over time. 
