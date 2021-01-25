@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Lesson0</title>
+      <title>lesson0</title>
       <link>/courses/intror/lesson0/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson0/</guid>
@@ -47,7 +47,7 @@ print(first_dataframe)                # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Lesson1</title>
+      <title>lesson1</title>
       <link>/courses/intror/lesson1/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/courses/intror/lesson1/</guid>
