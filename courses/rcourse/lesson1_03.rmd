@@ -1,6 +1,6 @@
 ---
-title: Concatenating Strings
-linktitle: Concatenating Strings
+title: String Manipulation
+linktitle: String Manipulation
 toc: false
 type: docs  # Do not modify.
 date: "2021-01-25T00:00:00Z"
@@ -11,7 +11,7 @@ draft: false
 menu:
   rcourse:
     parent: Lesson 1
-    weight: 2
+    weight: 40
 
 weight: 40
 ---
@@ -32,17 +32,14 @@ local({
 ```
 
 
-Before we get into downloading our data. Let's learn how to concatenate strings in R.
-
+## String Concatenation
 ```{r}
 a<-"This is a the start"
 b<-"of a sentence"
 print(paste0(a,b))
 print(paste(a,b))
 ```
-Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it's that easy! 
-
-## Note/Extras
+Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it's that easy!
 
 We will not be using this for this project but it may be useful to know we can concatenate two vectors of strings as well. 
 ```{r}
@@ -51,4 +48,28 @@ b<-c("of a sentence.", "another sentence.", "quite handy.", "awesome!")
 print(paste(a,b))
 ```
 
-Another command I have used a lot within the 
+I don't want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.
+
+## String Padding
+
+Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the 'single character' digits to have a leading one. That is instead of "1" we need "01". 
+
+We could use paste0 as above and combine a 0 with our vector.
+```{r}
+numbvec<-as.character(1:19)
+print(paste0("0", numbvec))
+```
+
+But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). We could break our vector into single character digits and two character digits, manipulate the single character digits, then combine it back in with the double character digits. But there is an easier way: str_pad !
+
+```{r}
+require(stringr)
+numbvec<-as.character(1:19)
+print(str_pad(numbvec, 2, "left", "0")  )
+```
+
+Now this looks like what we want! But what is str_pad doing? With str_pad we are telling stringr we want all elements of numbvec to be of length 2. So stringr checks to see if the elements are less than 2 characters, if an element is it adds “0”’s to the left side until it reaches length 2. If it is already length 2, it will leave it alone.
+
+There is many other handy commands to deal with strings in R. These are just a couple of commands we will be using. I will be writing a post with some other handy functions in the coming weeks and will link it here.
+
+

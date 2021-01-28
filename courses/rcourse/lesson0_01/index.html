@@ -689,11 +689,11 @@ A&lt;-c(5,6,7) # 1B&lt;-c(7,8,9) # 2Let’s dig into what is going on a bit mo
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_03/">Concatenating Strings</a>
+        <a href="/courses/rcourse/lesson1_03/">String Manipulation</a>
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_04/">Downloading in R</a>
+        <a href="/courses/rcourse/lesson1_04/">Downloading/Reading Data</a>
       </li>
       
       <li >
@@ -761,11 +761,17 @@ print(x)                # 3</code></pre>
 <pre><code>##   A B C D
 ## 1 5 7 a d
 ## 3 7 9 c f</code></pre>
-<p>We can do the same thing for the columns (we need to remember the order for the square brackets are rows, columns).</p>
-<pre class="r numCode R numberLines"><code>x&lt;-first_dataframe[,3]  # 1
-print(x)                # 2</code></pre>
+<p>We can do the same thing for the columns (we need to remember the order for the square brackets are rows, columns). Note: if we put a negative sign in front of these commands in the brackets, instead “keeping” certain rows or columns, it means remove! That is if in the below command we have -3, it would be saying REMOVE column 3!</p>
+<pre class="r numCode R numberLines"><code>x&lt;-first_dataframe[,3]   # 1
+y&lt;-first_dataframe[,-3]  # 2
+print(x)                 # 3</code></pre>
 <pre><code>## [1] a b c
 ## Levels: a b c</code></pre>
+<pre class="r numCode R numberLines"><code>print(y)  # 1</code></pre>
+<pre><code>##   A B D
+## 1 5 7 d
+## 2 6 8 e
+## 3 7 9 f</code></pre>
 <p>Our third column is named C, we can also pull this column by referencing it’s name after a dollar sign, such as:</p>
 <pre class="r numCode R numberLines"><code>x&lt;-first_dataframe$C  # 1
 print(x)              # 2</code></pre>

@@ -685,11 +685,11 @@ We could download these all one by one, or we could write a simple loop to read 
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_03/">Concatenating Strings</a>
+        <a href="/courses/rcourse/lesson1_03/">String Manipulation</a>
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_04/">Downloading in R</a>
+        <a href="/courses/rcourse/lesson1_04/">Downloading/Reading Data</a>
       </li>
       
       <li >
@@ -721,26 +721,23 @@ We could download these all one by one, or we could write a simple loop to read 
 
 <p>We will be using <a href="https://www.bls.gov/lau/home.htm">county level employment/labor force data from BLS</a>. We will be using the <strong>Labor force data by county, yearly annual averages</strong>. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.</p>
 <p>We could download these all one by one, or we could write a simple loop to read them in for us. To do this let’s first look at a very simple loop structure:</p>
-<pre class="r numCode R numberLines"><code>i=1               # 1
-repeat{           # 2
-print(i)          # 3
-if (i==5){break}  # 4
-i&lt;-i+1            # 5
-}                 # 6</code></pre>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5</code></pre>
+<pre class="r numCode R numberLines"><code>letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)  # 1
+letters_l&lt;-length(letters)           # 2
+for (i in 1:letters_l){              # 3
+  print(letters[i])                  # 4
+}                                    # 5</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;
+## [1] &quot;d&quot;
+## [1] &quot;e&quot;</code></pre>
 <p>Going line by line:</p>
-<ol style="list-style-type: decimal">
-<li>We make i the numeric value we will be looping over starting at 1.</li>
-<li>Repeat the action in the curly braces (note be careful, without an exit this will continuously loop)</li>
-<li>Print out the current value that i is taking.</li>
-<li>The break for our loop, when i takes the value 5, exit the loop</li>
-<li>If the line 4 break statement is not true, then increment i by 1.</li>
-</ol>
-<p>Taken all together we are printing then incrementing i by one while i is less than or equal to 5.</p>
+<ul>
+<li>Line 1: Define a vector of letters.</li>
+<li>Line 2: Report the number of elements in our letter vector and save as letters_l</li>
+<li>Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Not our for loop action is defined within the curly braces.</li>
+<li>Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.</li>
+</ul>
 <p>Okay, great. How does this help us with reading in the data? We’ll get to that in the next section.</p>
 
           </div>
@@ -765,7 +762,7 @@ i&lt;-i+1            # 5
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/courses/rcourse/lesson1_03/" rel="prev">Concatenating Strings</a>
+    <a href="/courses/rcourse/lesson1_03/" rel="prev">String Manipulation</a>
   </div>
   
 </div>

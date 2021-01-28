@@ -685,11 +685,11 @@
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_03/">Concatenating Strings</a>
+        <a href="/courses/rcourse/lesson1_03/">String Manipulation</a>
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_04/">Downloading in R</a>
+        <a href="/courses/rcourse/lesson1_04/">Downloading/Reading Data</a>
       </li>
       
       <li >
@@ -730,10 +730,11 @@
 </ul>
 <p>You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out <a href="https://econ-project-templates.readthedocs.io/en/stable/index.html">Templates for Reproducible Research Projects in Economics</a>.)</p>
 <p>My project folder now looks like this:
-<strong>Insert image of folder</strong></p>
+<img src="/img/rcourse/folders.png" alt="WD Folder" /></p>
 <p>Now within R let’s set our working directory to point to the main folder we have. It will be convenient to have this at the top of all of your scripts.</p>
 <pre class="r"><code>workingdir&lt;-&quot;PATH_TO_YOUR_WORKING_DIR&quot;  # 1
 setwd(workingdir)                       # 2</code></pre>
+<p>The first line above we are saving the path to our folder as a variable name ‘workingdir’, then we are telling R to be in this folder. That is if we had a data file right within our main folder, we could just simply reference that file without any path and it would open. That’s becaause we are telling R to be living in this folder. Note: this can be changed during your script and R reads your script sequentially, thus you need to make sure that you define your working directory before you are trying to open any files while using these paths. That is why it is always a good idea to start your script with this.</p>
 
           </div>
 

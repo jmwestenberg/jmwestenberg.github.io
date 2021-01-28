@@ -28,8 +28,7 @@
   
     
   
-  <meta name="description" content="We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in Lesson 1.1
-download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(workingdir, &quot;/raw_data/&quot;, &quot;bls_unemp_90.">
+  <meta name="description" content="Downloading within RWe can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in Lesson 1.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson1_04/">
@@ -270,9 +269,8 @@ download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(wor
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/lesson1_04/">
-  <meta property="og:title" content="Downloading in R | Joseph M. Westenberg">
-  <meta property="og:description" content="We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in Lesson 1.1
-download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(workingdir, &quot;/raw_data/&quot;, &quot;bls_unemp_90."><meta property="og:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png">
+  <meta property="og:title" content="Downloading/Reading Data | Joseph M. Westenberg">
+  <meta property="og:description" content="Downloading within RWe can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in Lesson 1."><meta property="og:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png">
   <meta property="twitter:image" content="/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -297,7 +295,7 @@ download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(wor
 
 
 
-  <title>Downloading in R | Joseph M. Westenberg</title>
+  <title>Downloading/Reading Data | Joseph M. Westenberg</title>
 
 </head>
 
@@ -685,11 +683,11 @@ download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(wor
       </li>
       
       <li >
-        <a href="/courses/rcourse/lesson1_03/">Concatenating Strings</a>
+        <a href="/courses/rcourse/lesson1_03/">String Manipulation</a>
       </li>
       
       <li class="active">
-        <a href="/courses/rcourse/lesson1_04/">Downloading in R</a>
+        <a href="/courses/rcourse/lesson1_04/">Downloading/Reading Data</a>
       </li>
       
       <li >
@@ -713,17 +711,39 @@ download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(wor
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Downloading in R</h1>
+          <h1>Downloading/Reading Data</h1>
 
           <div class="article-style">
             
 
 
+<div id="downloading-within-r" class="section level2">
+<h2>Downloading within R</h2>
 <p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1_01/">Lesson 1.1</a></p>
 <pre class="r"><code>download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;,              # 1
   paste0(workingdir, &quot;/raw_data/&quot;, &quot;bls_unemp_90.xlsx&quot;), mode=&quot;wb&quot;)  # 2</code></pre>
-<div id="downloading-data-in-a-loop" class="section level2">
-<h2>Downloading Data in a Loop</h2>
+</div>
+<div id="reading-in-data" class="section level2">
+<h2>Reading in Data</h2>
+<p>Before we read in this data to R, let’s see what we are dealing with. Opening up the file in excel we can see there will be issues reading the file in.
+<img src="/img/rcourse/data_head.png" alt="data head" /></p>
+<p>We can notice that the first row has the file title spread across columns A:J. Variable names are spread across anywhere 1-3 rows. And lastly we have an empty column in F. The bright side is if we observe the other year’s files, they all have this exact same structure. Hence we will able to use a loop eventually to clean them all instead of one at a time.</p>
+<p>The main package we will be using is readxl, which is quite self explanatory. It is a package meant to help to read in excel docs. Let’s try to open the file for 1990 we downloaded in R. We can do this through R Studio’s functionality.</p>
+<p>Within the “Environment” area of R Studio, click Import Dataset, then From Excel…
+<img src="/img/rcourse/import_fromexcel.png" alt="import" /></p>
+<p>There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.</p>
+<p><img src="/img/rcourse/import_fromexceloptions.png" /></p>
+<p>Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.</p>
+<p>Hence we have something that will look like the following for our command for our script.</p>
+<pre class="r"><code>require(readxl)                                                                                                                                     # 1
+workingdir&lt;-&quot;C:/Users/weste/Documents/GitHub/Rcourse&quot;                                                                                               # 2
+bls_unemp_90 &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_90.xlsx&quot;), col_names=FALSE, skip=5)                                              # 3
+bls_unemp_90&lt;-bls_unemp_90[,-6]                                                                                                                     # 4
+col_names(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;, &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)  # 5</code></pre>
+<p>Where the last line above we are giving our columns names based on the names we saw in the excel document.</p>
+</div>
+<div id="downloadingreading-data-in-a-loop" class="section level2">
+<h2>Downloading/Reading Data in a Loop</h2>
 <p>Here is a good place to pause if you want a challenge. You should have all the tools needed to write a loop to download all files from 1990-2019.</p>
 </div>
 
@@ -742,7 +762,7 @@ download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;, # 1paste0(wor
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/rcourse/lesson1_03/" rel="next">Concatenating Strings</a>
+    <a href="/courses/rcourse/lesson1_03/" rel="next">String Manipulation</a>
   </div>
   
   

@@ -11,7 +11,7 @@ draft: false
 menu:
   rcourse:
     parent: Lesson 1
-    weight: 1
+    weight: 30
 
 weight: 30
 ---
@@ -36,21 +36,17 @@ We will be using [county level employment/labor force data from BLS](https://www
 We could download these all one by one, or we could write a simple loop to read them in for us. To do this let's first look at a very simple loop structure:
 
 ```{r class.source = c("numCode", "R", "numberLines")}
-i=1
-repeat{
-print(i)
-if (i==5){break}
-i<-i+1
+letters<-c("a", "b", "c", "d", "e")
+letters_l<-length(letters)
+for (i in 1:letters_l){
+  print(letters[i])
 }
 ```
 Going line by line:
 
-1. We make i the numeric value we will be looping over starting at 1. 
-2. Repeat the action in the curly braces (note be careful, without an exit this will continuously loop)
-3. Print out the current value that i is taking.
-4. The break for our loop, when i takes the value 5, exit the loop
-5. If the line 4 break statement is not true, then increment i by 1.
-
-Taken all together we are printing then incrementing i by one while i is less than or equal to 5.
+- Line 1: Define a vector of letters.
+- Line 2: Report the number of elements in our letter vector and save as letters_l
+- Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Not our for loop action is defined within the curly braces.
+- Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.
 
 Okay, great. How does this help us with reading in the data? We'll get to that in the next section.
