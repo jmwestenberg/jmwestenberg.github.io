@@ -133,13 +133,13 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
 &lt;div id=&#34;reading-in-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Reading in Data&lt;/h2&gt;
 &lt;p&gt;Before we read in this data to R, let’s see what we are dealing with. Opening up the file in excel we can see there will be issues reading the file in.
-&lt;img src=&#34;/img/rcourse/data_head.png&#34; alt=&#34;data head&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/img/rcourse/data_head.PNG&#34; alt=&#34;data head&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can notice that the first row has the file title spread across columns A:J. Variable names are spread across anywhere 1-3 rows. And lastly we have an empty column in F. The bright side is if we observe the other year’s files, they all have this exact same structure. Hence we will able to use a loop eventually to clean them all instead of one at a time.&lt;/p&gt;
 &lt;p&gt;The main package we will be using is readxl, which is quite self explanatory. It is a package meant to help to read in excel docs. Let’s try to open the file for 1990 we downloaded in R. We can do this through R Studio’s functionality.&lt;/p&gt;
 &lt;p&gt;Within the “Environment” area of R Studio, click Import Dataset, then From Excel…
-&lt;img src=&#34;/img/rcourse/import_fromexcel.png&#34; alt=&#34;import&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/img/rcourse/import_fromexcel.PNG&#34; alt=&#34;import&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/rcourse/import_fromexceloptions.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/rcourse/import_fromexceloptions.PNG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.&lt;/p&gt;
 &lt;p&gt;Hence we have something that will look like the following for our command for our script.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(readxl)                                                                                                                                     # 1
