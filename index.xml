@@ -97,7 +97,7 @@ print(x)              # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;/ul&gt;
 &lt;p&gt;You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out &lt;a href=&#34;https://econ-project-templates.readthedocs.io/en/stable/index.html&#34;&gt;Templates for Reproducible Research Projects in Economics&lt;/a&gt;.)&lt;/p&gt;
 &lt;p&gt;My project folder now looks like this:
-&lt;img src=&#34;img/rcourse/folders.png&#34; alt=&#34;WD Folder&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;../../../../folders.png&#34; alt=&#34;WD Folder&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now within R let’s set our working directory to point to the main folder we have. It will be convenient to have this at the top of all of your scripts.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;workingdir&amp;lt;-&amp;quot;PATH_TO_YOUR_WORKING_DIR&amp;quot;  # 1
 setwd(workingdir)                       # 2&lt;/code&gt;&lt;/pre&gt;
