@@ -3,42 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/courses/interecon/</loc>
-    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/courses/rcourse/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson0_01/</loc>
+    <loc>/courses/rcourse/lesson0/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/rcourse/lesson1/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/interecon/</loc>
+    <lastmod>2018-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/rcourse/lesson0/lesson0_01/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1_01/</loc>
+    <loc>/courses/rcourse/lesson1/lesson1_01/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1_02/</loc>
+    <loc>/courses/rcourse/lesson1/lesson1_02/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1_03/</loc>
+    <loc>/courses/rcourse/lesson1/lesson1_03/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1_04/</loc>
+    <loc>/courses/rcourse/lesson1/lesson1_04/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1_05/</loc>
+    <loc>/courses/rcourse/lesson1/lesson1_05/</loc>
     <lastmod>2021-01-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -53,32 +63,32 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
+    <loc></loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/beverly-mendoza/</loc>
+    <loc></loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/nikita-lopatin/</loc>
+    <loc></loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/</loc>
+    <loc>/tag/international-trade/</loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/International-Trade/</loc>
+    <loc></loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/Political-Economy/</loc>
+    <loc>/tag/political-economy/</loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -88,7 +98,7 @@
   </url>
   
   <url>
-    <loc>/tags/Section-301/</loc>
+    <loc>/tag/section-301/</loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -113,22 +123,22 @@
   </url>
   
   <url>
-    <loc>/authors/david-schaffer/</loc>
+    <loc>/publication-type/2/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication_types/2/</loc>
+    <loc></loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/Labor-Economics/</loc>
+    <loc>/tag/labor-economics/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/Publication/</loc>
+    <loc>/tag/publication/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -149,6 +159,10 @@
   
   <url>
     <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc></loc>
   </url>
   
 </urlset>

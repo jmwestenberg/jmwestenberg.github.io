@@ -5,18 +5,18 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Joseph M. Westenberg</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Mon, 25 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Mon, 25 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/images/logo_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_300x300_fit_lanczos_2.png</url>
+      <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
       <title>Joseph M. Westenberg</title>
       <link>/</link>
     </image>
     
     <item>
       <title>Very Basics</title>
-      <link>/courses/rcourse/lesson0_01/</link>
+      <link>/courses/rcourse/lesson0/lesson0_01/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson0_01/</guid>
+      <guid>/courses/rcourse/lesson0/lesson0_01/</guid>
       <description>
 
 
@@ -80,9 +80,9 @@ print(x)              # 2&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Project Organization</title>
-      <link>/courses/rcourse/lesson1_01/</link>
+      <link>/courses/rcourse/lesson1/lesson1_01/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1_01/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_01/</guid>
       <description>
 
 
@@ -107,9 +107,9 @@ setwd(workingdir)                       # 2&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Writing Loops</title>
-      <link>/courses/rcourse/lesson1_02/</link>
+      <link>/courses/rcourse/lesson1/lesson1_02/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1_02/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_02/</guid>
       <description>
 
 
@@ -138,9 +138,9 @@ for (i in 1:letters_l){              # 3
     
     <item>
       <title>String Manipulation</title>
-      <link>/courses/rcourse/lesson1_03/</link>
+      <link>/courses/rcourse/lesson1/lesson1_03/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1_03/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
       <description>
 
 
@@ -184,9 +184,9 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
     
     <item>
       <title>Downloading/Reading Data</title>
-      <link>/courses/rcourse/lesson1_04/</link>
+      <link>/courses/rcourse/lesson1/lesson1_04/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1_04/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_04/</guid>
       <description>
 
 
@@ -224,9 +224,9 @@ col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State
     
     <item>
       <title>Download Loop</title>
-      <link>/courses/rcourse/lesson1_05/</link>
+      <link>/courses/rcourse/lesson1/lesson1_05/</link>
       <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1_05/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_05/</guid>
       <description>
 
 
