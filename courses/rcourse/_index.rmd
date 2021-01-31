@@ -1,0 +1,137 @@
+---
+# Course title, summary, and position.
+linktitle: "Basic R for Econ"
+summary: These notes were designed to assist in lectures given at IU-Bloomington for graduate students. The goal of the lectures and notes are to give graduate students a very prelimenary introduction into coding/working with data in R. Lectures given Spring 2021.
+weight: 1
+
+# Page metadata.
+title: "Introduction"
+date: "2021-01-31T00:00:00Z"
+lastmod: "2021-01-31T00:00:00Z"
+draft: false  # Is this a draft? true/false
+toc: false  # Show table of contents? true/false
+type: book  # Do not modify.
+
+# Add menu entry to sidebar.
+# - name: Declare this menu item as a parent with ID `name`.
+# - weight: Position of link in menu.
+menu: 
+  rcourse:
+    name: Introduction
+    weight: 1
+---
+
+The goal of these short courses are to give graduate students a very prelimenary introduction into coding in R. While having an 'instructor' teach you these things may be helpful, in my belief, coding, like math, you have to learn by doing. So I highly encourage following these notes, but then play around with the code. Change things and see how it changes the output. I think this is the best way to learn.
+
+Over the next 3 'sessions' we will be looking into county level unemployment data. The goal will be to learn how to:
+
+- download data straight into R
+- read in data (Rda, csv, xlsx, dta)
+- merge datasets
+- subset datasets
+- create summary statistics and plots
+- run basic regressions 
+
+The plan is to do this all while paying particular attention to file pathing and to teach you how to export graphics and tables from R into a form that can be directly into LaTex (so that it can be easily read into paper/presentation documents).
+
+Below is an example of an interactive plot you can make with plotly and an interactive map you can make with leaflet. Try interacting with them! In the plot you can select/deselect states you want to view. In the map you can click on a county for the name and labor force levels in 1990 and 2019.
+
+```{r, include=FALSE}
+local({
+  hook_source <- knitr::knit_hooks$get('source')
+  knitr::knit_hooks$set(source = function(x, options) {
+    x <- xfun::split_lines(x)
+    n <- nchar(x, 'width')
+    i <- seq_along(x)  # line numbers
+    n <- n + nchar(i)
+    s <- knitr:::v_spaces(max(n) - n)
+    x <- paste(x, s, '  # ', i, sep = '', collapse = '\n')
+    hook_source(x, options)
+  })
+})
+
+require(plotly)
+require(tidyverse)
+
+workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
+
+load(paste0(workingdir, file.path("processed_data", "county_data_all.rda")))
+
+county_data$state_abbr<-substr(county_data$County_name, str_length(county_data$County_name)-1, str_length(county_data$County_name))
+
+county_data$state_abbr[county_data$State_fips=='11']<-"DC"
+checkdup<-county_data %>% group_by(State_fips, state_abbr) %>% summarize(ave=mean(Unemp_rate))
+
+state_ave<-county_data %>% group_by(state_abbr, Year) %>% summarise(ave_unemp=mean(Unemp_rate))
+
+pal<-rainbow(52)
+```
+
+```{r echo=FALSE}
+state_ave %>%
+  plot_ly(
+    x = ~Year,
+    y = ~ave_unemp,
+    color = ~state_abbr,
+    text = ~state_abbr,
+    hoverinfo = "text",
+    type = 'scatter',
+    mode = 'lines',
+    colors = ~pal,
+    line =list(width=1)
+  )
+
+```
+
+```{r, include=FALSE}
+
+library(widgetframe)
+library(tigris)
+library(leaflet)
+
+wisccounty<-counties(state="WI", cb=TRUE)
+workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
+
+load(paste0(workingdir, file.path("processed_data", "county_data_all.rda")))
+
+wiscodata<-county_data %>% filter(State_fips=="55" & (Year==1990 | Year==2019))
+wiscodata$GEOID<-paste0(wiscodata$State_fips, wiscodata$County_fips)
+wiscodata_lf<-wiscodata %>% select(Year, GEOID, Labor_force)
+wide_wiscodata_lf<-wiscodata_lf %>% spread(Year, Labor_force)
+colnames(wide_wiscodata_lf)[2:3]<-paste0("LaborForce_", colnames(wide_wiscodata_lf)[2:3])
+
+wide_wiscodata_lf<-wide_wiscodata_lf %>% 
+  mutate(percchange=round(((LaborForce_2019 - LaborForce_1990)/LaborForce_1990),4)*100)
+
+wisccounty@data<-wisccounty@data %>% left_join(wide_wiscodata_lf)
+
+centerLNG<--90
+centerLAT<-44.8
+mypopup <- paste0("County: ", wisccounty$NAME,
+                  " <br> ", 
+                  "1990 Labor Force: ", wisccounty$LaborForce_1990,
+                  " <br> ", 
+                  "2019 Unemployment: ", wisccounty$LaborForce_2019,
+                  " <br> ", 
+                  "Percent Change: ", wisccounty$percchange, "%")
+mybins<-c(-20, 0, 20, 40, 60, 80, 100)
+my_pal <- colorBin(
+  palette = "YlOrBr",
+  domain = wisccounty@data$percchange,
+  bins=mybins
+)
+leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
+  addProviderTiles("CartoDB.Positron", group = "base") %>%
+  setView(centerLNG, centerLAT, zoom = 6) %>%
+  setMaxBounds(-94, 41, -85, 48) %>%
+  addPolygons(data = wisccounty, fillOpacity = 0.7, color = "#b2aeae", smoothFactor = 0.2,
+              fillColor = ~my_pal(wisccounty@data$percchange), weight = 2, popup = mypopup) %>%
+  addLegend(
+    pal=my_pal, values = wisccounty@data$percchange, position = "bottomright", title="% Change Labor Force"
+  )
+```
+
+
+```{r, echo=FALSE}
+frameWidget(leafmap)
+```

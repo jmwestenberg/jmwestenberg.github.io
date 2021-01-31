@@ -4,7 +4,7 @@
   
   <url>
     <loc>/courses/rcourse/</loc>
-    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -54,12 +54,12 @@
   
   <url>
     <loc>/courses/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -113,6 +113,16 @@
   </url>
   
   <url>
+    <loc>/talk/</loc>
+    <lastmod>2020-05-01T08:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/example/</loc>
+    <lastmod>2020-05-01T08:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/mapping-with-leaflet/</loc>
     <lastmod>2020-05-02T17:39:17-05:00</lastmod>
   </url>
@@ -155,6 +165,21 @@
   <url>
     <loc>/publication/journal-article/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/jupyter/</loc>
+    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
   
   <url>
