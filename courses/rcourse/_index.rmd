@@ -62,7 +62,7 @@ county_data$state_abbr<-substr(county_data$County_name, str_length(county_data$C
 county_data$state_abbr[county_data$State_fips=='11']<-"DC"
 checkdup<-county_data %>% group_by(State_fips, state_abbr) %>% summarize(ave=mean(Unemp_rate))
 
-state_ave<-county_data %>% group_by(state_abbr, Year) %>% summarise(ave_unemp=mean(Unemp_rate))
+state_ave<-county_data %>% group_by(state_abbr, Year) %>% summarise(ave_unemp=sum(Unemployed)/sum(Labor_force))
 
 pal<-rainbow(52)
 ```

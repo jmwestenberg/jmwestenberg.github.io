@@ -34,10 +34,11 @@
   
     
   
-  <meta name="description" content="Create a beautifully simple website in under 10 minutes.">
+  <meta name="description" content="Let’s learn how to export our summary table we created in the dplyr section. Just as a review here is how we created it.
+indiana_laborforce&lt;- # 1county_data %&gt;% # 2filter(State_fips==&quot;18&quot;) %&gt;% # 3group_by(Year) %&gt;% # 4summarise(Min=min(Labor_force), # 5p10th=quantile(Labor_force, c(0.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/getting-started/">
+  <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson2/lesson2_03/">
 
   
 
@@ -303,7 +304,7 @@
   <link rel="icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_180x180_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/post/getting-started/">
+  <link rel="canonical" href="/courses/rcourse/lesson2/lesson2_03/">
 
   
   
@@ -313,75 +314,30 @@
   
   
     
+    
   
   
-  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary">
   
   <meta property="twitter:site" content="@jmwestenberg">
   <meta property="twitter:creator" content="@jmwestenberg">
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
-  <meta property="og:url" content="/post/getting-started/">
-  <meta property="og:title" content="Academic: the website builder for Hugo | Joseph M. Westenberg">
-  <meta property="og:description" content="Create a beautifully simple website in under 10 minutes."><meta property="og:image" content="/post/getting-started/featured.jpg">
-  <meta property="twitter:image" content="/post/getting-started/featured.jpg"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="/courses/rcourse/lesson2/lesson2_03/">
+  <meta property="og:title" content="xtable | Joseph M. Westenberg">
+  <meta property="og:description" content="Let’s learn how to export our summary table we created in the dplyr section. Just as a review here is how we created it.
+indiana_laborforce&lt;- # 1county_data %&gt;% # 2filter(State_fips==&quot;18&quot;) %&gt;% # 3group_by(Year) %&gt;% # 4summarise(Min=min(Labor_force), # 5p10th=quantile(Labor_force, c(0."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2016-04-20T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2021-02-03T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-04-17T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-02-03T00:00:00&#43;00:00">
   
 
   
 
 
-    
-
-
-
-
-
-
-  
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "/post/getting-started/"
-  },
-  "headline": "Academic: the website builder for Hugo",
-  
-  "image": [
-    "/post/getting-started/featured.jpg"
-  ],
-  
-  "datePublished": "2016-04-20T00:00:00Z",
-  "dateModified": "2019-04-17T00:00:00Z",
-  
-  "author": {
-    "@type": "Person",
-    "name": "Joseph Westenberg"
-  },
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "Joseph M. Westenberg",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_192x192_fill_lanczos_center_2.png"
-    }
-  },
-  "description": "Create a beautifully simple website in under 10 minutes."
-}
-</script>
-
-  
 
   
 
@@ -395,7 +351,7 @@
 
 
 
-  <title>Academic: the website builder for Hugo | Joseph M. Westenberg</title>
+  <title>xtable | Joseph M. Westenberg</title>
 
 </head>
 
@@ -558,7 +514,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/courses/"><span>Courses</span></a>
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
         </li>
 
         
@@ -800,446 +756,417 @@
   </div>
 
   <div class="page-body">
-    <article class="article">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Lesson 2
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
 
   
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
 
   
   
     
-  
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/courses/"><i class="fas fa-arrow-left pr-1"></i>Courses</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
 
 
-<div class="article-container pt-3">
-  <h1>Academic: the website builder for Hugo</h1>
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/">Basic R for Econ</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
 
   
-  <p class="page-subtitle">Create a beautifully simple website in under 10 minutes 🚀</p>
-  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson0/">Lesson 0</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson0/lesson0_01/">Very Basics</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+
 
   
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson1/">Lesson 1</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
 
 
-<div class="article-metadata">
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_04/">Downloading/Reading Data</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_05/">Download Loop</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+
 
   
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson2/">Lesson 2</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_01/">Example</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_02/">dplyr</a></li>
+
+
+
+  <li class="active"><a href="/courses/rcourse/lesson2/lesson2_03/">xtable</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">ggplot</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
   
   
   
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/">
+      
+        Courses
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/rcourse/">
+      
+        Basic R for Econ
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/rcourse/lesson2/">
+      
+        Lesson 2
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        xtable
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>xtable</h1>
+
+          <div class="article-style">
+            
+
+
+<p>Let’s learn how to export our summary table we created in the dplyr section. Just as a review here is how we created it.</p>
+<pre class="r"><code>indiana_laborforce&lt;-                       # 1
+  county_data %&gt;%                          # 2
+  filter(State_fips==&quot;18&quot;) %&gt;%             # 3
+  group_by(Year) %&gt;%                       # 4
+  summarise(Min=min(Labor_force),          # 5
+    p10th=quantile(Labor_force, c(0.1)),   # 6
+    p25th=quantile(Labor_force, c(0.25)),  # 7
+    p50th=quantile(Labor_force, c(0.5)),   # 8
+    p75th=quantile(Labor_force, c(0.75)),  # 9
+    p90th=quantile(Labor_force, c(0.9)),  # 10
+    Max=max(Labor_force),                 # 11
+    Average=mean(Labor_force),            # 12
+    StDev=sd(Labor_force))                # 13</code></pre>
+<p>Now let’s load in the package xtable. This package allows us to print data.frames into a tex table environment. Let’s first inspect the output for just running the base function with minimal options.</p>
+<pre class="r"><code>  xtable(indiana_laborforce)  # 1</code></pre>
+<pre><code>## % latex table generated in R 3.6.3 by xtable 1.8-4 package
+## % Wed Feb 03 16:44:11 2021
+## \begin{table}[ht]
+## \centering
+## \begin{tabular}{rlrrrrrrrrr}
+##   \hline
+##  &amp; Year &amp; Min &amp; p10th &amp; p25th &amp; p50th &amp; p75th &amp; p90th &amp; Max &amp; Average &amp; StDev \\ 
+##   \hline
+## 1 &amp; 1990 &amp; 2629.00 &amp; 6639.30 &amp; 9617.50 &amp; 14858.50 &amp; 30089.50 &amp; 60784.50 &amp; 424053.00 &amp; 30593.65 &amp; 52989.19 \\ 
+##   2 &amp; 1991 &amp; 2541.00 &amp; 6380.50 &amp; 9480.00 &amp; 14713.00 &amp; 30131.00 &amp; 62309.90 &amp; 421789.00 &amp; 30357.00 &amp; 52670.08 \\ 
+##   3 &amp; 1992 &amp; 2550.00 &amp; 6284.20 &amp; 9615.50 &amp; 15169.50 &amp; 31117.00 &amp; 63623.20 &amp; 429239.00 &amp; 31058.60 &amp; 53551.02 \\ 
+##   4 &amp; 1993 &amp; 2607.00 &amp; 6200.60 &amp; 10037.75 &amp; 15652.50 &amp; 32034.75 &amp; 64549.90 &amp; 438377.00 &amp; 32046.84 &amp; 54683.97 \\ 
+##   5 &amp; 1994 &amp; 2681.00 &amp; 6453.10 &amp; 10480.50 &amp; 16472.00 &amp; 33808.25 &amp; 66506.30 &amp; 453457.00 &amp; 33308.01 &amp; 56427.35 \\ 
+##   6 &amp; 1995 &amp; 2714.00 &amp; 6543.20 &amp; 10994.75 &amp; 16648.50 &amp; 34588.00 &amp; 67364.50 &amp; 459603.00 &amp; 34078.00 &amp; 57219.27 \\ 
+##   7 &amp; 1996 &amp; 2724.00 &amp; 6522.60 &amp; 10827.50 &amp; 16551.00 &amp; 34597.25 &amp; 66487.50 &amp; 453728.00 &amp; 33800.80 &amp; 56670.37 \\ 
+##   8 &amp; 1997 &amp; 2698.00 &amp; 6585.30 &amp; 10966.00 &amp; 16671.50 &amp; 34786.50 &amp; 66195.30 &amp; 453928.00 &amp; 33919.72 &amp; 56870.28 \\ 
+##   9 &amp; 1998 &amp; 2701.00 &amp; 6629.70 &amp; 11008.75 &amp; 16660.00 &amp; 34150.50 &amp; 65887.60 &amp; 452412.00 &amp; 33947.47 &amp; 56827.82 \\ 
+##   10 &amp; 1999 &amp; 2691.00 &amp; 6496.70 &amp; 10986.75 &amp; 16958.50 &amp; 33968.50 &amp; 65196.00 &amp; 448732.00 &amp; 33965.91 &amp; 56434.89 \\ 
+##   11 &amp; 2000 &amp; 2985.00 &amp; 7053.50 &amp; 10816.50 &amp; 16984.50 &amp; 34996.50 &amp; 63718.60 &amp; 455135.00 &amp; 33982.50 &amp; 56818.02 \\ 
+##   12 &amp; 2001 &amp; 2982.00 &amp; 7085.70 &amp; 10709.00 &amp; 17127.50 &amp; 34674.75 &amp; 64832.00 &amp; 459505.00 &amp; 34140.32 &amp; 57318.59 \\ 
+##   13 &amp; 2002 &amp; 3051.00 &amp; 7040.70 &amp; 10802.75 &amp; 17244.50 &amp; 34974.75 &amp; 66572.30 &amp; 462330.00 &amp; 34469.34 &amp; 57807.67 \\ 
+##   14 &amp; 2003 &amp; 3092.00 &amp; 6941.00 &amp; 10709.50 &amp; 17199.00 &amp; 34514.75 &amp; 67751.50 &amp; 464331.00 &amp; 34597.76 &amp; 58056.22 \\ 
+##   15 &amp; 2004 &amp; 3109.00 &amp; 6815.20 &amp; 10547.00 &amp; 17083.50 &amp; 33431.50 &amp; 68476.20 &amp; 459140.00 &amp; 34432.72 &amp; 57583.09 \\ 
+##   16 &amp; 2005 &amp; 3152.00 &amp; 7075.80 &amp; 10702.75 &amp; 17357.50 &amp; 33606.00 &amp; 69985.60 &amp; 459492.00 &amp; 34841.75 &amp; 57925.42 \\ 
+##   17 &amp; 2006 &amp; 3107.00 &amp; 6883.10 &amp; 10620.50 &amp; 17326.50 &amp; 34554.50 &amp; 72792.00 &amp; 461468.00 &amp; 35164.35 &amp; 58484.53 \\ 
+##   18 &amp; 2007 &amp; 3026.00 &amp; 6816.70 &amp; 10447.50 &amp; 16881.00 &amp; 34304.50 &amp; 73128.10 &amp; 460046.00 &amp; 34866.21 &amp; 58342.88 \\ 
+##   19 &amp; 2008 &amp; 3044.00 &amp; 6816.20 &amp; 10488.00 &amp; 16673.50 &amp; 34065.50 &amp; 75072.00 &amp; 463200.00 &amp; 35131.49 &amp; 58819.13 \\ 
+##   20 &amp; 2009 &amp; 3088.00 &amp; 6758.40 &amp; 10434.25 &amp; 16452.00 &amp; 33700.25 &amp; 74434.10 &amp; 457524.00 &amp; 34717.45 &amp; 58083.80 \\ 
+##   21 &amp; 2010 &amp; 3263.00 &amp; 6440.50 &amp; 10308.00 &amp; 16622.00 &amp; 33921.75 &amp; 74406.00 &amp; 452836.00 &amp; 34512.97 &amp; 57806.16 \\ 
+##   22 &amp; 2011 &amp; 3210.00 &amp; 6459.90 &amp; 10184.25 &amp; 16630.50 &amp; 33804.00 &amp; 75620.50 &amp; 456011.00 &amp; 34586.91 &amp; 58199.53 \\ 
+##   23 &amp; 2012 &amp; 3181.00 &amp; 6336.20 &amp; 10058.50 &amp; 16453.00 &amp; 32924.00 &amp; 76458.00 &amp; 458377.00 &amp; 34454.88 &amp; 58388.80 \\ 
+##   24 &amp; 2013 &amp; 3165.00 &amp; 6325.90 &amp; 9900.50 &amp; 16289.50 &amp; 33053.00 &amp; 78149.50 &amp; 463346.00 &amp; 34656.59 &amp; 58983.65 \\ 
+##   25 &amp; 2014 &amp; 3216.00 &amp; 6401.20 &amp; 9851.50 &amp; 16524.00 &amp; 33215.50 &amp; 80113.30 &amp; 467169.00 &amp; 35052.00 &amp; 59579.47 \\ 
+##   26 &amp; 2015 &amp; 3178.00 &amp; 6341.80 &amp; 9924.75 &amp; 16908.00 &amp; 33960.00 &amp; 82327.70 &amp; 472330.00 &amp; 35508.30 &amp; 60275.44 \\ 
+##   27 &amp; 2016 &amp; 3226.00 &amp; 6444.80 &amp; 9930.50 &amp; 17093.50 &amp; 35149.00 &amp; 85223.00 &amp; 481434.00 &amp; 36178.11 &amp; 61517.07 \\ 
+##   28 &amp; 2017 &amp; 3153.00 &amp; 6512.50 &amp; 9783.75 &amp; 17119.00 &amp; 35516.50 &amp; 85487.60 &amp; 483607.00 &amp; 36243.96 &amp; 61840.36 \\ 
+##   29 &amp; 2018 &amp; 3189.00 &amp; 6561.90 &amp; 9943.50 &amp; 17334.50 &amp; 36211.00 &amp; 86905.80 &amp; 488698.00 &amp; 36756.59 &amp; 62659.34 \\ 
+##   30 &amp; 2019 &amp; 3201.00 &amp; 6615.60 &amp; 9812.75 &amp; 17243.00 &amp; 36470.50 &amp; 87146.90 &amp; 492967.00 &amp; 36819.25 &amp; 63114.77 \\ 
+##    \hline
+## \end{tabular}
+## \end{table}</code></pre>
+<p>We could then copy and paste this output into latex. However, we can tell xtable and R to save a tex file with this in it. Notice the pathing used. This is a latex table so we are keeping ourselves organized by 1) giving the tex file a useful name and 2) saving it within our tables folder. This may seem extra tedious now but come generating hundreds of plots and tables, organazation can be key to keeping everything straight.</p>
+<pre class="r"><code>  print.xtable(                                                # 1
+    xtable(indiana_laborforce),                                # 2
+    file=paste0(workingdir, &quot;tables/indiana_laborforce.tex&quot;))  # 3</code></pre>
+<p><div class="alert alert-note">
   <div>
-    
+    Try building this table in a pdf through LaTex
+  </div>
+</div>
+</p>
+<p>Let’s now customize this table more. First, let’s get rid of row names as they are not meaningful for us here. Also, if we want to later fix this table in a certain place in a tex document we want a table placement H.</p>
+<pre class="r"><code>print.xtable(                                                 # 1
+  xtable(indiana_laborforce),                                 # 2
+  table.placement=&quot;H&quot;,                                        # 3
+  include.rownames=FALSE,                                     # 4
+  file=paste0(workingdir, &quot;tables/indiana_laborforce.tex&quot;),   # 5
+  )                                                           # 6</code></pre>
+<p>Let’s add a bit more customization to this table.</p>
+<pre class="r"><code>print.xtable(                                                     # 1
+  xtable(                                                         # 2
+  indiana_laborforce,                                             # 3
+  digits=0,                                                       # 4
+  label= &quot;tab:indiana_laborforce&quot;,                                # 5
+  align = c(&quot;|c|&quot;,&quot;|c|&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c|&quot;)),   # 6
+  table.placement=&quot;H&quot;,                                            # 7
+  include.rownames=FALSE,                                         # 8
+  file=paste0(workingdir, &quot;tables/indiana_laborforce.tex&quot;))       # 9</code></pre>
+<ul>
+<li>Line #4: Round all digits to the nearest integer.</li>
+<li>Line #5: add a label to the table which you can then reference to in your main tex document.</li>
+<li>Line #6: if we want to have a custom alignment for our table. (Note: this command requires 1 more column of arguments than there is columns in your table. This is due to it printing the row names. However if you later define include.rownames as FALSE as I do here. It will get rid of the first column of row names.)</li>
+</ul>
+<p>There are many other packages that can assist in creating tex tables. We will later use stargazer for reporting regression results. I like using xtable due to it’s ease to customize. Please leave me a note below if you have any favorite packages for creating tex tables.</p>
 
-  <span >
-      Joseph Westenberg</span>
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/rcourse/lesson2/lesson2_02/" rel="next">dplyr</a>
   </div>
   
   
-
   
-  <span class="article-date">
-    
-    
-      
-          Last updated on
-      
-    
-    Apr 17, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 min read
-  </span>
-  
-
-  
-  
-  
-  
-  
-  <span class="middot-divider"></span>
-  <a href="/post/getting-started/#disqus_thread"></a>
-  
-
-  
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/demo/">Demo</a></span>
-  
-
-</div>
-
-  
-
-
-
-
-
-</div>
-
-
-<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 675px;">
-  <div style="position: relative">
-    <img src="/post/getting-started/featured_hub9ee31969f44a6711206a2baf9f065b4_241861_1200x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
-    <span class="article-header-caption">Image credit: <a href="https://unsplash.com/photos/CpkOjOcXdUY"><strong>Unsplash</strong></a></span>
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/rcourse/lesson2/lesson2_04/" rel="prev">ggplot</a>
   </div>
-</div>
-
-
-
-  <div class="article-container">
-
-    <div class="article-style">
-      <p><strong>Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 <em>widgets</em>, <em>themes</em>, and <em>language packs</em> included!</strong></p>
-<p><a href="https://academic-demo.netlify.com/" target="_blank" rel="noopener">Check out the latest <strong>demo</strong></a> of what you&rsquo;ll get in less than 10 minutes, or <a href="https://sourcethemes.com/academic/#expo" target="_blank" rel="noopener">view the <strong>showcase</strong></a> of personal, project, and business sites.</p>
-<ul>
-<li>👉 <a href="#install"><strong>Get Started</strong></a></li>
-<li>📚 <a href="https://sourcethemes.com/academic/docs/" target="_blank" rel="noopener">View the <strong>documentation</strong></a></li>
-<li>💬 <a href="https://discourse.gohugo.io" target="_blank" rel="noopener"><strong>Ask a question</strong> on the forum</a></li>
-<li>👥 <a href="https://spectrum.chat/academic" target="_blank" rel="noopener">Chat with the <strong>community</strong></a></li>
-<li>🐦 Twitter: <a href="https://twitter.com/source_themes" target="_blank" rel="noopener">@source_themes</a> <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">@GeorgeCushen</a> <a href="https://twitter.com/search?q=%23MadeWithAcademic&amp;src=typd" target="_blank" rel="noopener">#MadeWithAcademic</a></li>
-<li>💡 <a href="https://github.com/gcushen/hugo-academic/issues" target="_blank" rel="noopener">Request a <strong>feature</strong> or report a <strong>bug</strong></a></li>
-<li>⬆️ <strong>Updating?</strong> View the <a href="https://sourcethemes.com/academic/docs/update/" target="_blank" rel="noopener">Update Guide</a> and <a href="https://sourcethemes.com/academic/updates/" target="_blank" rel="noopener">Release Notes</a></li>
-<li>❤️ <strong>Support development</strong> of Academic:
-<ul>
-<li>☕️ <a href="https://paypal.me/cushen" target="_blank" rel="noopener"><strong>Donate a coffee</strong></a></li>
-<li>💵 <a href="https://www.patreon.com/cushen" target="_blank" rel="noopener">Become a backer on <strong>Patreon</strong></a></li>
-<li>🖼️ <a href="https://www.redbubble.com/people/neutreno/works/34387919-academic" target="_blank" rel="noopener">Decorate your laptop or journal with an Academic <strong>sticker</strong></a></li>
-<li>👕 <a href="https://academic.threadless.com/" target="_blank" rel="noopener">Wear the <strong>T-shirt</strong></a></li>
-<li>👩‍💻 <a href="https://sourcethemes.com/academic/docs/contribute/" target="_blank" rel="noopener"><strong>Contribute</strong></a></li>
-</ul>
-</li>
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure id="figure-academic-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device">
-
-
-  <a data-fancybox="" href="https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png" data-caption="Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.">
-
-
-  <img src="https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png" alt=""  >
-</a>
-
-
-  
-  
-  <figcaption>
-    Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.
-  </figcaption>
-
-
-</figure>
-
-<p><strong>Key features:</strong></p>
-<ul>
-<li><strong>Page builder</strong> - Create <em>anything</em> with <a href="https://sourcethemes.com/academic/docs/page-builder/" target="_blank" rel="noopener"><strong>widgets</strong></a> and <a href="https://sourcethemes.com/academic/docs/writing-markdown-latex/" target="_blank" rel="noopener"><strong>elements</strong></a></li>
-<li><strong>Edit any type of content</strong> - Blog posts, publications, talks, slides, projects, and more!</li>
-<li><strong>Create content</strong> in <a href="https://sourcethemes.com/academic/docs/writing-markdown-latex/" target="_blank" rel="noopener"><strong>Markdown</strong></a>, <a href="https://sourcethemes.com/academic/docs/jupyter/" target="_blank" rel="noopener"><strong>Jupyter</strong></a>, or <a href="https://sourcethemes.com/academic/docs/install/#install-with-rstudio" target="_blank" rel="noopener"><strong>RStudio</strong></a></li>
-<li><strong>Plugin System</strong> - Fully customizable <a href="https://sourcethemes.com/academic/themes/" target="_blank" rel="noopener"><strong>color</strong> and <strong>font themes</strong></a></li>
-<li><strong>Display Code and Math</strong> - Code highlighting and <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics" target="_blank" rel="noopener">LaTeX math</a> supported</li>
-<li><strong>Integrations</strong> - <a href="https://analytics.google.com" target="_blank" rel="noopener">Google Analytics</a>, <a href="https://disqus.com" target="_blank" rel="noopener">Disqus commenting</a>, Maps, Contact Forms, and more!</li>
-<li><strong>Beautiful Site</strong> - Simple and refreshing one page design</li>
-<li><strong>Industry-Leading SEO</strong> - Help get your website found on search engines and social media</li>
-<li><strong>Media Galleries</strong> - Display your images and videos with captions in a customizable gallery</li>
-<li><strong>Mobile Friendly</strong> - Look amazing on every screen with a mobile friendly version of your site</li>
-<li><strong>Multi-language</strong> - 15+ language packs including English, 中文, and Português</li>
-<li><strong>Multi-user</strong> - Each author gets their own profile page</li>
-<li><strong>Privacy Pack</strong> - Assists with GDPR</li>
-<li><strong>Stand Out</strong> - Bring your site to life with animation, parallax backgrounds, and scroll effects</li>
-<li><strong>One-Click Deployment</strong> - No servers. No databases. Only files.</li>
-</ul>
-<h2 id="themes">Themes</h2>
-<p>Academic comes with <strong>automatic day (light) and night (dark) mode</strong> built-in. Alternatively, visitors can  choose their preferred mode - click the sun/moon icon in the top right of the <a href="https://academic-demo.netlify.com/" target="_blank" rel="noopener">Demo</a> to see it in action! Day/night mode can also be disabled by the site admin in <code>params.toml</code>.</p>
-<p><a href="https://sourcethemes.com/academic/themes/" target="_blank" rel="noopener">Choose a stunning <strong>theme</strong> and <strong>font</strong></a> for your site. Themes are fully <a href="https://sourcethemes.com/academic/docs/customization/#custom-theme" target="_blank" rel="noopener">customizable</a>.</p>
-<h2 id="ecosystem">Ecosystem</h2>
-<ul>
-<li><strong><a href="https://github.com/sourcethemes/academic-admin" target="_blank" rel="noopener">Academic Admin</a>:</strong> An admin tool to import publications from BibTeX or import assets for an offline site</li>
-<li><strong><a href="https://github.com/sourcethemes/academic-scripts" target="_blank" rel="noopener">Academic Scripts</a>:</strong> Scripts to help migrate content to new versions of Academic</li>
-</ul>
-<h2 id="install">Install</h2>
-<p>You can choose from one of the following four methods to install:</p>
-<ul>
-<li><a href="https://sourcethemes.com/academic/docs/install/#install-with-web-browser" target="_blank" rel="noopener"><strong>one-click install using your web browser (recommended)</strong></a></li>
-<li><a href="https://sourcethemes.com/academic/docs/install/#install-with-git" target="_blank" rel="noopener">install on your computer using <strong>Git</strong> with the Command Prompt/Terminal app</a></li>
-<li><a href="https://sourcethemes.com/academic/docs/install/#install-with-zip" target="_blank" rel="noopener">install on your computer by downloading the <strong>ZIP files</strong></a></li>
-<li><a href="https://sourcethemes.com/academic/docs/install/#install-with-rstudio" target="_blank" rel="noopener">install on your computer with <strong>RStudio</strong></a></li>
-</ul>
-<p>Then <a href="https://sourcethemes.com/academic/docs/get-started/" target="_blank" rel="noopener">personalize and deploy your new site</a>.</p>
-<h2 id="updating">Updating</h2>
-<p><a href="https://sourcethemes.com/academic/docs/update/" target="_blank" rel="noopener">View the Update Guide</a>.</p>
-<p>Feel free to <em>star</em> the project on <a href="https://github.com/gcushen/hugo-academic/" target="_blank" rel="noopener">Github</a> to help keep track of <a href="https://sourcethemes.com/academic/updates" target="_blank" rel="noopener">updates</a>.</p>
-<h2 id="license">License</h2>
-<p>Copyright 2016-present <a href="https://georgecushen.com" target="_blank" rel="noopener">George Cushen</a>.</p>
-<p>Released under the <a href="https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md" target="_blank" rel="noopener">MIT</a> license.</p>
-
-    </div>
-
-    
-
-
-
-
-
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tag/academic/">Academic</a>
   
 </div>
 
+          </div>
+          
+        </div>
 
+        <div class="body-footer">
+          <p>Last updated on Feb 3, 2021</p>
 
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/getting-started/&amp;text=Academic:%20the%20website%20builder%20for%20Hugo" target="_blank" rel="noopener" class="share-btn-twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/getting-started/&amp;t=Academic:%20the%20website%20builder%20for%20Hugo" target="_blank" rel="noopener" class="share-btn-facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="mailto:?subject=Academic:%20the%20website%20builder%20for%20Hugo&amp;body=/post/getting-started/" target="_blank" rel="noopener" class="share-btn-email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/getting-started/&amp;title=Academic:%20the%20website%20builder%20for%20Hugo" target="_blank" rel="noopener" class="share-btn-linkedin">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="whatsapp://send?text=Academic:%20the%20website%20builder%20for%20Hugo%20/post/getting-started/" target="_blank" rel="noopener" class="share-btn-whatsapp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/getting-started/&amp;title=Academic:%20the%20website%20builder%20for%20Hugo" target="_blank" rel="noopener" class="share-btn-weibo">
-          <i class="fab fa-weibo"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
+          
 
 
 
 
 
-
-
-
-
-
-
-  
-  
-    
-
-
-
-  
-  
-  
-    
-  
-  
-  
-  <div class="media author-card content-widget-hr">
-    
-      
-      <a href="/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu29d46efa9c3797e7116b2034bb8ab228_28182_270x270_fill_q75_lanczos_center.jpg" alt="Joseph Westenberg"></a>
-    
-
-    <div class="media-body">
-      <h5 class="card-title"><a href="/">Joseph Westenberg</a></h5>
-      <h6 class="card-subtitle">PhD Candidate</h6>
-      <p class="card-text">My research interests are in Public Economics, Political Economy, Industrial Organization, and Applied Econometrics.</p>
-      <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-    <li>
-      <a href="mailto:jwesten@iu.edu" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/jmwestenberg" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://scholar.google.com/citations?user=-QlG0yMAAAAJ&amp;hl=en#" target="_blank" rel="noopener">
-        <i class="ai ai-google-scholar"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/jmwestenberg" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/files/cv.pdf" >
-        <i class="ai ai-cv"></i>
-      </a>
-    </li>
-  
-</ul>
-
-    </div>
-  </div>
-
-
-  
-
-
-
-
-
+          
 
 
 <section id="comments">
@@ -1272,9 +1199,7 @@
 
 
 
-
-
-
+          
 
 
   
@@ -1282,27 +1207,11 @@
 
 
 
+        </div>
 
+      </article>
 
-  </div>
-</article>
-  </div>
-
-  <div class="page-footer">
-    
-    
-    <div class="container">
       <footer class="site-footer">
-  
-  <p class="powered-by">
-    
-      <a href="/privacy/">Privacy Policy</a>
-    
-    
-       &middot; 
-      <a href="/terms/">Terms</a>
-    
-  </p>
   
 
   <p class="powered-by">
@@ -1329,7 +1238,15 @@
   </p>
 </footer>
 
-    </div>
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
     
   </div>
 
@@ -1393,6 +1310,11 @@
     
 
     
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
     
 
     
