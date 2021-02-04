@@ -103,7 +103,7 @@ colnames(wide_wiscodata_lf)[2:3]<-paste0("LaborForce_", colnames(wide_wiscodata_
 wide_wiscodata_lf<-wide_wiscodata_lf %>% 
   mutate(percchange=round(((LaborForce_2019 - LaborForce_1990)/(LaborForce_1990*29)),4)*100)
 
-wisccounty@data<-wisccounty@data %>% left_join(wide_wiscodata_lf)
+wisccounty<-wisccounty %>% left_join(wide_wiscodata_lf)
 
 centerLNG<--90
 centerLAT<-44.8
@@ -117,7 +117,7 @@ mypopup <- paste0("County: ", wisccounty$NAME,
 mybins<-c(-0.5, 0, 0.5, 1, 1.5, 2, 3)
 my_pal <- colorBin(
   palette = "YlOrBr",
-  domain = wisccounty@data$percchange,
+  domain = wisccounty$percchange,
   bins=mybins
 )
 leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
@@ -125,9 +125,9 @@ leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
   setView(centerLNG, centerLAT, zoom = 6) %>%
   setMaxBounds(-94, 41, -85, 48) %>%
   addPolygons(data = wisccounty, fillOpacity = 0.7, color = "#b2aeae", smoothFactor = 0.2,
-              fillColor = ~my_pal(wisccounty@data$percchange), weight = 2, popup = mypopup) %>%
+              fillColor = ~my_pal(wisccounty$percchange), weight = 2, popup = mypopup) %>%
   addLegend(
-    pal=my_pal, values = wisccounty@data$percchange, position = "bottomright", title="Average Annual % Change <br> in Labor Force 1990-2019"
+    pal=my_pal, values = wisccounty$percchange, position = "bottomright", title="Average Annual % Change <br> in Labor Force 1990-2019"
   )
 ```
 

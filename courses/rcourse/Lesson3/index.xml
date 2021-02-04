@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lesson 3 | Joseph M. Westenberg</title>
+    <link>/courses/rcourse/lesson3/</link>
+      <atom:link href="/courses/rcourse/lesson3/index.xml" rel="self" type="application/rss+xml" />
+    <description>Lesson 3</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
+      <title>Lesson 3</title>
+      <link>/courses/rcourse/lesson3/</link>
+    </image>
+    
+    <item>
+      <title>ggplot</title>
+      <link>/courses/rcourse/lesson3/lesson3_01/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson3/lesson3_01/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_01_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -79,6 +79,28 @@ print(x)              # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>ggplot</title>
+      <link>/courses/rcourse/lesson3/lesson3_01/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson3/lesson3_01/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_01_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Example</title>
       <link>/courses/rcourse/lesson2/lesson2_01/</link>
       <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
@@ -563,6 +585,7 @@ Average
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;p&gt;This group_by command paired with summarise is quite useful. For example going back to our original data.frame, county_data. Suppose we wanted to do what we just did but for all states. That is calculate within each state and year combination. With the group_by command this is quite simple! (I print the first 100 lines of output below)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` has grouped output by &amp;#39;Year&amp;#39;. You can override using the `.groups` argument.&lt;/code&gt;&lt;/pre&gt;
 &lt;div style=&#34;border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; &#34;&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -2880,6 +2903,10 @@ unemp_rate_calc
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div id=&#34;select&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;select&lt;/h3&gt;
+&lt;p&gt;drop unemp_rate_calc.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -2939,7 +2966,7 @@ for (i in 1:letters_l){              # 3
 &lt;p&gt;Now let’s load in the package xtable. This package allows us to print data.frames into a tex table environment. Let’s first inspect the output for just running the base function with minimal options.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  xtable(indiana_laborforce)  # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## % latex table generated in R 3.6.3 by xtable 1.8-4 package
-## % Wed Feb 03 16:44:11 2021
+## % Thu Feb 04 17:18:37 2021
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rlrrrrrrrrr}
@@ -3062,24 +3089,1634 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
     </item>
     
     <item>
-      <title>ggplot</title>
+      <title>Merging Datasets</title>
       <link>/courses/rcourse/lesson2/lesson2_04/</link>
       <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson2/lesson2_04/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
 
 
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson2/lesson2_04_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
-  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson2/lesson2_04_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What if we have 2 data sets, both county level. How could we combine them?&lt;/p&gt;
+&lt;div id=&#34;poverty-estimates&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Poverty Estimates&lt;/h3&gt;
+&lt;p&gt;We will be merging poverty estimates for the US counties in 2019. A table prepared by the USDA can be found on &lt;a href=&#34;https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/&#34;&gt;their website here.&lt;/a&gt; Let’s download this and put it into our original_data folder. Now let’s open it and see what the data looks like. One of the first things we can notice is the first 2 lines, United States and Alabama. That is there is county and state level observations in addition to the county level ones. We need to keep this in mind before we merge with our unemployment data.&lt;/p&gt;
+&lt;p&gt;Try to figure out how to read this data into R by yourself. If you need to review, go back to &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt;. Remember using R Studio to assist with this is probably the simplest way until we get very comfortable with the commands.&lt;/p&gt;
+&lt;p&gt;Here is the command I use for it:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;PovertyEstimates &amp;lt;-                                                # 1
+  read_excel(paste0(workingdir, &amp;quot;raw_data/PovertyEstimates.xls&amp;quot;),  # 2
+  skip = 4)                                                        # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Make sure we also have our county unemployment data read in. We can observe both of these data.frames now. The way I would clean this data is the following (of course depends on the question/results you are trying to obtain):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;unemployment data:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;restrict to 2019 data (as our other county data is just 2019)&lt;/li&gt;
+&lt;li&gt;Drop Year variable (as we only have one year now)&lt;/li&gt;
+&lt;li&gt;Drop Puerto Rico (State FIPS 72)&lt;/li&gt;
+&lt;li&gt;combine state_fips and county_fips into a FIPStxt variable (this is a variable in our poverty data which we will later be using as an ID to merge data on.)&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;poverty data:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;filter out state/country level observations, leaving just county level.&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here is the code I use for this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unem_2019&amp;lt;-county_data %&amp;gt;%                                                            # 1
+  filter(Year==2019, State_fips!=72) %&amp;gt;% #restrict sample to only year 2019, drop PR  # 2
+  select(-Year) %&amp;gt;% #drop the variable Year                                           # 3
+  mutate(FIPStxt=paste0(State_fips, County_fips)) #Create variable to merge on        # 4
+                                                                                      # 5
+pov_2019 &amp;lt;- PovertyEstimates %&amp;gt;%                                                      # 6
+  filter(substr(FIPStxt, str_length(FIPStxt)-2, str_length(FIPStxt))!=&amp;quot;000&amp;quot;)          # 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now if we observe both data frames we are left with what we want to merge. We have defined a variable FIPStxt which we would like to join observations on. That is for a given FIPStxt ID in our unemployment data, we would like to find the row with that FIPStxt ID in our poverty data, then add the variables in the poverty data to our unemployment data. Then do this for all iterations of our FIPStxt ID.&lt;/p&gt;
+&lt;p&gt;There are join commands for this in the dplyr package. The clearest join command is full_join. This matches data frames based on common variable names (or defined variable names to match on.) I print the first 3 rows below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clean_full&amp;lt;-                         # 1
+  unem_2019 %&amp;gt;% full_join(pov_2019)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26172
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25458
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+714
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6723
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7929
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2040
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1472
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2608
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1376
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+902
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1850
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58233
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63949
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+97328
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+94675
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2653
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22360
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+18541
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26179
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6323
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4521
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8125
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4641
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3295
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5987
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+59871
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+54593
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65149
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8537
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8213
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+324
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5909
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4787
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7031
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2050
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1560
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2540
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1468
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1114
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+49.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35972
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+40122
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;left_join&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;left_join&lt;/h3&gt;
+&lt;p&gt;While the above full_join command is probably the ‘safest’ route since it prints all of the variables and rows of both data frames, knowing more about other joins can save us some time.&lt;/p&gt;
+&lt;p&gt;For example, consider above when we first loaded in our poverty data. It had observations at state and country wide levels in addition to the county level data we wanted. We would ideally want a command that took in the county unemployment data, matched the poverty data based on FIPStxt, and then just exclude any extras from the poverty data. We can do this with left (or right) join.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unclean_left&amp;lt;-                               # 1
+  unem_2019 %&amp;gt;% left_join(PovertyEstimates)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26172
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25458
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+714
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6723
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7929
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2040
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1472
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2608
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1376
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+902
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1850
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58233
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63949
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+97328
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+94675
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2653
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22360
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+18541
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26179
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6323
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4521
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8125
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4641
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3295
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5987
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+59871
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+54593
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65149
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8537
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8213
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+324
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5909
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4787
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7031
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2050
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1560
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2540
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1468
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1114
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+49.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35972
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+40122
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;In this case we are starting with our unemployment data, and then telling R to match all possible values by our common variable (FIPStxt here), then we don’t care about any poverty estimate observations that can’t be matched. However what about unemployment observations that can’t be? We simply fill these values with NA’s. For example, if we DON’T exclude Puerto Rico, it would be in our unemployment data, but not in our poverty data. Let’s see what happens:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unem_2019_pr&amp;lt;-county_data %&amp;gt;%                      # 1
+  filter(Year==2019) %&amp;gt;%                           # 2
+  select(-Year) %&amp;gt;%                                # 3
+  mutate(FIPStxt=paste0(State_fips, County_fips))  # 4
+pr&amp;lt;-                                               # 5
+  unem_2019_pr %&amp;gt;%                                 # 6
+  left_join(PovertyEstimates) %&amp;gt;%                  # 7
+  filter(State_fips==72)                           # 8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Adjuntas Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4115
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3485
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+630
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Aguada Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11743
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10553
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1190
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Aguadilla Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14350
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12881
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1469
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;additional-resources&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Additional Resources&lt;/h3&gt;
+&lt;p&gt;In addition to full and left join shown here, there is also inner join and right join. Details of these can be &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34;&gt;found here.&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
