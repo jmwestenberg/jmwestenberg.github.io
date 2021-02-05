@@ -132,7 +132,7 @@ leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 frameWidget(leafmap)
-
 ```
+See [here for an example of what is possible in GIS with R.](https://jmwestenberg.github.io/post/mapping-with-leaflet/)
