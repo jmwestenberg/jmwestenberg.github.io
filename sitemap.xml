@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/courses/rcourse/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/courses/rcourse/lesson0/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
@@ -33,76 +28,6 @@
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson0/lesson0_01/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/lesson2_01/</loc>
-    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson3/lesson3_01/</loc>
-    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/lesson1_01/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/lesson2_02/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/lesson1_02/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/lesson2_03/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/lesson1_03/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/lesson2_04/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/lesson1_04/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/lesson1_05/</loc>
-    <lastmod>2021-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/lesson2_05/</loc>
-    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc></loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
@@ -119,6 +44,11 @@
   
   <url>
     <loc>/tag/international-trade/</loc>
+    <lastmod>2020-12-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
     <lastmod>2020-12-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -163,16 +93,6 @@
   </url>
   
   <url>
-    <loc>/post/mapping-with-leaflet/</loc>
-    <lastmod>2020-05-02T17:39:17-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-05-02T17:39:17-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/publication-type/2/</loc>
     <lastmod>2019-06-01T00:00:00+00:00</lastmod>
   </url>
@@ -210,6 +130,16 @@
   <url>
     <loc>/post/jupyter/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/</loc>
+    <lastmod>2018-09-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
