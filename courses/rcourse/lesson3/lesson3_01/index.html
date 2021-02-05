@@ -34,8 +34,7 @@
   
     
   
-  <meta name="description" content="In this lesson we will be plotting the data gathered in previous lessons. This is a temporary troubleshooting page updated
-ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) &#43; # 2theme(legend.">
+  <meta name="description" content="In this lesson we will be plotting the data gathered in previous lessons. ggplot2 is a very popular package for plotting and is now included as part of the tidyverse package.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson3/lesson3_01/">
@@ -324,9 +323,8 @@ ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/lesson3/lesson3_01/">
-  <meta property="og:title" content="temporary page | Joseph M. Westenberg">
-  <meta property="og:description" content="In this lesson we will be plotting the data gathered in previous lessons. This is a temporary troubleshooting page updated
-ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) &#43; # 2theme(legend."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:title" content="ggplot | Joseph M. Westenberg">
+  <meta property="og:description" content="In this lesson we will be plotting the data gathered in previous lessons. ggplot2 is a very popular package for plotting and is now included as part of the tidyverse package."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -351,7 +349,7 @@ ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_
 
 
 
-  <title>temporary page | Joseph M. Westenberg</title>
+  <title>ggplot | Joseph M. Westenberg</title>
 
 </head>
 
@@ -970,7 +968,7 @@ ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_
       
 
 
-  <li class="active"><a href="/courses/rcourse/lesson3/lesson3_01/">temporary page</a></li>
+  <li class="active"><a href="/courses/rcourse/lesson3/lesson3_01/">ggplot</a></li>
 
       
         </ul>
@@ -1051,7 +1049,7 @@ ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        temporary page
+        ggplot
       </li>
     </ol>
   </nav>
@@ -1059,24 +1057,78 @@ ggplot(data=indiana)&#43; # 1geom_line(aes(x=Year, y=Unemp_rate, colour=County_
 
           
 
-          <h1>temporary page</h1>
+          <h1>ggplot</h1>
 
           <div class="article-style">
             
 
 
-<p>In this lesson we will be plotting the data gathered in previous lessons. This is a temporary troubleshooting page updated</p>
-<pre class="r"><code>ggplot(data=indiana)+                                                                  # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
-  theme(legend.position=&quot;none&quot;,                                                        # 3
-    axis.text.x=element_text(angle=45)) + ylab(&#39;Indiana Unemployment Rate by County&#39;)  # 4</code></pre>
-<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>ggplot(indiana)+                                                                                                           # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
-  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&#39;black&#39;) +   # 3
-  theme(legend.position=&quot;none&quot;,                                                                                            # 4
-    axis.text.x=element_text(angle=45)) + ylab(&#39;Indiana Unemployment Rate by County&#39;)                                      # 5</code></pre>
+<p>In this lesson we will be plotting the data gathered in previous lessons. ggplot2 is a very popular package for plotting and is now included as part of the tidyverse package. It allows us to make many different kinds of plots and customize them. As it is so popular there are many guides for it. <a href="https://ggplot2.tidyverse.org/">Tidyverse’s website</a> summarizes some very useful resources.</p>
+<p>As ggplot2 has so many options, we will just be barely skimming the surface in this introduction. Let’s start with a minimal command. First let’s load in ggplot2 filter our data down into just Indiana.</p>
+<pre class="r"><code>library(ggplot2)                                     # 1
+                                                     # 2
+indiana &lt;- county_data %&gt;% filter(State_fips==&quot;18&quot;)  # 3</code></pre>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line()                                    # 3</code></pre>
 <p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>Line #1: Tells ggplot we will be using the data.frame indiana. aes is short for aesthetics. This is where we tell ggplot how to map our data into the plots. Here I want ggplot to plot Year on the x-axis, Unemp_rate on the y-axis.</li>
+<li>Line #2: A continuation of the aesthetic mapping, his line is saying plot separately for each County_fips separately, giving them a different color.</li>
+<li>Line #3: Tells ggplot to plot the data as lines.</li>
+</ul>
+<p>First thing after this plot, the legend is excessive. Let’s just suppress it for now. To do this we can define the legend.position in theme as none. The theme command allows for a lot of customization with the plot. If you want to see all options <a href="https://ggplot2.tidyverse.org/reference/theme.html">click here.</a> Let’s also change the thickness of the lines, we can do this with the alpha argument.</p>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line(size=0.3)+                           # 3
+  theme(legend.position=&quot;none&quot;)                  # 4</code></pre>
+<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>This already is looking a lot better. But can we do something about the labels on the x axis, they are overlaying on each other. We could make the text smaller but then it would be difficult to see, so let’s just rotate them. Also let’s make the y-axis name a bit more meaningful.</p>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line(size=0.3)+                           # 3
+  theme(legend.position=&quot;none&quot;,                  # 4
+    axis.text.x=element_text(angle=45)) +        # 5
+  ylab(&#39;Indiana Unemployment Rate by County&#39;)    # 6</code></pre>
+<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Now we’re getting somewhere! But what if we want to emphasize the county Bloomington is in, Monroe County?</p>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 1
+    colour=County_fips, group=County_fips))+            # 2
+  geom_line(size=0.3)+                                  # 3
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate,   # 4
+    colour=County_fips, group=1),                       # 5
+    size=0.6, colour=&#39;black&#39;) +                         # 6
+  theme(legend.position=&quot;none&quot;,                         # 7
+    axis.text.x=element_text(angle=45)) +               # 8
+  ylab(&#39;Indiana Unemployment Rate by County&#39;)           # 9</code></pre>
+<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>We can make the black line for Monroe County ‘pop’ a bit more too. Let’s change the opacity of the other counties lines. To do this we can set a value, alpha. This takes values 0 to 1 where smaller values are more transparent.</p>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 1
+    colour=County_fips, group=County_fips))+            # 2
+  geom_line(size=0.3, alpha=0.5)+                       # 3
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate,   # 4
+    colour=County_fips, group=1),                       # 5
+    size=0.6, colour=&#39;black&#39;) +                         # 6
+  theme(legend.position=&quot;none&quot;,                         # 7
+    axis.text.x=element_text(angle=45)) +               # 8
+  ylab(&#39;Indiana Unemployment Rate by County&#39;)           # 9</code></pre>
+<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div id="saving-plots" class="section level3">
+<h3>Saving Plots</h3>
+<p>Now we have generated a plot we like, let’s save it.</p>
+<pre class="r"><code>ggsave(file=paste0(workingdir, &quot;/figures/indiana_unemp.png&quot;))      # 1</code></pre>
+<p>This will take the last graphic in memory and save it in the location we specify. We can also tell ggplot to make the plot specific dimensions which I highly recommend doing. If you do not specify dimensions, they can be dependent on the size of your viewer in RStudio.</p>
+<pre class="r"><code>ggsave(file=paste0(workingdir, &quot;/figures/indiana_unemp.png&quot;),   # 1
+  height = 5, width = 7)                                        # 2</code></pre>
+</div>
+<div id="scatter-plot-geom_point" class="section level3">
+<h3>Scatter plot (geom_point)</h3>
+<p>What if we want points to insteaed of lines for each year?</p>
+<pre class="r"><code>ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+  colour=County_fips, group=County_fips))+       # 2
+  geom_point()                                   # 3</code></pre>
+<p><img src="/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
 
           </div>
 
