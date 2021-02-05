@@ -120,7 +120,7 @@ my_pal <- colorBin(
   domain = wisccounty$percchange,
   bins=mybins
 )
-leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
+leaflet(options = leafletOptions(minZoom = 4)) %>%
   addProviderTiles("CartoDB.Positron", group = "base") %>%
   setView(centerLNG, centerLAT, zoom = 6) %>%
   setMaxBounds(-94, 41, -85, 48) %>%
@@ -132,7 +132,4 @@ leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
 ```
 
 
-```{r}
-frameWidget(leafmap)
-```
 See [here for an example of what is possible in GIS with R.](https://jmwestenberg.github.io/post/mapping-with-leaflet/)
