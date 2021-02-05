@@ -35,5 +35,28 @@
 </description>
     </item>
     
+    <item>
+      <title>ggplot2</title>
+      <link>/courses/rcourse/lesson3/lesson3_02/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson3/lesson3_02/</guid>
+      <description>
+
+
+&lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) + 
+  theme(legend.position=&amp;quot;none&amp;quot;,
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_02_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) + 
+  theme(legend.position=&amp;quot;none&amp;quot;,
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson3/lesson3_02_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
