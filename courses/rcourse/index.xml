@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introduction | Joseph M. Westenberg</title>
+    <link>/courses/rcourse/</link>
+      <atom:link href="/courses/rcourse/index.xml" rel="self" type="application/rss+xml" />
+    <description>Introduction</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
+      <title>Introduction</title>
+      <link>/courses/rcourse/</link>
+    </image>
+    
+  </channel>
+</rss>

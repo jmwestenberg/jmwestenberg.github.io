@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Joseph M. Westenberg</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
       <title>Joseph M. Westenberg</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Very Basics</title>
       <link>/courses/rcourse/lesson0/lesson0_01/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson0/lesson0_01/</guid>
       <description>
 
@@ -81,14 +81,14 @@ print(x)              # 2&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Example</title>
       <link>/courses/rcourse/lesson2/lesson2_01/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson2/lesson2_01/</guid>
       <description>
 
 
 &lt;p&gt;Suppose we want to know what is happening to the distribution of the Labor Force Across the counties in Indiana across time.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## % latex table generated in R 3.6.3 by xtable 1.8-4 package
-## % Fri Feb 05 12:41:52 2021
+## % Fri Feb 05 13:54:19 2021
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{|c||c|ccccccccc|}
@@ -154,32 +154,9 @@ xtable(indiana_laborforce, type =&amp;quot;latex&amp;quot;,                     
     </item>
     
     <item>
-      <title>temporary page</title>
-      <link>/courses/rcourse/lesson3/lesson3_01/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson3/lesson3_01/</guid>
-      <description>
-
-
-&lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons. This is a temporary troubleshooting page updated&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
-  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Project Organization</title>
       <link>/courses/rcourse/lesson1/lesson1_01/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson1/lesson1_01/</guid>
       <description>
 
@@ -204,9 +181,32 @@ setwd(workingdir)                       # 2&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>temporary page</title>
+      <link>/courses/rcourse/lesson3/lesson3_01/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson3/lesson3_01/</guid>
+      <description>
+
+
+&lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons. This is a temporary troubleshooting page updated&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
+  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
+  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
+    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>dplyr</title>
       <link>/courses/rcourse/lesson2/lesson2_02/</link>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson2/lesson2_02/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
@@ -2914,7 +2914,7 @@ unemp_rate_calc
     <item>
       <title>Writing Loops</title>
       <link>/courses/rcourse/lesson1/lesson1_02/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson1/lesson1_02/</guid>
       <description>
 
@@ -2943,9 +2943,55 @@ for (i in 1:letters_l){              # 3
     </item>
     
     <item>
+      <title>String Manipulation</title>
+      <link>/courses/rcourse/lesson1/lesson1_03/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
+      <description>
+
+
+&lt;div id=&#34;string-concatenation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;String Concatenation&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a&amp;lt;-&amp;quot;This is a the start&amp;quot;  # 1
+b&amp;lt;-&amp;quot;of a sentence&amp;quot;        # 2
+print(paste0(a,b))        # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the startof a sentence&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(paste(a,b))  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the start of a sentence&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it’s that easy!&lt;/p&gt;
+&lt;p&gt;We will not be using this for this project but it may be useful to know we can concatenate two vectors of strings as well.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a&amp;lt;-c(&amp;quot;This is a the start&amp;quot;, &amp;quot;Now we have&amp;quot;, &amp;quot;This really is&amp;quot;, &amp;quot;Economics is&amp;quot;)  # 1
+b&amp;lt;-c(&amp;quot;of a sentence.&amp;quot;, &amp;quot;another sentence.&amp;quot;, &amp;quot;quite handy.&amp;quot;, &amp;quot;awesome!&amp;quot;)       # 2
+print(paste(a,b))                                                             # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the start of a sentence.&amp;quot; &amp;quot;Now we have another sentence.&amp;quot;     
+## [3] &amp;quot;This really is quite handy.&amp;quot;        &amp;quot;Economics is awesome!&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I don’t want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;string-padding&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;String Padding&lt;/h2&gt;
+&lt;p&gt;Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading one. That is instead of “1” we need “01”.&lt;/p&gt;
+&lt;p&gt;We could use paste0 as above and combine a 0 with our vector.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;numbvec&amp;lt;-as.character(1:19)  # 1
+print(paste0(&amp;quot;0&amp;quot;, numbvec))  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;01&amp;quot;  &amp;quot;02&amp;quot;  &amp;quot;03&amp;quot;  &amp;quot;04&amp;quot;  &amp;quot;05&amp;quot;  &amp;quot;06&amp;quot;  &amp;quot;07&amp;quot;  &amp;quot;08&amp;quot;  &amp;quot;09&amp;quot;  &amp;quot;010&amp;quot; &amp;quot;011&amp;quot; &amp;quot;012&amp;quot;
+## [13] &amp;quot;013&amp;quot; &amp;quot;014&amp;quot; &amp;quot;015&amp;quot; &amp;quot;016&amp;quot; &amp;quot;017&amp;quot; &amp;quot;018&amp;quot; &amp;quot;019&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). We could break our vector into single character digits and two character digits, manipulate the single character digits, then combine it back in with the double character digits. But there is an easier way: str_pad !&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(stringr)  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: stringr&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;numbvec&amp;lt;-as.character(1:19)                # 1
+print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;01&amp;quot; &amp;quot;02&amp;quot; &amp;quot;03&amp;quot; &amp;quot;04&amp;quot; &amp;quot;05&amp;quot; &amp;quot;06&amp;quot; &amp;quot;07&amp;quot; &amp;quot;08&amp;quot; &amp;quot;09&amp;quot; &amp;quot;10&amp;quot; &amp;quot;11&amp;quot; &amp;quot;12&amp;quot; &amp;quot;13&amp;quot; &amp;quot;14&amp;quot; &amp;quot;15&amp;quot;
+## [16] &amp;quot;16&amp;quot; &amp;quot;17&amp;quot; &amp;quot;18&amp;quot; &amp;quot;19&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now this looks like what we want! But what is str_pad doing? With str_pad we are telling stringr we want all elements of numbvec to be of length 2. So stringr checks to see if the elements are less than 2 characters, if an element is it adds “0”’s to the left side until it reaches length 2. If it is already length 2, it will leave it alone.&lt;/p&gt;
+&lt;p&gt;There is many other handy commands to deal with strings in R. These are just a couple of commands we will be using. I will be writing a post with some other handy functions in the coming weeks and will link it here.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>xtable</title>
       <link>/courses/rcourse/lesson2/lesson2_03/</link>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson2/lesson2_03/</guid>
       <description>
 
@@ -2967,7 +3013,7 @@ for (i in 1:letters_l){              # 3
 &lt;p&gt;Now let’s load in the package xtable. This package allows us to print data.frames into a tex table environment. Let’s first inspect the output for just running the base function with minimal options.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  xtable(indiana_laborforce)  # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## % latex table generated in R 3.6.3 by xtable 1.8-4 package
-## % Fri Feb 05 12:42:03 2021
+## % Fri Feb 05 13:54:34 2021
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rlrrrrrrrrr}
@@ -3044,47 +3090,41 @@ for (i in 1:letters_l){              # 3
     </item>
     
     <item>
-      <title>String Manipulation</title>
-      <link>/courses/rcourse/lesson1/lesson1_03/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
+      <title>Downloading/Reading Data</title>
+      <link>/courses/rcourse/lesson1/lesson1_04/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson1/lesson1_04/</guid>
       <description>
 
 
-&lt;div id=&#34;string-concatenation&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;String Concatenation&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a&amp;lt;-&amp;quot;This is a the start&amp;quot;  # 1
-b&amp;lt;-&amp;quot;of a sentence&amp;quot;        # 2
-print(paste0(a,b))        # 3&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the startof a sentence&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(paste(a,b))  # 1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the start of a sentence&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it’s that easy!&lt;/p&gt;
-&lt;p&gt;We will not be using this for this project but it may be useful to know we can concatenate two vectors of strings as well.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a&amp;lt;-c(&amp;quot;This is a the start&amp;quot;, &amp;quot;Now we have&amp;quot;, &amp;quot;This really is&amp;quot;, &amp;quot;Economics is&amp;quot;)  # 1
-b&amp;lt;-c(&amp;quot;of a sentence.&amp;quot;, &amp;quot;another sentence.&amp;quot;, &amp;quot;quite handy.&amp;quot;, &amp;quot;awesome!&amp;quot;)       # 2
-print(paste(a,b))                                                             # 3&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the start of a sentence.&amp;quot; &amp;quot;Now we have another sentence.&amp;quot;     
-## [3] &amp;quot;This really is quite handy.&amp;quot;        &amp;quot;Economics is awesome!&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I don’t want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.&lt;/p&gt;
+&lt;div id=&#34;downloading-within-r&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Downloading within R&lt;/h2&gt;
+&lt;p&gt;We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1_01/&#34;&gt;Lesson 1.1&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(&amp;quot;https://www.bls.gov/lau/laucnty90.xlsx&amp;quot;,              # 1
+  paste0(workingdir, &amp;quot;/raw_data/&amp;quot;, &amp;quot;bls_unemp_90.xlsx&amp;quot;), mode=&amp;quot;wb&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;string-padding&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;String Padding&lt;/h2&gt;
-&lt;p&gt;Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading one. That is instead of “1” we need “01”.&lt;/p&gt;
-&lt;p&gt;We could use paste0 as above and combine a 0 with our vector.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;numbvec&amp;lt;-as.character(1:19)  # 1
-print(paste0(&amp;quot;0&amp;quot;, numbvec))  # 2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;01&amp;quot;  &amp;quot;02&amp;quot;  &amp;quot;03&amp;quot;  &amp;quot;04&amp;quot;  &amp;quot;05&amp;quot;  &amp;quot;06&amp;quot;  &amp;quot;07&amp;quot;  &amp;quot;08&amp;quot;  &amp;quot;09&amp;quot;  &amp;quot;010&amp;quot; &amp;quot;011&amp;quot; &amp;quot;012&amp;quot;
-## [13] &amp;quot;013&amp;quot; &amp;quot;014&amp;quot; &amp;quot;015&amp;quot; &amp;quot;016&amp;quot; &amp;quot;017&amp;quot; &amp;quot;018&amp;quot; &amp;quot;019&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). We could break our vector into single character digits and two character digits, manipulate the single character digits, then combine it back in with the double character digits. But there is an easier way: str_pad !&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(stringr)  # 1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: stringr&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;numbvec&amp;lt;-as.character(1:19)                # 1
-print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  # 2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;01&amp;quot; &amp;quot;02&amp;quot; &amp;quot;03&amp;quot; &amp;quot;04&amp;quot; &amp;quot;05&amp;quot; &amp;quot;06&amp;quot; &amp;quot;07&amp;quot; &amp;quot;08&amp;quot; &amp;quot;09&amp;quot; &amp;quot;10&amp;quot; &amp;quot;11&amp;quot; &amp;quot;12&amp;quot; &amp;quot;13&amp;quot; &amp;quot;14&amp;quot; &amp;quot;15&amp;quot;
-## [16] &amp;quot;16&amp;quot; &amp;quot;17&amp;quot; &amp;quot;18&amp;quot; &amp;quot;19&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now this looks like what we want! But what is str_pad doing? With str_pad we are telling stringr we want all elements of numbvec to be of length 2. So stringr checks to see if the elements are less than 2 characters, if an element is it adds “0”’s to the left side until it reaches length 2. If it is already length 2, it will leave it alone.&lt;/p&gt;
-&lt;p&gt;There is many other handy commands to deal with strings in R. These are just a couple of commands we will be using. I will be writing a post with some other handy functions in the coming weeks and will link it here.&lt;/p&gt;
+&lt;div id=&#34;reading-in-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reading in Data&lt;/h2&gt;
+&lt;p&gt;Before we read in this data to R, let’s see what we are dealing with. Opening up the file in excel we can see there will be issues reading the file in.
+&lt;img src=&#34;/img/rcourse/data_head.PNG&#34; alt=&#34;data head&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can notice that the first row has the file title spread across columns A:J. Variable names are spread across anywhere 1-3 rows. And lastly we have an empty column in F. The bright side is if we observe the other year’s files, they all have this exact same structure. Hence we will able to use a loop eventually to clean them all instead of one at a time.&lt;/p&gt;
+&lt;p&gt;The main package we will be using is readxl, which is quite self explanatory. It is a package meant to help to read in excel docs. Let’s try to open the file for 1990 we downloaded in R. We can do this through R Studio’s functionality.&lt;/p&gt;
+&lt;p&gt;Within the “Environment” area of R Studio, click Import Dataset, then From Excel…
+&lt;img src=&#34;/img/rcourse/import_fromexcel.PNG&#34; alt=&#34;import&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/rcourse/import_fromexceloptions.PNG&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.&lt;/p&gt;
+&lt;p&gt;Hence we have something that will look like the following for our command for our script.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(readxl)                                                                                                                                     # 1
+workingdir&amp;lt;-&amp;quot;C:/Users/weste/Documents/GitHub/Rcourse&amp;quot;                                                                                               # 2
+bls_unemp_90 &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_90.xlsx&amp;quot;), col_names=FALSE, skip=5)                                              # 3
+bls_unemp_90&amp;lt;-bls_unemp_90[,-6]                                                                                                                     # 4
+col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;, &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)  # 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where the last line above we are giving our columns names based on the names we saw in the excel document.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;downloadingreading-data-in-a-loop&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Downloading/Reading Data in a Loop&lt;/h2&gt;
+&lt;p&gt;Here is a good place to pause if you want a challenge. You should have all the tools needed to write a loop to download all files from 1990-2019.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -3092,7 +3132,7 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
     <item>
       <title>Merging Datasets</title>
       <link>/courses/rcourse/lesson2/lesson2_04/</link>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson2/lesson2_04/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
@@ -4722,49 +4762,9 @@ NA
     </item>
     
     <item>
-      <title>Downloading/Reading Data</title>
-      <link>/courses/rcourse/lesson1/lesson1_04/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_04/</guid>
-      <description>
-
-
-&lt;div id=&#34;downloading-within-r&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Downloading within R&lt;/h2&gt;
-&lt;p&gt;We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1_01/&#34;&gt;Lesson 1.1&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(&amp;quot;https://www.bls.gov/lau/laucnty90.xlsx&amp;quot;,              # 1
-  paste0(workingdir, &amp;quot;/raw_data/&amp;quot;, &amp;quot;bls_unemp_90.xlsx&amp;quot;), mode=&amp;quot;wb&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;reading-in-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Reading in Data&lt;/h2&gt;
-&lt;p&gt;Before we read in this data to R, let’s see what we are dealing with. Opening up the file in excel we can see there will be issues reading the file in.
-&lt;img src=&#34;/img/rcourse/data_head.PNG&#34; alt=&#34;data head&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We can notice that the first row has the file title spread across columns A:J. Variable names are spread across anywhere 1-3 rows. And lastly we have an empty column in F. The bright side is if we observe the other year’s files, they all have this exact same structure. Hence we will able to use a loop eventually to clean them all instead of one at a time.&lt;/p&gt;
-&lt;p&gt;The main package we will be using is readxl, which is quite self explanatory. It is a package meant to help to read in excel docs. Let’s try to open the file for 1990 we downloaded in R. We can do this through R Studio’s functionality.&lt;/p&gt;
-&lt;p&gt;Within the “Environment” area of R Studio, click Import Dataset, then From Excel…
-&lt;img src=&#34;/img/rcourse/import_fromexcel.PNG&#34; alt=&#34;import&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/rcourse/import_fromexceloptions.PNG&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.&lt;/p&gt;
-&lt;p&gt;Hence we have something that will look like the following for our command for our script.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(readxl)                                                                                                                                     # 1
-workingdir&amp;lt;-&amp;quot;C:/Users/weste/Documents/GitHub/Rcourse&amp;quot;                                                                                               # 2
-bls_unemp_90 &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_90.xlsx&amp;quot;), col_names=FALSE, skip=5)                                              # 3
-bls_unemp_90&amp;lt;-bls_unemp_90[,-6]                                                                                                                     # 4
-col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;, &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)  # 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Where the last line above we are giving our columns names based on the names we saw in the excel document.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;downloadingreading-data-in-a-loop&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Downloading/Reading Data in a Loop&lt;/h2&gt;
-&lt;p&gt;Here is a good place to pause if you want a challenge. You should have all the tools needed to write a loop to download all files from 1990-2019.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Download Loop</title>
       <link>/courses/rcourse/lesson1/lesson1_05/</link>
-      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson1/lesson1_05/</guid>
       <description>
 
@@ -4804,29 +4804,6 @@ save(county_data, file=paste0(workingdir, &amp;quot;/processed_data/county_data_
 &lt;li&gt;Line #18: save the combined data to our processed_data folder as a Rda type.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We now have our data cleaned and saved for our next lesson when we will start to work with it more!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ggplot</title>
-      <link>/courses/rcourse/lesson2/lesson2_05/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_05/</guid>
-      <description>
-
-
-&lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indplot&amp;lt;-ggplot(data=indiana)+                                                         # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/img/rcourse/plot1.PNG&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indplot_monroe&amp;lt;-ggplot(indiana)+                                                                                           # 1
-  geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
-  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
-  theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
-    axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/img/rcourse/plot2.PNG&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -4951,8 +4928,6 @@ visible on the map, but we can add/remove “Lower”. To see this in the map be
 in the upper right corner. Notice how we can uncheck and recheck “Lower”? But we can’t do that
 with the base map.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;## Warning in dir.create(target_dir): cannot create dir
-## &amp;#39;leaflet_libs\Proj4Leaflet&amp;#39;, reason &amp;#39;Permission denied&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;htmlwidget-2&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
 &lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-6.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
 &lt;p&gt;We can then add an additional layer to this map with the upper house as well.&lt;/p&gt;

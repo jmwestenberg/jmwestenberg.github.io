@@ -1,0 +1,4030 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.2 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Joseph Westenberg">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Let’s take a look at some code from our example.
+Pipe Operator and Filtering on Specific Valuesindiana&lt;- # 1county_data %&gt;% filter(State_fips==&quot;18&quot;) # 2What is going on in this line of code?">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson2/lesson2_02/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#990000">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.287bcbd73f86673da8f9ec2eefc4cb44.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165021462-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-165021462-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_180x180_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/courses/rcourse/lesson2/lesson2_02/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jmwestenberg">
+  <meta property="twitter:creator" content="@jmwestenberg">
+  
+  <meta property="og:site_name" content="Joseph M. Westenberg">
+  <meta property="og:url" content="/courses/rcourse/lesson2/lesson2_02/">
+  <meta property="og:title" content="dplyr | Joseph M. Westenberg">
+  <meta property="og:description" content="Let’s take a look at some code from our example.
+Pipe Operator and Filtering on Specific Valuesindiana&lt;- # 1county_data %&gt;% filter(State_fips==&quot;18&quot;) # 2What is going on in this line of code?"><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-02-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-02-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>dplyr | Joseph M. Westenberg</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.d876f1a6b98701f9238f2313b512a26f.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Joseph M. Westenberg</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Joseph M. Westenberg</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Current Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#conferences"><span>Conferences</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Achievements</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#skills"><span>Skills</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Lesson 2
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
+
+  
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
+
+  
+  
+    
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/courses/"><i class="fas fa-arrow-left pr-1"></i>Courses</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/">Basic R for Econ</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson0/">Lesson 0</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson0/lesson0_01/">Very Basics</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson1/">Lesson 1</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_04/">Downloading/Reading Data</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_05/">Download Loop</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson2/">Lesson 2</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_01/">Example</a></li>
+
+
+
+  <li class="active"><a href="/courses/rcourse/lesson2/lesson2_02/">dplyr</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">xtable</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">Merging Datasets</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/rcourse/lesson3/">Lesson 3</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/rcourse/lesson3/lesson3_01/">temporary page</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+  
+  
+  
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/">
+      
+        Courses
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/rcourse/">
+      
+        Basic R for Econ
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/rcourse/lesson2/">
+      
+        Lesson 2
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        dplyr
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>dplyr</h1>
+
+          <div class="article-style">
+            
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>Let’s take a look at some code from our example.</p>
+<div id="pipe-operator-and-filtering-on-specific-values" class="section level3">
+<h3>Pipe Operator and Filtering on Specific Values</h3>
+<pre class="r"><code>indiana&lt;-                                     # 1
+    county_data %&gt;% filter(State_fips==&quot;18&quot;)  # 2</code></pre>
+<p>What is going on in this line of code? Let’s start with the second line. The operator %&gt;% is called a pipe. This comes from a package called magittr which is included within tidyverse. Pipes are very handy for neatly writing longer sequences of code. Here we begin with a pretty simple example. We can think of pipes as saying “then”. That is it takes the argument before it and uses it as input in the following command. Here we are using a filter command, so we are saying take our data.frame county_data, then filter or “give us” the values where State_fips is equal to “18” (this is fips code for Indiana. Go Hoosiers!). So in summary we are just filtering out indiana data and saving it as a new data frame (this is line 1). Note: this operation does NOT impact county_data, the only way we ‘over write’ a data frame is to explicitly tell it to. For example the following WOULD overwrite county_data.</p>
+<pre class="r"><code>county_data&lt;-county_data %&gt;% filter(State_fips==&quot;18&quot;)  # 1</code></pre>
+<div id="and-and-or-operators" class="section level4">
+<h4>“And” and “Or” Operators</h4>
+<p>Another common thing that we may want to do is to filter on multiple values. Suppose we wanted data for Monroe County, IN (the county fips is 105 for Monroe) but just in 2 years, 1990 and 2019. We can use “and” and “or” statements. Within R:</p>
+<ul>
+<li>“&amp;” : Our “and” operator</li>
+<li>“|” : Our “or” operator</li>
+</ul>
+<p>Okay now to filtering to indiana in the two years, 1990 and 2019.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+LAUS_code
+</th>
+<th style="text-align:left;">
+State_fips
+</th>
+<th style="text-align:left;">
+County_fips
+</th>
+<th style="text-align:left;">
+County_name
+</th>
+<th style="text-align:left;">
+Year
+</th>
+<th style="text-align:right;">
+Labor_force
+</th>
+<th style="text-align:right;">
+Employed
+</th>
+<th style="text-align:right;">
+Unemployed
+</th>
+<th style="text-align:right;">
+Unemp_rate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CN1810500000000
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+105
+</td>
+<td style="text-align:left;">
+Monroe County, IN
+</td>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:right;">
+54722
+</td>
+<td style="text-align:right;">
+52975
+</td>
+<td style="text-align:right;">
+1747
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CN1810500000000
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+105
+</td>
+<td style="text-align:left;">
+Monroe County, IN
+</td>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+70338
+</td>
+<td style="text-align:right;">
+68000
+</td>
+<td style="text-align:right;">
+2338
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="group_by-and-summarise" class="section level3">
+<h3>group_by and summarise</h3>
+<p>Our next chunk of code gets a bit more complex, let’s take it peice by peice though.</p>
+<pre class="r"><code>  indiana %&gt;% group_by(Year) %&gt;%          # 1
+    summarise(Average=mean(Labor_force))  # 2</code></pre>
+<p>Let’s again take it from the end and work our ways backwards through it. The 3rd line above is calculating a new variable within a group that is called ‘Average’. The group (line 2) that we are calculating within is each Year for our Indiana data.frame. That is this snippet of code will give us one value back for each year, the average Labor Force level across Indiana’s counties.</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; ">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Year
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Average
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:right;">
+30593.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:right;">
+30357.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1992
+</td>
+<td style="text-align:right;">
+31058.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1993
+</td>
+<td style="text-align:right;">
+32046.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1994
+</td>
+<td style="text-align:right;">
+33308.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1995
+</td>
+<td style="text-align:right;">
+34078.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1996
+</td>
+<td style="text-align:right;">
+33800.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1997
+</td>
+<td style="text-align:right;">
+33919.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1998
+</td>
+<td style="text-align:right;">
+33947.47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1999
+</td>
+<td style="text-align:right;">
+33965.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000
+</td>
+<td style="text-align:right;">
+33982.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001
+</td>
+<td style="text-align:right;">
+34140.32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002
+</td>
+<td style="text-align:right;">
+34469.34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003
+</td>
+<td style="text-align:right;">
+34597.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2004
+</td>
+<td style="text-align:right;">
+34432.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2005
+</td>
+<td style="text-align:right;">
+34841.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:right;">
+35164.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:right;">
+34866.21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2008
+</td>
+<td style="text-align:right;">
+35131.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009
+</td>
+<td style="text-align:right;">
+34717.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2010
+</td>
+<td style="text-align:right;">
+34512.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2011
+</td>
+<td style="text-align:right;">
+34586.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012
+</td>
+<td style="text-align:right;">
+34454.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013
+</td>
+<td style="text-align:right;">
+34656.59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014
+</td>
+<td style="text-align:right;">
+35052.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015
+</td>
+<td style="text-align:right;">
+35508.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016
+</td>
+<td style="text-align:right;">
+36178.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017
+</td>
+<td style="text-align:right;">
+36243.96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018
+</td>
+<td style="text-align:right;">
+36756.59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+36819.25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This group_by command paired with summarise is quite useful. For example going back to our original data.frame, county_data. Suppose we wanted to do what we just did but for all states. That is calculate within each state and year combination. With the group_by command this is quite simple! (I print the first 100 lines of output below)</p>
+<pre><code>## `summarise()` has grouped output by &#39;Year&#39;. You can override using the `.groups` argument.</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; ">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+State_fips
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Average
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:right;">
+28468.343
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+02
+</td>
+<td style="text-align:right;">
+10323.923
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:right;">
+119079.067
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+05
+</td>
+<td style="text-align:right;">
+15091.147
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+06
+</td>
+<td style="text-align:right;">
+261007.414
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+08
+</td>
+<td style="text-align:right;">
+27557.641
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+09
+</td>
+<td style="text-align:right;">
+227471.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:right;">
+120074.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:right;">
+328924.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:right;">
+96480.269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:right;">
+20653.579
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:right;">
+137730.500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:right;">
+11193.045
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+58304.049
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:right;">
+30593.652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:right;">
+14664.212
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:right;">
+12119.305
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:right;">
+14619.667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:right;">
+29216.547
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:right;">
+39563.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:right;">
+107919.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:right;">
+229027.357
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:right;">
+55509.072
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:right;">
+27573.690
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:right;">
+14438.854
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+29
+</td>
+<td style="text-align:right;">
+22737.852
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+30
+</td>
+<td style="text-align:right;">
+7198.929
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+31
+</td>
+<td style="text-align:right;">
+8871.215
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+32
+</td>
+<td style="text-align:right;">
+39407.176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+33
+</td>
+<td style="text-align:right;">
+62009.100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+34
+</td>
+<td style="text-align:right;">
+193117.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+35
+</td>
+<td style="text-align:right;">
+21630.061
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:right;">
+142149.565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+37
+</td>
+<td style="text-align:right;">
+34765.130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:right;">
+5985.226
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+39
+</td>
+<td style="text-align:right;">
+61586.670
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:right;">
+19786.338
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+41
+</td>
+<td style="text-align:right;">
+41408.833
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:right;">
+86992.045
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:right;">
+105072.600
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+45
+</td>
+<td style="text-align:right;">
+37903.326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+46
+</td>
+<td style="text-align:right;">
+5260.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+47
+</td>
+<td style="text-align:right;">
+25207.768
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:right;">
+33932.858
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:right;">
+28352.138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+50
+</td>
+<td style="text-align:right;">
+21768.214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+51
+</td>
+<td style="text-align:right;">
+24452.541
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+53
+</td>
+<td style="text-align:right;">
+64751.974
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+54
+</td>
+<td style="text-align:right;">
+13857.600
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:right;">
+35970.542
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:right;">
+10259.348
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:left;">
+72
+</td>
+<td style="text-align:right;">
+14517.090
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:right;">
+28665.134
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+02
+</td>
+<td style="text-align:right;">
+10626.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:right;">
+120334.200
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+05
+</td>
+<td style="text-align:right;">
+15060.213
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+06
+</td>
+<td style="text-align:right;">
+260801.552
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+08
+</td>
+<td style="text-align:right;">
+28035.766
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+09
+</td>
+<td style="text-align:right;">
+230137.750
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:right;">
+120571.333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:right;">
+321433.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:right;">
+97499.104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:right;">
+20619.044
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:right;">
+142897.250
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:right;">
+11547.432
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+58277.431
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:right;">
+30357.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:right;">
+14896.960
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:right;">
+12190.105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:right;">
+14689.508
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:right;">
+29804.094
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:right;">
+40318.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:right;">
+109023.333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:right;">
+228211.357
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:right;">
+55369.482
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:right;">
+27903.586
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:right;">
+14439.512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+29
+</td>
+<td style="text-align:right;">
+23000.835
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+30
+</td>
+<td style="text-align:right;">
+7247.179
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+31
+</td>
+<td style="text-align:right;">
+8992.527
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+32
+</td>
+<td style="text-align:right;">
+41338.118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+33
+</td>
+<td style="text-align:right;">
+61429.900
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+34
+</td>
+<td style="text-align:right;">
+193610.571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+35
+</td>
+<td style="text-align:right;">
+21974.485
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:right;">
+140985.613
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+37
+</td>
+<td style="text-align:right;">
+35380.200
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:right;">
+5947.509
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+39
+</td>
+<td style="text-align:right;">
+61726.409
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:right;">
+19575.922
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+41
+</td>
+<td style="text-align:right;">
+42135.556
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:right;">
+87390.030
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:right;">
+103603.400
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+45
+</td>
+<td style="text-align:right;">
+38234.348
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+46
+</td>
+<td style="text-align:right;">
+5303.182
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+47
+</td>
+<td style="text-align:right;">
+25407.611
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:right;">
+34512.854
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:right;">
+29390.414
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+50
+</td>
+<td style="text-align:right;">
+21683.857
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+51
+</td>
+<td style="text-align:right;">
+25107.677
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:left;">
+53
+</td>
+<td style="text-align:right;">
+65281.667
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Average is just one statistic we may want to calculate, how about percentiles, minimum, maximum, standard deviation. our summarise command will accept more than one argument, we just have to separate by a comma. Let’s also save this as a new data.frame for use in future lessons.</p>
+<pre class="r"><code>indiana_laborforce&lt;-                       # 1
+  indiana %&gt;% group_by(Year) %&gt;%           # 2
+  summarise(Min=min(Labor_force),          # 3
+    p10th=quantile(Labor_force, c(0.1)),   # 4
+    p25th=quantile(Labor_force, c(0.25)),  # 5
+    p50th=quantile(Labor_force, c(0.5)),   # 6
+    p75th=quantile(Labor_force, c(0.75)),  # 7
+    p90th=quantile(Labor_force, c(0.9)),   # 8
+    Max=max(Labor_force),                  # 9
+    Average=mean(Labor_force),            # 10
+    StDev=sd(Labor_force))                # 11</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; ">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Year
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Min
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p10th
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p25th
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p50th
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p75th
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p90th
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Max
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Average
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+StDev
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1990
+</td>
+<td style="text-align:right;">
+2629
+</td>
+<td style="text-align:right;">
+6639.3
+</td>
+<td style="text-align:right;">
+9617.50
+</td>
+<td style="text-align:right;">
+14858.5
+</td>
+<td style="text-align:right;">
+30089.50
+</td>
+<td style="text-align:right;">
+60784.5
+</td>
+<td style="text-align:right;">
+424053
+</td>
+<td style="text-align:right;">
+30593.65
+</td>
+<td style="text-align:right;">
+52989.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1991
+</td>
+<td style="text-align:right;">
+2541
+</td>
+<td style="text-align:right;">
+6380.5
+</td>
+<td style="text-align:right;">
+9480.00
+</td>
+<td style="text-align:right;">
+14713.0
+</td>
+<td style="text-align:right;">
+30131.00
+</td>
+<td style="text-align:right;">
+62309.9
+</td>
+<td style="text-align:right;">
+421789
+</td>
+<td style="text-align:right;">
+30357.00
+</td>
+<td style="text-align:right;">
+52670.08
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1992
+</td>
+<td style="text-align:right;">
+2550
+</td>
+<td style="text-align:right;">
+6284.2
+</td>
+<td style="text-align:right;">
+9615.50
+</td>
+<td style="text-align:right;">
+15169.5
+</td>
+<td style="text-align:right;">
+31117.00
+</td>
+<td style="text-align:right;">
+63623.2
+</td>
+<td style="text-align:right;">
+429239
+</td>
+<td style="text-align:right;">
+31058.60
+</td>
+<td style="text-align:right;">
+53551.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1993
+</td>
+<td style="text-align:right;">
+2607
+</td>
+<td style="text-align:right;">
+6200.6
+</td>
+<td style="text-align:right;">
+10037.75
+</td>
+<td style="text-align:right;">
+15652.5
+</td>
+<td style="text-align:right;">
+32034.75
+</td>
+<td style="text-align:right;">
+64549.9
+</td>
+<td style="text-align:right;">
+438377
+</td>
+<td style="text-align:right;">
+32046.84
+</td>
+<td style="text-align:right;">
+54683.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1994
+</td>
+<td style="text-align:right;">
+2681
+</td>
+<td style="text-align:right;">
+6453.1
+</td>
+<td style="text-align:right;">
+10480.50
+</td>
+<td style="text-align:right;">
+16472.0
+</td>
+<td style="text-align:right;">
+33808.25
+</td>
+<td style="text-align:right;">
+66506.3
+</td>
+<td style="text-align:right;">
+453457
+</td>
+<td style="text-align:right;">
+33308.01
+</td>
+<td style="text-align:right;">
+56427.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1995
+</td>
+<td style="text-align:right;">
+2714
+</td>
+<td style="text-align:right;">
+6543.2
+</td>
+<td style="text-align:right;">
+10994.75
+</td>
+<td style="text-align:right;">
+16648.5
+</td>
+<td style="text-align:right;">
+34588.00
+</td>
+<td style="text-align:right;">
+67364.5
+</td>
+<td style="text-align:right;">
+459603
+</td>
+<td style="text-align:right;">
+34078.00
+</td>
+<td style="text-align:right;">
+57219.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1996
+</td>
+<td style="text-align:right;">
+2724
+</td>
+<td style="text-align:right;">
+6522.6
+</td>
+<td style="text-align:right;">
+10827.50
+</td>
+<td style="text-align:right;">
+16551.0
+</td>
+<td style="text-align:right;">
+34597.25
+</td>
+<td style="text-align:right;">
+66487.5
+</td>
+<td style="text-align:right;">
+453728
+</td>
+<td style="text-align:right;">
+33800.80
+</td>
+<td style="text-align:right;">
+56670.37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1997
+</td>
+<td style="text-align:right;">
+2698
+</td>
+<td style="text-align:right;">
+6585.3
+</td>
+<td style="text-align:right;">
+10966.00
+</td>
+<td style="text-align:right;">
+16671.5
+</td>
+<td style="text-align:right;">
+34786.50
+</td>
+<td style="text-align:right;">
+66195.3
+</td>
+<td style="text-align:right;">
+453928
+</td>
+<td style="text-align:right;">
+33919.72
+</td>
+<td style="text-align:right;">
+56870.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1998
+</td>
+<td style="text-align:right;">
+2701
+</td>
+<td style="text-align:right;">
+6629.7
+</td>
+<td style="text-align:right;">
+11008.75
+</td>
+<td style="text-align:right;">
+16660.0
+</td>
+<td style="text-align:right;">
+34150.50
+</td>
+<td style="text-align:right;">
+65887.6
+</td>
+<td style="text-align:right;">
+452412
+</td>
+<td style="text-align:right;">
+33947.47
+</td>
+<td style="text-align:right;">
+56827.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1999
+</td>
+<td style="text-align:right;">
+2691
+</td>
+<td style="text-align:right;">
+6496.7
+</td>
+<td style="text-align:right;">
+10986.75
+</td>
+<td style="text-align:right;">
+16958.5
+</td>
+<td style="text-align:right;">
+33968.50
+</td>
+<td style="text-align:right;">
+65196.0
+</td>
+<td style="text-align:right;">
+448732
+</td>
+<td style="text-align:right;">
+33965.91
+</td>
+<td style="text-align:right;">
+56434.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000
+</td>
+<td style="text-align:right;">
+2985
+</td>
+<td style="text-align:right;">
+7053.5
+</td>
+<td style="text-align:right;">
+10816.50
+</td>
+<td style="text-align:right;">
+16984.5
+</td>
+<td style="text-align:right;">
+34996.50
+</td>
+<td style="text-align:right;">
+63718.6
+</td>
+<td style="text-align:right;">
+455135
+</td>
+<td style="text-align:right;">
+33982.50
+</td>
+<td style="text-align:right;">
+56818.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001
+</td>
+<td style="text-align:right;">
+2982
+</td>
+<td style="text-align:right;">
+7085.7
+</td>
+<td style="text-align:right;">
+10709.00
+</td>
+<td style="text-align:right;">
+17127.5
+</td>
+<td style="text-align:right;">
+34674.75
+</td>
+<td style="text-align:right;">
+64832.0
+</td>
+<td style="text-align:right;">
+459505
+</td>
+<td style="text-align:right;">
+34140.32
+</td>
+<td style="text-align:right;">
+57318.59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002
+</td>
+<td style="text-align:right;">
+3051
+</td>
+<td style="text-align:right;">
+7040.7
+</td>
+<td style="text-align:right;">
+10802.75
+</td>
+<td style="text-align:right;">
+17244.5
+</td>
+<td style="text-align:right;">
+34974.75
+</td>
+<td style="text-align:right;">
+66572.3
+</td>
+<td style="text-align:right;">
+462330
+</td>
+<td style="text-align:right;">
+34469.34
+</td>
+<td style="text-align:right;">
+57807.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003
+</td>
+<td style="text-align:right;">
+3092
+</td>
+<td style="text-align:right;">
+6941.0
+</td>
+<td style="text-align:right;">
+10709.50
+</td>
+<td style="text-align:right;">
+17199.0
+</td>
+<td style="text-align:right;">
+34514.75
+</td>
+<td style="text-align:right;">
+67751.5
+</td>
+<td style="text-align:right;">
+464331
+</td>
+<td style="text-align:right;">
+34597.76
+</td>
+<td style="text-align:right;">
+58056.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2004
+</td>
+<td style="text-align:right;">
+3109
+</td>
+<td style="text-align:right;">
+6815.2
+</td>
+<td style="text-align:right;">
+10547.00
+</td>
+<td style="text-align:right;">
+17083.5
+</td>
+<td style="text-align:right;">
+33431.50
+</td>
+<td style="text-align:right;">
+68476.2
+</td>
+<td style="text-align:right;">
+459140
+</td>
+<td style="text-align:right;">
+34432.72
+</td>
+<td style="text-align:right;">
+57583.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2005
+</td>
+<td style="text-align:right;">
+3152
+</td>
+<td style="text-align:right;">
+7075.8
+</td>
+<td style="text-align:right;">
+10702.75
+</td>
+<td style="text-align:right;">
+17357.5
+</td>
+<td style="text-align:right;">
+33606.00
+</td>
+<td style="text-align:right;">
+69985.6
+</td>
+<td style="text-align:right;">
+459492
+</td>
+<td style="text-align:right;">
+34841.75
+</td>
+<td style="text-align:right;">
+57925.42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:right;">
+3107
+</td>
+<td style="text-align:right;">
+6883.1
+</td>
+<td style="text-align:right;">
+10620.50
+</td>
+<td style="text-align:right;">
+17326.5
+</td>
+<td style="text-align:right;">
+34554.50
+</td>
+<td style="text-align:right;">
+72792.0
+</td>
+<td style="text-align:right;">
+461468
+</td>
+<td style="text-align:right;">
+35164.35
+</td>
+<td style="text-align:right;">
+58484.53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:right;">
+3026
+</td>
+<td style="text-align:right;">
+6816.7
+</td>
+<td style="text-align:right;">
+10447.50
+</td>
+<td style="text-align:right;">
+16881.0
+</td>
+<td style="text-align:right;">
+34304.50
+</td>
+<td style="text-align:right;">
+73128.1
+</td>
+<td style="text-align:right;">
+460046
+</td>
+<td style="text-align:right;">
+34866.21
+</td>
+<td style="text-align:right;">
+58342.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2008
+</td>
+<td style="text-align:right;">
+3044
+</td>
+<td style="text-align:right;">
+6816.2
+</td>
+<td style="text-align:right;">
+10488.00
+</td>
+<td style="text-align:right;">
+16673.5
+</td>
+<td style="text-align:right;">
+34065.50
+</td>
+<td style="text-align:right;">
+75072.0
+</td>
+<td style="text-align:right;">
+463200
+</td>
+<td style="text-align:right;">
+35131.49
+</td>
+<td style="text-align:right;">
+58819.13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009
+</td>
+<td style="text-align:right;">
+3088
+</td>
+<td style="text-align:right;">
+6758.4
+</td>
+<td style="text-align:right;">
+10434.25
+</td>
+<td style="text-align:right;">
+16452.0
+</td>
+<td style="text-align:right;">
+33700.25
+</td>
+<td style="text-align:right;">
+74434.1
+</td>
+<td style="text-align:right;">
+457524
+</td>
+<td style="text-align:right;">
+34717.45
+</td>
+<td style="text-align:right;">
+58083.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2010
+</td>
+<td style="text-align:right;">
+3263
+</td>
+<td style="text-align:right;">
+6440.5
+</td>
+<td style="text-align:right;">
+10308.00
+</td>
+<td style="text-align:right;">
+16622.0
+</td>
+<td style="text-align:right;">
+33921.75
+</td>
+<td style="text-align:right;">
+74406.0
+</td>
+<td style="text-align:right;">
+452836
+</td>
+<td style="text-align:right;">
+34512.97
+</td>
+<td style="text-align:right;">
+57806.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2011
+</td>
+<td style="text-align:right;">
+3210
+</td>
+<td style="text-align:right;">
+6459.9
+</td>
+<td style="text-align:right;">
+10184.25
+</td>
+<td style="text-align:right;">
+16630.5
+</td>
+<td style="text-align:right;">
+33804.00
+</td>
+<td style="text-align:right;">
+75620.5
+</td>
+<td style="text-align:right;">
+456011
+</td>
+<td style="text-align:right;">
+34586.91
+</td>
+<td style="text-align:right;">
+58199.53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012
+</td>
+<td style="text-align:right;">
+3181
+</td>
+<td style="text-align:right;">
+6336.2
+</td>
+<td style="text-align:right;">
+10058.50
+</td>
+<td style="text-align:right;">
+16453.0
+</td>
+<td style="text-align:right;">
+32924.00
+</td>
+<td style="text-align:right;">
+76458.0
+</td>
+<td style="text-align:right;">
+458377
+</td>
+<td style="text-align:right;">
+34454.88
+</td>
+<td style="text-align:right;">
+58388.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013
+</td>
+<td style="text-align:right;">
+3165
+</td>
+<td style="text-align:right;">
+6325.9
+</td>
+<td style="text-align:right;">
+9900.50
+</td>
+<td style="text-align:right;">
+16289.5
+</td>
+<td style="text-align:right;">
+33053.00
+</td>
+<td style="text-align:right;">
+78149.5
+</td>
+<td style="text-align:right;">
+463346
+</td>
+<td style="text-align:right;">
+34656.59
+</td>
+<td style="text-align:right;">
+58983.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014
+</td>
+<td style="text-align:right;">
+3216
+</td>
+<td style="text-align:right;">
+6401.2
+</td>
+<td style="text-align:right;">
+9851.50
+</td>
+<td style="text-align:right;">
+16524.0
+</td>
+<td style="text-align:right;">
+33215.50
+</td>
+<td style="text-align:right;">
+80113.3
+</td>
+<td style="text-align:right;">
+467169
+</td>
+<td style="text-align:right;">
+35052.00
+</td>
+<td style="text-align:right;">
+59579.47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015
+</td>
+<td style="text-align:right;">
+3178
+</td>
+<td style="text-align:right;">
+6341.8
+</td>
+<td style="text-align:right;">
+9924.75
+</td>
+<td style="text-align:right;">
+16908.0
+</td>
+<td style="text-align:right;">
+33960.00
+</td>
+<td style="text-align:right;">
+82327.7
+</td>
+<td style="text-align:right;">
+472330
+</td>
+<td style="text-align:right;">
+35508.30
+</td>
+<td style="text-align:right;">
+60275.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016
+</td>
+<td style="text-align:right;">
+3226
+</td>
+<td style="text-align:right;">
+6444.8
+</td>
+<td style="text-align:right;">
+9930.50
+</td>
+<td style="text-align:right;">
+17093.5
+</td>
+<td style="text-align:right;">
+35149.00
+</td>
+<td style="text-align:right;">
+85223.0
+</td>
+<td style="text-align:right;">
+481434
+</td>
+<td style="text-align:right;">
+36178.11
+</td>
+<td style="text-align:right;">
+61517.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017
+</td>
+<td style="text-align:right;">
+3153
+</td>
+<td style="text-align:right;">
+6512.5
+</td>
+<td style="text-align:right;">
+9783.75
+</td>
+<td style="text-align:right;">
+17119.0
+</td>
+<td style="text-align:right;">
+35516.50
+</td>
+<td style="text-align:right;">
+85487.6
+</td>
+<td style="text-align:right;">
+483607
+</td>
+<td style="text-align:right;">
+36243.96
+</td>
+<td style="text-align:right;">
+61840.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018
+</td>
+<td style="text-align:right;">
+3189
+</td>
+<td style="text-align:right;">
+6561.9
+</td>
+<td style="text-align:right;">
+9943.50
+</td>
+<td style="text-align:right;">
+17334.5
+</td>
+<td style="text-align:right;">
+36211.00
+</td>
+<td style="text-align:right;">
+86905.8
+</td>
+<td style="text-align:right;">
+488698
+</td>
+<td style="text-align:right;">
+36756.59
+</td>
+<td style="text-align:right;">
+62659.34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+3201
+</td>
+<td style="text-align:right;">
+6615.6
+</td>
+<td style="text-align:right;">
+9812.75
+</td>
+<td style="text-align:right;">
+17243.0
+</td>
+<td style="text-align:right;">
+36470.50
+</td>
+<td style="text-align:right;">
+87146.9
+</td>
+<td style="text-align:right;">
+492967
+</td>
+<td style="text-align:right;">
+36819.25
+</td>
+<td style="text-align:right;">
+63114.77
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="mutate" class="section level3">
+<h3>mutate</h3>
+<p>How about if we don’t want to calculate summary statistics within a group, but just want to calculate a new variable from each observation? Consider if we had unemployed and labor force levels but did not have unemployment rate, how could we go about calculating it with mutate?</p>
+<pre class="r"><code>indiana&lt;-                                                                # 1
+  indiana %&gt;%                                                            # 2
+  mutate(unemp_rate_calc=round((Unemployed/Labor_force)*100, digits=1))  # 3</code></pre>
+<p>Note since we are defining our new data frame as indiana, the one we are manipulating, we are in this case overwriting the indiana data.frame. Since the unemployment rate in our file was listed as percent and rounded to the nearest tenth, I did the same for our calculated. (digits=1 means one decimal place)</p>
+<p>Now let’s compare the first 20 rows of the given unemployment rate with the one we just calculated.</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; ">
+<table>
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Unemp_rate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+unemp_rate_calc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9.2
+</td>
+<td style="text-align:right;">
+9.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6.8
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9.9
+</td>
+<td style="text-align:right;">
+9.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8.2
+</td>
+<td style="text-align:right;">
+8.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.2
+</td>
+<td style="text-align:right;">
+4.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="select" class="section level3">
+<h3>select</h3>
+<p>drop unemp_rate_calc.</p>
+</div>
+
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/rcourse/lesson2/lesson2_01/" rel="next">Example</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/rcourse/lesson2/lesson2_03/" rel="prev">xtable</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Feb 5, 2021</p>
+
+          
+
+
+
+
+
+          
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "jmwestenberg-github-io" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Joseph Westenberg 2021
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+        <div class="search-hit-content">
+          <div class="search-hit-name">
+            <a href="{{relpermalink}}">{{title}}</a>
+            <div class="article-metadata search-hit-type">{{type}}</div>
+            <p class="search-hit-description">{{snippet}}</p>
+          </div>
+        </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://jmwestenberg-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.06e52bf0665167274d459a9300d0fab2.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
