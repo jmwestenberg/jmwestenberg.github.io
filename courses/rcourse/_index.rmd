@@ -134,4 +134,5 @@ leafmap<-leaflet(options = leafletOptions(minZoom = 4)) %>%
 
 ```{r, echo=FALSE}
 frameWidget(leafmap)
+
 ```
