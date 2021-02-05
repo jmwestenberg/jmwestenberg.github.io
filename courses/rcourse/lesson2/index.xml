@@ -4537,17 +4537,17 @@ NA
 
 
 &lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana)+                                                                  # 1
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indplot&amp;lt;-ggplot(data=indiana)+                                                         # 1
   geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips)) +        # 2
   theme(legend.position=&amp;quot;none&amp;quot;,                                                        # 3
     axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)  # 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson2/lesson2_05_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(indiana)+                                                                                                           # 1
+&lt;p&gt;&lt;img src=&#34;/img/rcourse/plot1.PNG&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indplot_monroe&amp;lt;-ggplot(indiana)+                                                                                           # 1
   geom_line(aes(x=Year, y=Unemp_rate, colour=County_fips, group=County_fips), alpha=0.7)+                                  # 2
   geom_line(data=monroecty, aes(x=Year, y=Unemp_rate, colour=County_fips, group=1), alpha=0.9, size=2, colour=&amp;#39;black&amp;#39;) +   # 3
   theme(legend.position=&amp;quot;none&amp;quot;,                                                                                            # 4
     axis.text.x=element_text(angle=45)) + ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)                                      # 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/Lesson2/lesson2_05_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/rcourse/plot2.PNG&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
