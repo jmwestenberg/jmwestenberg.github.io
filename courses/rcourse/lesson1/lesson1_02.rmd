@@ -46,7 +46,7 @@ Going line by line:
 
 - Line 1: Define a vector of letters.
 - Line 2: Report the number of elements in our letter vector and save as letters_l
-- Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Not our for loop action is defined within the curly braces.
+- Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Note our for loop action is defined within the curly braces.
 - Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.
 
 Okay, great. How does this help us with reading in the data? We'll get to that in the next section.

@@ -48,9 +48,11 @@ temp_df <- read_excel(paste0(workingdir, "/raw_data/bls_unemp_", years[i],
 temp_df<-temp_df[,-6]
 colnames(temp_df)<-c("LAUS_code", "State_fips", "County_fips", "County_name",
   "Year", "Labor_force", "Employed", "Unemployed", "Unemp_rate")
+temp_df<-temp_df[!is.na(temp_df$State_fips),]
 county_data<-rbind(county_data, temp_df)
 }
-save(county_data, file=paste0(workingdir, "/processed_data/county_data_all"))
+filename<-paste0(workingdir, file.path("processed_data", "county_data_all.rda"))
+save(county_data, file=filename)
 ```
 
 First let's think what we are trying to achieve. The links for the downloads are all in the form of https://www.bls.gov/lau/laucntyZZ.xlsx, where ZZ is two digits representing the year. These ZZ values run from "90"to "99" for years 1990-1999 and "00" to "19" for years 2000-2019.
@@ -66,8 +68,9 @@ Let's work through the above code line by line:
 - Line #8 : We are creating the character string for the url for the download link. Since they all take the form of https://www.bls.gov/lau/laucntyZZ.xlsx, we can use one element of our years vector at a time. (See [String Manipulation](http://jmwestenberg.github.io/courses/rcourse/lesson1_03/) for explanation on paste0)
 - Line #9 : This is of similar spirit to line #4, but this is defining the path/filename of the excel file we will save. 
 - Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see [Downloading/Reading Data](http://jmwestenberg.github.io/courses/rcourse/lesson1_04/) if unclear.)
-- Lines #11-#15: See [Downloading/Reading Data](http://jmwestenberg.github.io/courses/rcourse/lesson1_04/) for a direct explanation.
-- Line #16: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.
-- Line #18: save the combined data to our processed_data folder as a Rda type.
+- Lines #11-#16: See [Downloading/Reading Data](http://jmwestenberg.github.io/courses/rcourse/lesson1_04/) for a direct explanation.
+- Line #17: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.
+- Line #19: Create the filepath (to our processed_data folder) where we will save the file, what the file name and type is.
+- Line #20: save the combined data to the location/name we defined above.
 
 We now have our data cleaned and saved for our next lesson when we will start to work with it more!

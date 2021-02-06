@@ -925,19 +925,27 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_01/">Example</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_pipes/">pipes</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_02/">dplyr</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_group_byandsummarise/">group_by and summarise</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">xtable</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_mutate/">mutate</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">Merging Datasets</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_select/">select</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">Merging Datasets</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">xtable</a></li>
 
       
         </ul>
@@ -1079,7 +1087,7 @@
 <img src="/img/rcourse/import_fromexcel.PNG" alt="import" /></p>
 <p>There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.</p>
 <p><img src="/img/rcourse/import_fromexceloptions.PNG" /></p>
-<p>Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.</p>
+<p>Next we can handle column F that we noticed was blank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.</p>
 <p>Hence we have something that will look like the following for our command for our script.</p>
 <pre class="r"><code>require(readxl)                                                                                                                                     # 1
 workingdir&lt;-&quot;C:/Users/weste/Documents/GitHub/Rcourse&quot;                                                                                               # 2
@@ -1087,6 +1095,8 @@ bls_unemp_90 &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_90.xl
 bls_unemp_90&lt;-bls_unemp_90[,-6]                                                                                                                     # 4
 col_names(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;, &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)  # 5</code></pre>
 <p>Where the last line above we are giving our columns names based on the names we saw in the excel document.</p>
+<p>We can then observe our data frame to ssee if it’s fully cleaned. At first it seems so (I actually initially thought so). However when reading in the data, we grabbed 2 extra rows at the end of the file. Hence we have 2 rows at the end of our data frame that are NA’s. Let’s drop these two rows, to do this we can use a command is.na and prior to it include an “!”, saying ‘not is.na’.</p>
+<pre class="r"><code>bls_unemp_90&lt;-bls_unemp_90[!is.na(bls_unemp_90$State_fips),]  # 1</code></pre>
 </div>
 <div id="downloadingreading-data-in-a-loop" class="section level2">
 <h2>Downloading/Reading Data in a Loop</h2>

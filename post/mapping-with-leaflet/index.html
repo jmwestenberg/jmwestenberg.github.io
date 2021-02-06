@@ -34,7 +34,8 @@
   
     
   
-  <meta name="description" content="## Warning: sf layer has inconsistent datum (&#43;proj=longlat &#43;datum=NAD83 &#43;no_defs).## Need &#39;&#43;proj=longlat &#43;datum=WGS84&#39;## Warning: sf layer has inconsistent datum (&#43;proj=longlat &#43;datum=NAD83 &#43;no_defs).## Need &#39;&#43;proj=longlat &#43;datum=WGS84&#39;This post assumes a basic knowledge of R.">
+  <meta name="description" content="This post assumes a basic knowledge of R.
+Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I waslooking into some political economy questions regarding schools and state government.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/mapping-with-leaflet/">
@@ -324,7 +325,8 @@
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/post/mapping-with-leaflet/">
   <meta property="og:title" content="Mapping with Leaflet | Joseph M. Westenberg">
-  <meta property="og:description" content="## Warning: sf layer has inconsistent datum (&#43;proj=longlat &#43;datum=NAD83 &#43;no_defs).## Need &#39;&#43;proj=longlat &#43;datum=WGS84&#39;## Warning: sf layer has inconsistent datum (&#43;proj=longlat &#43;datum=NAD83 &#43;no_defs).## Need &#39;&#43;proj=longlat &#43;datum=WGS84&#39;This post assumes a basic knowledge of R."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:description" content="This post assumes a basic knowledge of R.
+Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I waslooking into some political economy questions regarding schools and state government."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -374,7 +376,7 @@
       "url": "/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).\r## Need \u0026#39;+proj=longlat +datum=WGS84\u0026#39;\r## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).\r## Need \u0026#39;+proj=longlat +datum=WGS84\u0026#39;\rThis post assumes a basic knowledge of R."
+  "description": "This post assumes a basic knowledge of R.\nUsing leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I was\rlooking into some political economy questions regarding schools and state government."
 }
 </script>
 
@@ -886,11 +888,6 @@
 <script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
 
 
-<pre><code>## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).
-## Need &#39;+proj=longlat +datum=WGS84&#39;
-
-## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).
-## Need &#39;+proj=longlat +datum=WGS84&#39;</code></pre>
 <p>This post assumes a basic knowledge of R.</p>
 <p>Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I was
 looking into some political economy questions regarding schools and state government.
@@ -928,7 +925,7 @@ over a base map.</p>
 command. Now within our spatial polygon data frame, we can access the ID of each shape. these
 take the form of SSDDD where SS is a two digit state FIPS code, and DDD is a 3 digit district
 number.</p>
-<pre class="r numCode R numberLines"><code>districtinfo &lt;- paste0(&quot;Lower District: &quot;, substr(WiscoCdLower$GEOID, 3, 5))  # 1
+<pre class="r"><code>districtinfo &lt;- paste0(&quot;Lower District: &quot;, substr(WiscoCdLower$GEOID, 3, 5))  # 1
 mapcolors&lt;-rainbow(length(WiscoCdLower$GEOID))                                # 2
 rnum&lt;-sample(nrow(WiscoCdLower))                                              # 3
 pal &lt;- colorFactor(mapcolors[rnum], WiscoCdLower$GEOID)                       # 4
@@ -940,8 +937,6 @@ lowermap&lt;-leaflet(options = leafletOptions(minZoom = 4)) %&gt;%              
     fillColor = ~pal(GEOID), fillOpacity = 0.5, popup = districtinfo,        # 10
     group = &quot;Lower&quot;) %&gt;%                                                     # 11
   addLayersControl(baseGroups = c(&quot;base&quot;), overlayGroups = c(&quot;Lower&quot;))       # 12</code></pre>
-<pre><code>## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).
-## Need &#39;+proj=longlat +datum=WGS84&#39;</code></pre>
 <p>Going line by line:</p>
 <ol style="list-style-type: decimal">
 <li>Define the text that we want to appear in the information when users click an area of the map</li>
@@ -970,7 +965,7 @@ in the upper right corner. Notice how we can uncheck and recheck “Lower”? Bu
 with the base map.</li>
 </ol>
 <div id="htmlwidget-2" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 <p>We can then add an additional layer to this map with the upper house as well.</p>
 <pre class="r"><code>districtinfo &lt;- paste0(&quot;Lower District: &quot;, substr(WiscoCdLower$GEOID,3,5),  # 1
   &quot; &lt;br&gt; &quot;, &quot;Upper District: &quot;, substr(WiscoCdUpper$GEOID,3,5))             # 2
@@ -985,11 +980,6 @@ loweranduppermap&lt;-leaflet(options = leafletOptions(minZoom = 4)) %&gt;%      
     color = &quot;black&quot;, fill = FALSE, group = &quot;Upper&quot;) %&gt;%                    # 11
   addLayersControl(baseGroups = c(&quot;base&quot;),                                 # 12
     overlayGroups = c(&quot;Upper&quot;, &quot;Lower&quot;))                                   # 13</code></pre>
-<pre><code>## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).
-## Need &#39;+proj=longlat +datum=WGS84&#39;
-
-## Warning: sf layer has inconsistent datum (+proj=longlat +datum=NAD83 +no_defs).
-## Need &#39;+proj=longlat +datum=WGS84&#39;</code></pre>
 <p>There are only a few changes we needed to make. In line 1 and 2 we define our pop up
 to show information on both the lower and upper legislative districts. In lines 10 and 11
 we add in the upper house as an additional layer. Setting fill to false we can just have the
@@ -998,7 +988,7 @@ legislative district layer. And lastly in line 12 and 13 we add our upper legisl
 into the map. Notice if you open the layer control in the map below (upper right corner), you
 can now check/uncheck both the lower and the upper legislative districts.</p>
 <div id="htmlwidget-3" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-8.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/2020-05-01-mapping-with-leaflet_files/figure-html//widgets/widget_unnamed-chunk-10.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 
     </div>
 

@@ -75,6 +75,23 @@ print(x)              # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] a b c
 ## Levels: a b c&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This may not sound useful now, but think if we have many columns of variables, say wage, hoursworked, fulltime, and hundreds of more. We don’t want to have to find what column number hoursworked is, we can just reference this column name.&lt;/p&gt;
+&lt;div id=&#34;and-and-or-operators&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;“And” and “Or” Operators&lt;/h4&gt;
+&lt;p&gt;A couple common operators that we may want to use are “and” and “or” statements. Within R:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“&amp;amp;” : Our “and” operator&lt;/li&gt;
+&lt;li&gt;“|” : Our “or” operator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;first_dataframe[first_dataframe$A&amp;gt;=6 &amp;amp; first_dataframe$B&amp;lt;9,]  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   A B C D
+## 2 6 8 b e&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;first_dataframe[first_dataframe$A&amp;gt;=6 | first_dataframe$B&amp;lt;9,]  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   A B C D
+## 1 5 7 a d
+## 2 6 8 b e
+## 3 7 9 c f&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
     </item>
     

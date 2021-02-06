@@ -63,7 +63,7 @@ for (i in 1:letters_l){              # 3
 &lt;ul&gt;
 &lt;li&gt;Line 1: Define a vector of letters.&lt;/li&gt;
 &lt;li&gt;Line 2: Report the number of elements in our letter vector and save as letters_l&lt;/li&gt;
-&lt;li&gt;Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Not our for loop action is defined within the curly braces.&lt;/li&gt;
+&lt;li&gt;Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Note our for loop action is defined within the curly braces.&lt;/li&gt;
 &lt;li&gt;Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Okay, great. How does this help us with reading in the data? We’ll get to that in the next section.&lt;/p&gt;
@@ -93,11 +93,10 @@ b&amp;lt;-c(&amp;quot;of a sentence.&amp;quot;, &amp;quot;another sentence.&amp;
 print(paste(a,b))                                                             # 3&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;This is a the start of a sentence.&amp;quot; &amp;quot;Now we have another sentence.&amp;quot;     
 ## [3] &amp;quot;This really is quite handy.&amp;quot;        &amp;quot;Economics is awesome!&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I don’t want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;string-padding&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;String Padding&lt;/h2&gt;
-&lt;p&gt;Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading one. That is instead of “1” we need “01”.&lt;/p&gt;
+&lt;p&gt;Consider we have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading zero. That is instead of “1” we need “01”.&lt;/p&gt;
 &lt;p&gt;We could use paste0 as above and combine a 0 with our vector.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;numbvec&amp;lt;-as.character(1:19)  # 1
 print(paste0(&amp;quot;0&amp;quot;, numbvec))  # 2&lt;/code&gt;&lt;/pre&gt;
@@ -140,7 +139,7 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
 &lt;img src=&#34;/img/rcourse/import_fromexcel.PNG&#34; alt=&#34;import&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There is definitely multiple ways to do this, as we can see from the options available. I first deselect “First Row as Names” (This option is very nice if your data is already in a precleaned form and your first row simply has your variable names.) I then begin to skip rows, 5 rows of skipping leads to the first row being the first row of data.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/rcourse/import_fromexceloptions.PNG&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Next we can handle column F that we noticed was plank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.&lt;/p&gt;
+&lt;p&gt;Next we can handle column F that we noticed was blank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.&lt;/p&gt;
 &lt;p&gt;Hence we have something that will look like the following for our command for our script.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(readxl)                                                                                                                                     # 1
 workingdir&amp;lt;-&amp;quot;C:/Users/weste/Documents/GitHub/Rcourse&amp;quot;                                                                                               # 2
@@ -148,6 +147,8 @@ bls_unemp_90 &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_une
 bls_unemp_90&amp;lt;-bls_unemp_90[,-6]                                                                                                                     # 4
 col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;, &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)  # 5&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Where the last line above we are giving our columns names based on the names we saw in the excel document.&lt;/p&gt;
+&lt;p&gt;We can then observe our data frame to ssee if it’s fully cleaned. At first it seems so (I actually initially thought so). However when reading in the data, we grabbed 2 extra rows at the end of the file. Hence we have 2 rows at the end of our data frame that are NA’s. Let’s drop these two rows, to do this we can use a command is.na and prior to it include an “!”, saying ‘not is.na’.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bls_unemp_90&amp;lt;-bls_unemp_90[!is.na(bls_unemp_90$State_fips),]  # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;downloadingreading-data-in-a-loop&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading/Reading Data in a Loop&lt;/h2&gt;
@@ -164,24 +165,26 @@ col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State
       <description>
 
 
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(stringr)                                                                # 1
-require(readxl)                                                                 # 2
-county_data&amp;lt;-data.frame()                                                       # 3
-years&amp;lt;-c(90:99, 0:19)                                                           # 4
-years&amp;lt;-str_pad(as.character(years), 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)                             # 5
-years_l&amp;lt;-length(years)                                                          # 6
-for (i in 1:years_l){                                                           # 7
-url&amp;lt;-paste0(&amp;quot;https://www.bls.gov/lau/laucnty&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)               # 8
-destination&amp;lt;-paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)      # 9
-download.file(url, destination, mode=&amp;quot;wb&amp;quot;)                                     # 10
-temp_df &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i],     # 11
-  &amp;quot;.xlsx&amp;quot;),col_names=FALSE, skip=5)                                            # 12
-temp_df&amp;lt;-temp_df[,-6]                                                          # 13
-colnames(temp_df)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;,  # 14
-  &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)               # 15
-county_data&amp;lt;-rbind(county_data, temp_df)                                       # 16
-}                                                                              # 17
-save(county_data, file=paste0(workingdir, &amp;quot;/processed_data/county_data_all&amp;quot;))  # 18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(stringr)                                                                   # 1
+require(readxl)                                                                    # 2
+county_data&amp;lt;-data.frame()                                                          # 3
+years&amp;lt;-c(90:99, 0:19)                                                              # 4
+years&amp;lt;-str_pad(as.character(years), 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)                                # 5
+years_l&amp;lt;-length(years)                                                             # 6
+for (i in 1:years_l){                                                              # 7
+url&amp;lt;-paste0(&amp;quot;https://www.bls.gov/lau/laucnty&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)                  # 8
+destination&amp;lt;-paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)         # 9
+download.file(url, destination, mode=&amp;quot;wb&amp;quot;)                                        # 10
+temp_df &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i],        # 11
+  &amp;quot;.xlsx&amp;quot;),col_names=FALSE, skip=5)                                               # 12
+temp_df&amp;lt;-temp_df[,-6]                                                             # 13
+colnames(temp_df)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;,     # 14
+  &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)                  # 15
+temp_df&amp;lt;-temp_df[!is.na(temp_df$State_fips),]                                     # 16
+county_data&amp;lt;-rbind(county_data, temp_df)                                          # 17
+}                                                                                 # 18
+filename&amp;lt;-paste0(workingdir, file.path(&amp;quot;processed_data&amp;quot;, &amp;quot;county_data_all.rda&amp;quot;))  # 19
+save(county_data, file=filename)                                                  # 20&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;First let’s think what we are trying to achieve. The links for the downloads are all in the form of &lt;a href=&#34;https://www.bls.gov/lau/laucntyZZ.xlsx&#34; class=&#34;uri&#34;&gt;https://www.bls.gov/lau/laucntyZZ.xlsx&lt;/a&gt;, where ZZ is two digits representing the year. These ZZ values run from “90”to “99” for years 1990-1999 and “00” to “19” for years 2000-2019.&lt;/p&gt;
 &lt;p&gt;Let’s work through the above code line by line:&lt;/p&gt;
 &lt;ul&gt;
@@ -194,9 +197,10 @@ save(county_data, file=paste0(workingdir, &amp;quot;/processed_data/county_data_
 &lt;li&gt;Line #8 : We are creating the character string for the url for the download link. Since they all take the form of &lt;a href=&#34;https://www.bls.gov/lau/laucntyZZ.xlsx&#34; class=&#34;uri&#34;&gt;https://www.bls.gov/lau/laucntyZZ.xlsx&lt;/a&gt;, we can use one element of our years vector at a time. (See &lt;a href=&#34;http://jmwestenberg.github.io/courses/rcourse/lesson1_03/&#34;&gt;String Manipulation&lt;/a&gt; for explanation on paste0)&lt;/li&gt;
 &lt;li&gt;Line #9 : This is of similar spirit to line #4, but this is defining the path/filename of the excel file we will save.&lt;/li&gt;
 &lt;li&gt;Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see &lt;a href=&#34;http://jmwestenberg.github.io/courses/rcourse/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt; if unclear.)&lt;/li&gt;
-&lt;li&gt;Lines #11-#15: See &lt;a href=&#34;http://jmwestenberg.github.io/courses/rcourse/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt; for a direct explanation.&lt;/li&gt;
-&lt;li&gt;Line #16: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.&lt;/li&gt;
-&lt;li&gt;Line #18: save the combined data to our processed_data folder as a Rda type.&lt;/li&gt;
+&lt;li&gt;Lines #11-#16: See &lt;a href=&#34;http://jmwestenberg.github.io/courses/rcourse/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt; for a direct explanation.&lt;/li&gt;
+&lt;li&gt;Line #17: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.&lt;/li&gt;
+&lt;li&gt;Line #19: Create the filepath (to our processed_data folder) where we will save the file, what the file name and type is.&lt;/li&gt;
+&lt;li&gt;Line #20: save the combined data to the location/name we defined above.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We now have our data cleaned and saved for our next lesson when we will start to work with it more!&lt;/p&gt;
 </description>

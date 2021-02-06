@@ -377,24 +377,26 @@ summary {
 </div>
 
 
-<pre class="r"><code>require(stringr)                                                                # 1
-require(readxl)                                                                 # 2
-county_data&lt;-data.frame()                                                       # 3
-years&lt;-c(90:99, 0:19)                                                           # 4
-years&lt;-str_pad(as.character(years), 2, &quot;left&quot;, &quot;0&quot;)                             # 5
-years_l&lt;-length(years)                                                          # 6
-for (i in 1:years_l){                                                           # 7
-url&lt;-paste0(&quot;https://www.bls.gov/lau/laucnty&quot;, years[i], &quot;.xlsx&quot;)               # 8
-destination&lt;-paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i], &quot;.xlsx&quot;)      # 9
-download.file(url, destination, mode=&quot;wb&quot;)                                     # 10
-temp_df &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i],     # 11
-  &quot;.xlsx&quot;),col_names=FALSE, skip=5)                                            # 12
-temp_df&lt;-temp_df[,-6]                                                          # 13
-colnames(temp_df)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;,  # 14
-  &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)               # 15
-county_data&lt;-rbind(county_data, temp_df)                                       # 16
-}                                                                              # 17
-save(county_data, file=paste0(workingdir, &quot;/processed_data/county_data_all&quot;))  # 18</code></pre>
+<pre class="r"><code>require(stringr)                                                                   # 1
+require(readxl)                                                                    # 2
+county_data&lt;-data.frame()                                                          # 3
+years&lt;-c(90:99, 0:19)                                                              # 4
+years&lt;-str_pad(as.character(years), 2, &quot;left&quot;, &quot;0&quot;)                                # 5
+years_l&lt;-length(years)                                                             # 6
+for (i in 1:years_l){                                                              # 7
+url&lt;-paste0(&quot;https://www.bls.gov/lau/laucnty&quot;, years[i], &quot;.xlsx&quot;)                  # 8
+destination&lt;-paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i], &quot;.xlsx&quot;)         # 9
+download.file(url, destination, mode=&quot;wb&quot;)                                        # 10
+temp_df &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i],        # 11
+  &quot;.xlsx&quot;),col_names=FALSE, skip=5)                                               # 12
+temp_df&lt;-temp_df[,-6]                                                             # 13
+colnames(temp_df)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;,     # 14
+  &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)                  # 15
+temp_df&lt;-temp_df[!is.na(temp_df$State_fips),]                                     # 16
+county_data&lt;-rbind(county_data, temp_df)                                          # 17
+}                                                                                 # 18
+filename&lt;-paste0(workingdir, file.path(&quot;processed_data&quot;, &quot;county_data_all.rda&quot;))  # 19
+save(county_data, file=filename)                                                  # 20</code></pre>
 <p>First let’s think what we are trying to achieve. The links for the downloads are all in the form of <a href="https://www.bls.gov/lau/laucntyZZ.xlsx" class="uri">https://www.bls.gov/lau/laucntyZZ.xlsx</a>, where ZZ is two digits representing the year. These ZZ values run from “90”to “99” for years 1990-1999 and “00” to “19” for years 2000-2019.</p>
 <p>Let’s work through the above code line by line:</p>
 <ul>
@@ -407,9 +409,10 @@ save(county_data, file=paste0(workingdir, &quot;/processed_data/county_data_all&
 <li>Line #8 : We are creating the character string for the url for the download link. Since they all take the form of <a href="https://www.bls.gov/lau/laucntyZZ.xlsx" class="uri">https://www.bls.gov/lau/laucntyZZ.xlsx</a>, we can use one element of our years vector at a time. (See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_03/">String Manipulation</a> for explanation on paste0)</li>
 <li>Line #9 : This is of similar spirit to line #4, but this is defining the path/filename of the excel file we will save.</li>
 <li>Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_04/">Downloading/Reading Data</a> if unclear.)</li>
-<li>Lines #11-#15: See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_04/">Downloading/Reading Data</a> for a direct explanation.</li>
-<li>Line #16: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.</li>
-<li>Line #18: save the combined data to our processed_data folder as a Rda type.</li>
+<li>Lines #11-#16: See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_04/">Downloading/Reading Data</a> for a direct explanation.</li>
+<li>Line #17: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.</li>
+<li>Line #19: Create the filepath (to our processed_data folder) where we will save the file, what the file name and type is.</li>
+<li>Line #20: save the combined data to the location/name we defined above.</li>
 </ul>
 <p>We now have our data cleaned and saved for our next lesson when we will start to work with it more!</p>
 

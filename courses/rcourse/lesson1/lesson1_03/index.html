@@ -925,19 +925,27 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_01/">Example</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_pipes/">pipes</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_02/">dplyr</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_group_byandsummarise/">group_by and summarise</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">xtable</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_mutate/">mutate</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">Merging Datasets</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_select/">select</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">Merging Datasets</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">xtable</a></li>
 
       
         </ul>
@@ -1078,11 +1086,10 @@ b&lt;-c(&quot;of a sentence.&quot;, &quot;another sentence.&quot;, &quot;quite h
 print(paste(a,b))                                                             # 3</code></pre>
 <pre><code>## [1] &quot;This is a the start of a sentence.&quot; &quot;Now we have another sentence.&quot;     
 ## [3] &quot;This really is quite handy.&quot;        &quot;Economics is awesome!&quot;</code></pre>
-<p>I don’t want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.</p>
 </div>
 <div id="string-padding" class="section level2">
 <h2>String Padding</h2>
-<p>Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading one. That is instead of “1” we need “01”.</p>
+<p>Consider we have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading zero. That is instead of “1” we need “01”.</p>
 <p>We could use paste0 as above and combine a 0 with our vector.</p>
 <pre class="r"><code>numbvec&lt;-as.character(1:19)  # 1
 print(paste0(&quot;0&quot;, numbvec))  # 2</code></pre>

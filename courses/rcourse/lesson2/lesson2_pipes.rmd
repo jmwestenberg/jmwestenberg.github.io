@@ -1,0 +1,53 @@
+---
+title: pipes
+linktitle: pipes
+toc: false
+type: book
+date: "2021-02-05T00:00:00Z"
+draft: false
+# Add menu entry to sidebar.
+# - name: Declare this menu item as a parent with ID `name`.
+# - weight: Position of link in menu.
+menu:
+  rcourse:
+    parent: Lesson 2
+    weight: 20
+
+weight: 20
+---
+
+```{r, include=FALSE}
+local({
+  hook_source <- knitr::knit_hooks$get('source')
+  knitr::knit_hooks$set(source = function(x, options) {
+    x <- xfun::split_lines(x)
+    n <- nchar(x, 'width')
+    i <- seq_along(x)  # line numbers
+    n <- n + nchar(i)
+    s <- knitr:::v_spaces(max(n) - n)
+    x <- paste(x, s, '  # ', i, sep = '', collapse = '\n')
+    hook_source(x, options)
+  })
+})
+
+require(tidyverse)
+require(xtable)
+require(knitr)
+require(kableExtra)
+
+workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
+load(paste0(workingdir, file.path("processed_data", "county_data_all.rda")))
+
+indiana<-county_data %>% filter(State_fips=="18")
+```
+
+### Pipe Operator and Filtering on Specific Values
+```{r eval=FALSE}
+indiana<-
+    county_data %>% filter(State_fips=="18")
+```
+What is going on in this line of code? Let's start with the second line. The operator %>% is called a pipe. This comes from a package called magittr which is included within tidyverse. Pipes are very handy for neatly writing longer sequences of code. Here we begin with a pretty simple example. We can think of pipes as saying "then". That is it takes the argument before it and uses it as input in the following command. Here we are using a filter command, so we are saying take our data.frame county_data, then filter or "give us" the values where State_fips is equal to "18" (this is fips code for Indiana. Go Hoosiers!). So in summary we are just filtering out indiana data and saving it as a new data frame (this is line 1). Note: this operation does NOT impact county_data, the only way we 'over write' a data frame is to explicitly tell it to. For example the following WOULD overwrite county_data.
+
+```{r eval=FALSE}
+county_data<-county_data %>% filter(State_fips=="18")
+```  

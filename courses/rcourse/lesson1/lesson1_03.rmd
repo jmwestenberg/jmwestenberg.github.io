@@ -48,11 +48,10 @@ b<-c("of a sentence.", "another sentence.", "quite handy.", "awesome!")
 print(paste(a,b))
 ```
 
-I don't want to get into too many details here but R has some very useful functions for dealing with/cleaning strings. I will be writing another post on this in the coming weeks.
 
 ## String Padding
 
-Consider an example that will become relevant in coming lessons. We have a vector of numbers which currently runs 1-19. Now what if we need all the 'single character' digits to have a leading one. That is instead of "1" we need "01". 
+Consider we have a vector of numbers which currently runs 1-19. Now what if we need all the 'single character' digits to have a leading zero. That is instead of "1" we need "01". 
 
 We could use paste0 as above and combine a 0 with our vector.
 ```{r}

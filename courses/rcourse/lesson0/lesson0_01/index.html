@@ -929,19 +929,27 @@ These can be numeric based, in this case integer."><meta property="og:image" con
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_01/">Example</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_pipes/">pipes</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_02/">dplyr</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_group_byandsummarise/">group_by and summarise</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">xtable</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_mutate/">mutate</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">Merging Datasets</a></li>
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_select/">select</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_03/">Merging Datasets</a></li>
+
+
+
+  <li class=""><a href="/courses/rcourse/lesson2/lesson2_04/">xtable</a></li>
 
       
         </ul>
@@ -1122,6 +1130,23 @@ print(x)              # 2</code></pre>
 <pre><code>## [1] a b c
 ## Levels: a b c</code></pre>
 <p>This may not sound useful now, but think if we have many columns of variables, say wage, hoursworked, fulltime, and hundreds of more. We don’t want to have to find what column number hoursworked is, we can just reference this column name.</p>
+<div id="and-and-or-operators" class="section level4">
+<h4>“And” and “Or” Operators</h4>
+<p>A couple common operators that we may want to use are “and” and “or” statements. Within R:</p>
+<ul>
+<li>“&amp;” : Our “and” operator</li>
+<li>“|” : Our “or” operator</li>
+</ul>
+<p>For example:</p>
+<pre class="r"><code>first_dataframe[first_dataframe$A&gt;=6 &amp; first_dataframe$B&lt;9,]  # 1</code></pre>
+<pre><code>##   A B C D
+## 2 6 8 b e</code></pre>
+<pre class="r"><code>first_dataframe[first_dataframe$A&gt;=6 | first_dataframe$B&lt;9,]  # 1</code></pre>
+<pre><code>##   A B C D
+## 1 5 7 a d
+## 2 6 8 b e
+## 3 7 9 c f</code></pre>
+</div>
 
           </div>
 
