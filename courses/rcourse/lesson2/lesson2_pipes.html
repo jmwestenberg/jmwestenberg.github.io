@@ -379,10 +379,10 @@ summary {
 
 <div id="pipe-operator-and-filtering-on-specific-values" class="section level3">
 <h3>Pipe Operator and Filtering on Specific Values</h3>
-<pre class="r"><code>indiana&lt;-                                     # 1
-    county_data %&gt;% filter(State_fips==&quot;18&quot;)  # 2</code></pre>
+<pre class="r"><code>indiana&lt;-                                    # 1
+    unemp_data %&gt;% filter(State_fips==&quot;18&quot;)  # 2</code></pre>
 <p>What is going on in this line of code? Let’s start with the second line. The operator %&gt;% is called a pipe. This comes from a package called magittr which is included within tidyverse. Pipes are very handy for neatly writing longer sequences of code. Here we begin with a pretty simple example. We can think of pipes as saying “then”. That is it takes the argument before it and uses it as input in the following command. Here we are using a filter command, so we are saying take our data.frame county_data, then filter or “give us” the values where State_fips is equal to “18” (this is fips code for Indiana. Go Hoosiers!). So in summary we are just filtering out indiana data and saving it as a new data frame (this is line 1). Note: this operation does NOT impact county_data, the only way we ‘over write’ a data frame is to explicitly tell it to. For example the following WOULD overwrite county_data.</p>
-<pre class="r"><code>county_data&lt;-county_data %&gt;% filter(State_fips==&quot;18&quot;)  # 1</code></pre>
+<pre class="r"><code>unemp_data&lt;-unemp_data %&gt;% filter(State_fips==&quot;18&quot;)  # 1</code></pre>
 </div>
 
 

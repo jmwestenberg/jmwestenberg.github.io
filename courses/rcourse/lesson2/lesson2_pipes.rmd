@@ -36,18 +36,18 @@ require(knitr)
 require(kableExtra)
 
 workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
-load(paste0(workingdir, file.path("processed_data", "county_data_all.rda")))
+load(paste0(workingdir, file.path("processed_data", "unemp_data.rda")))
 
-indiana<-county_data %>% filter(State_fips=="18")
+indiana<-unemp_data %>% filter(State_fips=="18")
 ```
 
 ### Pipe Operator and Filtering on Specific Values
 ```{r eval=FALSE}
 indiana<-
-    county_data %>% filter(State_fips=="18")
+    unemp_data %>% filter(State_fips=="18")
 ```
 What is going on in this line of code? Let's start with the second line. The operator %>% is called a pipe. This comes from a package called magittr which is included within tidyverse. Pipes are very handy for neatly writing longer sequences of code. Here we begin with a pretty simple example. We can think of pipes as saying "then". That is it takes the argument before it and uses it as input in the following command. Here we are using a filter command, so we are saying take our data.frame county_data, then filter or "give us" the values where State_fips is equal to "18" (this is fips code for Indiana. Go Hoosiers!). So in summary we are just filtering out indiana data and saving it as a new data frame (this is line 1). Note: this operation does NOT impact county_data, the only way we 'over write' a data frame is to explicitly tell it to. For example the following WOULD overwrite county_data.
 
 ```{r eval=FALSE}
-county_data<-county_data %>% filter(State_fips=="18")
+unemp_data<-unemp_data %>% filter(State_fips=="18")
 ```  

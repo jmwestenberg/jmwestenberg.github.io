@@ -37,9 +37,9 @@ require(knitr)
 require(kableExtra)
 
 workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
-load(paste0(workingdir, file.path("processed_data", "county_data_all.rda")))
+load(paste0(workingdir, file.path("processed_data", "unemp_data.rda")))
 
-indiana<-county_data %>% filter(State_fips=="18")
+indiana<-unemp_data %>% filter(State_fips=="18")
 ```
 
 
@@ -62,13 +62,13 @@ scroll_box(kable(temp), height="300px", width="180px")
 This group_by command paired with summarise is quite useful. For example going back to our original data.frame, county_data. Suppose we wanted to do what we just did but for all states. That is calculate within each state and year combination. With the group_by command this is quite simple! (I print the first 100 lines of output below)
 
 ```{r eval=FALSE}
-county_data %>% 
+unemp_data %>% 
   group_by(Year, State_fips) %>% 
   summarise(Average=mean(Labor_force))
 ```
 
 ```{r echo=FALSE}
-all_ave<-county_data %>% group_by(Year, State_fips) %>% summarise(Average=mean(Labor_force))
+all_ave<-unemp_data %>% group_by(Year, State_fips) %>% summarise(Average=mean(Labor_force))
 scroll_box(kable(all_ave[1:100,]), height="300px", width="290px")
 ```
 

@@ -862,7 +862,7 @@ Average
 </table>
 </div>
 <p>This group_by command paired with summarise is quite useful. For example going back to our original data.frame, county_data. Suppose we wanted to do what we just did but for all states. That is calculate within each state and year combination. With the group_by command this is quite simple! (I print the first 100 lines of output below)</p>
-<pre class="r"><code>county_data %&gt;%                         # 1
+<pre class="r"><code>unemp_data %&gt;%                          # 1
   group_by(Year, State_fips) %&gt;%        # 2
   summarise(Average=mean(Labor_force))  # 3</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;Year&#39;. You can override using the `.groups` argument.</code></pre>
