@@ -34,7 +34,7 @@
   
     
   
-  <meta name="description" content="Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:">
+  <meta name="description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes).">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson1/lesson1_01/">
@@ -323,8 +323,8 @@
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/lesson1/lesson1_01/">
-  <meta property="og:title" content="Project Organization | Joseph M. Westenberg">
-  <meta property="og:description" content="Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:"><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:title" content="Writing Loops | Joseph M. Westenberg">
+  <meta property="og:description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes)."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -349,7 +349,7 @@
 
 
 
-  <title>Project Organization | Joseph M. Westenberg</title>
+  <title>Writing Loops | Joseph M. Westenberg</title>
 
 </head>
 
@@ -878,15 +878,15 @@
       
 
 
-  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1057,7 +1057,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Project Organization
+        Writing Loops
       </li>
     </ol>
   </nav>
@@ -1065,28 +1065,32 @@
 
           
 
-          <h1>Project Organization</h1>
+          <h1>Writing Loops</h1>
 
           <div class="article-style">
             
 
 
-<p>Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:</p>
+<p>We will be using <a href="https://www.bls.gov/lau/home.htm">county level employment/labor force data from BLS</a>. We will be using the <strong>Labor force data by county, yearly annual averages</strong>. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.</p>
+<p>We could download these all one by one, or we could write a simple loop to read them in for us. To do this let’s first look at a very simple loop structure:</p>
+<pre class="r numCode R numberLines"><code>letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)  # 1
+letters_l&lt;-length(letters)           # 2
+for (i in 1:letters_l){              # 3
+  print(letters[i])                  # 4
+}                                    # 5</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;
+## [1] &quot;d&quot;
+## [1] &quot;e&quot;</code></pre>
+<p>Going line by line:</p>
 <ul>
-<li>raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.</li>
-<li>scripts: Where we will save all of our R-scripts in this folder</li>
-<li>processed_data: If we want to save some intermediate data steps between raw data and our output.</li>
-<li>tables: Any tex tables we generate we will save to this folder</li>
-<li>figures: Any figures we generate we will save to this folder</li>
-<li>tex: Where we can have our paper and/or presentations</li>
+<li>Line 1: Define a vector of letters.</li>
+<li>Line 2: Report the number of elements in our letter vector and save as letters_l</li>
+<li>Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Note our for loop action is defined within the curly braces.</li>
+<li>Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.</li>
 </ul>
-<p>You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out <a href="https://econ-project-templates.readthedocs.io/en/stable/index.html">Templates for Reproducible Research Projects in Economics</a>.)</p>
-<p>My project folder now looks like this:
-<img src="/img/rcourse/folders.PNG" alt="WD Folder" /></p>
-<p>Now within R let’s set our working directory to point to the main folder we have. It will be convenient to have this at the top of all of your scripts.</p>
-<pre class="r"><code>workingdir&lt;-&quot;PATH_TO_YOUR_WORKING_DIR&quot;  # 1
-setwd(workingdir)                       # 2</code></pre>
-<p>The first line above we are saving the path to our folder as a variable name ‘workingdir’, then we are telling R to be in this folder. That is if we had a data file right within our main folder, we could just simply reference that file without any path and it would open. That’s becaause we are telling R to be living in this folder. Note: this can be changed during your script and R reads your script sequentially, thus you need to make sure that you define your working directory before you are trying to open any files while using these paths. That is why it is always a good idea to start your script with this.</p>
+<p>Okay, great. How does this help us with reading in the data? We’ll get to that in the next section.</p>
 
           </div>
 
@@ -1104,7 +1108,7 @@ setwd(workingdir)                       # 2</code></pre>
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/courses/rcourse/lesson1/lesson1_02/" rel="prev">Writing Loops</a>
+    <a href="/courses/rcourse/lesson1/lesson1_02/" rel="prev">String Manipulation</a>
   </div>
   
 </div>

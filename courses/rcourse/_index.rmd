@@ -36,7 +36,7 @@ Over the next 3 'sessions' we will be looking into county level unemployment dat
 - create summary statistics and plots
 - run basic regressions 
 
-all while paying particular attention to file pathing and to teach you how to export graphics and tables from R into a form that can be directly into LaTex (so that it can be easily read into paper/presentation documents).
+all while paying particular attention to file pathing and to teach you how to export graphics and tables from R into a form that can be directly read into LaTex (so that it can be easily read into paper/presentation documents).
 
 Below is an example of an interactive plot you can make with a package called plotly. Try interacting with it! In the plot you can select/deselect states you want to view. There is also a link to a short post I made about using GIS with R. I show these to illustrate a bit of what is possible to do in R after we familiarize ourselves with the basic functions.
 

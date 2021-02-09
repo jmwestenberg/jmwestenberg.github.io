@@ -34,7 +34,7 @@
   
     
   
-  <meta name="description" content="String Concatenationa&lt;-&quot;This is a the start&quot; # 1b&lt;-&quot;of a sentence&quot; # 2print(paste0(a,b)) # 3## [1] &quot;This is a the startof a sentence&quot;print(paste(a,b)) # 1## [1] &quot;This is a the start of a sentence&quot;Notice we define a and b as strings.">
+  <meta name="description" content="Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson1/lesson1_03/">
@@ -323,8 +323,8 @@
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/lesson1/lesson1_03/">
-  <meta property="og:title" content="String Manipulation | Joseph M. Westenberg">
-  <meta property="og:description" content="String Concatenationa&lt;-&quot;This is a the start&quot; # 1b&lt;-&quot;of a sentence&quot; # 2print(paste0(a,b)) # 3## [1] &quot;This is a the startof a sentence&quot;print(paste(a,b)) # 1## [1] &quot;This is a the start of a sentence&quot;Notice we define a and b as strings."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:title" content="Project Organization | Joseph M. Westenberg">
+  <meta property="og:description" content="Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:"><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -349,7 +349,7 @@
 
 
 
-  <title>String Manipulation | Joseph M. Westenberg</title>
+  <title>Project Organization | Joseph M. Westenberg</title>
 
 </head>
 
@@ -878,15 +878,15 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1057,7 +1057,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        String Manipulation
+        Project Organization
       </li>
     </ol>
   </nav>
@@ -1065,45 +1065,39 @@
 
           
 
-          <h1>String Manipulation</h1>
+          <h1>Project Organization</h1>
 
           <div class="article-style">
             
 
 
-<div id="string-concatenation" class="section level2">
-<h2>String Concatenation</h2>
-<pre class="r"><code>a&lt;-&quot;This is a the start&quot;  # 1
-b&lt;-&quot;of a sentence&quot;        # 2
-print(paste0(a,b))        # 3</code></pre>
-<pre><code>## [1] &quot;This is a the startof a sentence&quot;</code></pre>
-<pre class="r"><code>print(paste(a,b))  # 1</code></pre>
-<pre><code>## [1] &quot;This is a the start of a sentence&quot;</code></pre>
-<p>Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it’s that easy!</p>
-<p>We will not be using this for this project but it may be useful to know we can concatenate two vectors of strings as well.</p>
-<pre class="r"><code>a&lt;-c(&quot;This is a the start&quot;, &quot;Now we have&quot;, &quot;This really is&quot;, &quot;Economics is&quot;)  # 1
-b&lt;-c(&quot;of a sentence.&quot;, &quot;another sentence.&quot;, &quot;quite handy.&quot;, &quot;awesome!&quot;)       # 2
-print(paste(a,b))                                                             # 3</code></pre>
-<pre><code>## [1] &quot;This is a the start of a sentence.&quot; &quot;Now we have another sentence.&quot;     
-## [3] &quot;This really is quite handy.&quot;        &quot;Economics is awesome!&quot;</code></pre>
-</div>
-<div id="string-padding" class="section level2">
-<h2>String Padding</h2>
-<p>Consider we have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading zero. That is instead of “1” we need “01”.</p>
-<p>We could use paste0 as above and combine a 0 with our vector.</p>
-<pre class="r"><code>numbvec&lt;-as.character(1:19)  # 1
-print(paste0(&quot;0&quot;, numbvec))  # 2</code></pre>
-<pre><code>##  [1] &quot;01&quot;  &quot;02&quot;  &quot;03&quot;  &quot;04&quot;  &quot;05&quot;  &quot;06&quot;  &quot;07&quot;  &quot;08&quot;  &quot;09&quot;  &quot;010&quot; &quot;011&quot; &quot;012&quot;
-## [13] &quot;013&quot; &quot;014&quot; &quot;015&quot; &quot;016&quot; &quot;017&quot; &quot;018&quot; &quot;019&quot;</code></pre>
-<p>But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). We could break our vector into single character digits and two character digits, manipulate the single character digits, then combine it back in with the double character digits. But there is an easier way: str_pad !</p>
-<pre class="r"><code>require(stringr)  # 1</code></pre>
-<pre><code>## Loading required package: stringr</code></pre>
-<pre class="r"><code>numbvec&lt;-as.character(1:19)                # 1
-print(str_pad(numbvec, 2, &quot;left&quot;, &quot;0&quot;)  )  # 2</code></pre>
-<pre><code>##  [1] &quot;01&quot; &quot;02&quot; &quot;03&quot; &quot;04&quot; &quot;05&quot; &quot;06&quot; &quot;07&quot; &quot;08&quot; &quot;09&quot; &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot; &quot;15&quot;
-## [16] &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot;</code></pre>
-<p>Now this looks like what we want! But what is str_pad doing? With str_pad we are telling stringr we want all elements of numbvec to be of length 2. So stringr checks to see if the elements are less than 2 characters, if an element is it adds “0”’s to the left side until it reaches length 2. If it is already length 2, it will leave it alone.</p>
-<p>There is many other handy commands to deal with strings in R. These are just a couple of commands we will be using. I will be writing a post with some other handy functions in the coming weeks and will link it here.</p>
+<p>Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:</p>
+<ul>
+<li>raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.</li>
+<li>scripts: Where we will save all of our R-scripts in this folder</li>
+<li>processed_data: If we want to save some intermediate data steps between raw data and our output.</li>
+<li>tables: Any tex tables we generate we will save to this folder</li>
+<li>figures: Any figures we generate we will save to this folder</li>
+<li>tex: Where we can have our paper and/or presentations</li>
+</ul>
+<p>You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out <a href="https://econ-project-templates.readthedocs.io/en/stable/index.html">Templates for Reproducible Research Projects in Economics</a>.)</p>
+<p>My project folder now looks like this:
+<img src="/img/rcourse/folders.PNG" alt="WD Folder" /></p>
+<div id="first-r-script" class="section level3">
+<h3>First R script!</h3>
+<p>Now that we have our folders created, let’s now create paths to those folders with R. Let’s start by creating a variable workingdir which we can define as the path to our main folder.</p>
+<pre class="r"><code>workingdir&lt;-&quot;PATH_TO_YOUR_WORKING_DIR&quot;  # 1</code></pre>
+<p>Now we are going to create a script, let’s save it as workingdir.R and place it in our main parent folder. We are then going to be using the path we defined above in this script to create paths to our other folders.</p>
+<pre class="r"><code>folder_figures&lt;-paste0(workingdir, &quot;figures&quot;)                # 1
+folder_processed_data&lt;-paste0(workingdir, &quot;processed_data&quot;)  # 2
+folder_raw_data&lt;-paste0(workingdir, &quot;raw_data&quot;)              # 3
+folder_scripts&lt;-paste0(workingdir, &quot;scripts&quot;)                # 4
+folder_tables&lt;-paste0(workingdir, &quot;tables&quot;)                  # 5
+folder_tex&lt;-paste0(workingdir, &quot;tex&quot;)                        # 6</code></pre>
+<p>Now at the top of all other scripts we can have:</p>
+<pre class="r"><code>workingdir&lt;-&quot;PATH_TO_YOUR_WORKING_DIR&quot;    # 1
+source(paste0(workingdir, workingdir.r))  # 2</code></pre>
+<p>Now all this says is we have a variable named workingdir that points to our main parent folder. We then have a script in which we define paths to all other folders. With this at the front of all of our scripts, we can easily reference them to create easier pathing for ourselves.</p>
 </div>
 
           </div>
@@ -1122,7 +1116,7 @@ print(str_pad(numbvec, 2, &quot;left&quot;, &quot;0&quot;)  )  # 2</code></pre>
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/rcourse/lesson1/lesson1_02/" rel="next">Writing Loops</a>
+    <a href="/courses/rcourse/lesson1/lesson1_02/" rel="next">String Manipulation</a>
   </div>
   
   

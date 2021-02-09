@@ -878,15 +878,15 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1074,8 +1074,8 @@
 <div id="downloading-within-r" class="section level2">
 <h2>Downloading within R</h2>
 <p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1_01/">Lesson 1.1</a></p>
-<pre class="r"><code>download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;,              # 1
-  paste0(workingdir, &quot;/raw_data/&quot;, &quot;bls_unemp_90.xlsx&quot;), mode=&quot;wb&quot;)  # 2</code></pre>
+<pre class="r"><code>download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;,     # 1
+  paste0(folder_raw_data, &quot;bls_unemp_90.xlsx&quot;), mode=&quot;wb&quot;)  # 2</code></pre>
 </div>
 <div id="reading-in-data" class="section level2">
 <h2>Reading in Data</h2>
@@ -1091,7 +1091,7 @@
 <p>Hence we have something that will look like the following for our command for our script.</p>
 <pre class="r"><code>require(readxl)                                                                                                                                     # 1
 workingdir&lt;-&quot;C:/Users/weste/Documents/GitHub/Rcourse&quot;                                                                                               # 2
-bls_unemp_90 &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_90.xlsx&quot;), col_names=FALSE, skip=5)                                              # 3
+bls_unemp_90 &lt;- read_excel(paste0(folder_raw_data, &quot;/bls_unemp_90.xlsx&quot;), col_names=FALSE, skip=5)                                                  # 3
 bls_unemp_90&lt;-bls_unemp_90[,-6]                                                                                                                     # 4
 col_names(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;, &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)  # 5</code></pre>
 <p>Where the last line above we are giving our columns names based on the names we saw in the excel document.</p>
@@ -1119,7 +1119,7 @@ col_names(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &qu
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/rcourse/lesson1/lesson1_03/" rel="next">String Manipulation</a>
+    <a href="/courses/rcourse/lesson1/lesson1_03/" rel="next">Project Organization</a>
   </div>
   
   

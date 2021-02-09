@@ -34,7 +34,7 @@
   
     
   
-  <meta name="description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes).">
+  <meta name="description" content="String Concatenationa&lt;-&quot;This is a the start&quot; # 1b&lt;-&quot;of a sentence&quot; # 2print(paste0(a,b)) # 3## [1] &quot;This is a the startof a sentence&quot;print(paste(a,b)) # 1## [1] &quot;This is a the start of a sentence&quot;Notice we define a and b as strings.">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/lesson1/lesson1_02/">
@@ -323,8 +323,8 @@
   
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/lesson1/lesson1_02/">
-  <meta property="og:title" content="Writing Loops | Joseph M. Westenberg">
-  <meta property="og:description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes)."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:title" content="String Manipulation | Joseph M. Westenberg">
+  <meta property="og:description" content="String Concatenationa&lt;-&quot;This is a the start&quot; # 1b&lt;-&quot;of a sentence&quot; # 2print(paste0(a,b)) # 3## [1] &quot;This is a the startof a sentence&quot;print(paste(a,b)) # 1## [1] &quot;This is a the start of a sentence&quot;Notice we define a and b as strings."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -349,7 +349,7 @@
 
 
 
-  <title>Writing Loops | Joseph M. Westenberg</title>
+  <title>String Manipulation | Joseph M. Westenberg</title>
 
 </head>
 
@@ -878,15 +878,15 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class="active"><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1057,7 +1057,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Writing Loops
+        String Manipulation
       </li>
     </ol>
   </nav>
@@ -1065,32 +1065,46 @@
 
           
 
-          <h1>Writing Loops</h1>
+          <h1>String Manipulation</h1>
 
           <div class="article-style">
             
 
 
-<p>We will be using <a href="https://www.bls.gov/lau/home.htm">county level employment/labor force data from BLS</a>. We will be using the <strong>Labor force data by county, yearly annual averages</strong>. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.</p>
-<p>We could download these all one by one, or we could write a simple loop to read them in for us. To do this let’s first look at a very simple loop structure:</p>
-<pre class="r numCode R numberLines"><code>letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)  # 1
-letters_l&lt;-length(letters)           # 2
-for (i in 1:letters_l){              # 3
-  print(letters[i])                  # 4
-}                                    # 5</code></pre>
-<pre><code>## [1] &quot;a&quot;
-## [1] &quot;b&quot;
-## [1] &quot;c&quot;
-## [1] &quot;d&quot;
-## [1] &quot;e&quot;</code></pre>
-<p>Going line by line:</p>
-<ul>
-<li>Line 1: Define a vector of letters.</li>
-<li>Line 2: Report the number of elements in our letter vector and save as letters_l</li>
-<li>Line 3: Defining for loop. Our index will be i, and it will run from 0 to however long letters vector is (try adding some more letters!) Note our for loop action is defined within the curly braces.</li>
-<li>Line 4: For every i defined in Line 3 we want to print the corresponding element in the vector letters.</li>
-</ul>
-<p>Okay, great. How does this help us with reading in the data? We’ll get to that in the next section.</p>
+<div id="string-concatenation" class="section level2">
+<h2>String Concatenation</h2>
+<pre class="r"><code>a&lt;-&quot;This is a the start&quot;  # 1
+b&lt;-&quot;of a sentence&quot;        # 2
+print(paste0(a,b))        # 3</code></pre>
+<pre><code>## [1] &quot;This is a the startof a sentence&quot;</code></pre>
+<pre class="r"><code>print(paste(a,b))  # 1</code></pre>
+<pre><code>## [1] &quot;This is a the start of a sentence&quot;</code></pre>
+<p>Notice we define a and b as strings. What paste and paste0 do are combine these strings into one string. We can see that paste places a space between the two strings while paste0 does not. paste0 comes in quite handy for working with file pathing as we will see. Yes it’s that easy!</p>
+<p>We will not be using this for this project but it may be useful to know we can concatenate two vectors of strings as well.</p>
+<pre class="r"><code>a&lt;-c(&quot;This is a the start&quot;, &quot;Now we have&quot;, &quot;This really is&quot;, &quot;Economics is&quot;)  # 1
+b&lt;-c(&quot;of a sentence.&quot;, &quot;another sentence.&quot;, &quot;quite handy.&quot;, &quot;awesome!&quot;)       # 2
+print(paste(a,b))                                                             # 3</code></pre>
+<pre><code>## [1] &quot;This is a the start of a sentence.&quot; &quot;Now we have another sentence.&quot;     
+## [3] &quot;This really is quite handy.&quot;        &quot;Economics is awesome!&quot;</code></pre>
+</div>
+<div id="string-padding" class="section level2">
+<h2>String Padding</h2>
+<p>Consider we have a vector of numbers which currently runs 1-19. Now what if we need all the ‘single character’ digits to have a leading zero. That is instead of “1” we need “01”.</p>
+<p>We could use paste0 as above and combine a 0 with our vector.</p>
+<pre class="r"><code>numbvec&lt;-as.character(1:19)  # 1
+print(paste0(&quot;0&quot;, numbvec))  # 2</code></pre>
+<pre><code>##  [1] &quot;01&quot;  &quot;02&quot;  &quot;03&quot;  &quot;04&quot;  &quot;05&quot;  &quot;06&quot;  &quot;07&quot;  &quot;08&quot;  &quot;09&quot;  &quot;010&quot; &quot;011&quot; &quot;012&quot;
+## [13] &quot;013&quot; &quot;014&quot; &quot;015&quot; &quot;016&quot; &quot;017&quot; &quot;018&quot; &quot;019&quot;</code></pre>
+<p>But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). We could break our vector into single character digits and two character digits, manipulate the single character digits, then combine it back in with the double character digits. But there is an easier way: str_pad !</p>
+<pre class="r"><code>require(stringr)  # 1</code></pre>
+<pre><code>## Loading required package: stringr</code></pre>
+<pre class="r"><code>numbvec&lt;-as.character(1:19)                # 1
+print(str_pad(numbvec, 2, &quot;left&quot;, &quot;0&quot;)  )  # 2</code></pre>
+<pre><code>##  [1] &quot;01&quot; &quot;02&quot; &quot;03&quot; &quot;04&quot; &quot;05&quot; &quot;06&quot; &quot;07&quot; &quot;08&quot; &quot;09&quot; &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot; &quot;15&quot;
+## [16] &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot;</code></pre>
+<p>Now this looks like what we want! But what is str_pad doing? With str_pad we are telling stringr we want all elements of numbvec to be of length 2. So stringr checks to see if the elements are less than 2 characters, if an element is it adds “0”’s to the left side until it reaches length 2. If it is already length 2, it will leave it alone.</p>
+<p>There is many other handy commands to deal with strings in R. These are just a couple of commands we will be using. I will be writing a post with some other handy functions in the coming weeks and will link it here.</p>
+</div>
 
           </div>
 
@@ -1108,14 +1122,14 @@ for (i in 1:letters_l){              # 3
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/rcourse/lesson1/lesson1_01/" rel="next">Project Organization</a>
+    <a href="/courses/rcourse/lesson1/lesson1_01/" rel="next">Writing Loops</a>
   </div>
   
   
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/courses/rcourse/lesson1/lesson1_03/" rel="prev">String Manipulation</a>
+    <a href="/courses/rcourse/lesson1/lesson1_03/" rel="prev">Project Organization</a>
   </div>
   
 </div>

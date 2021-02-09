@@ -36,6 +36,8 @@ require(knitr)
 require(kableExtra)
 
 workingdir<-"C:/Users/weste/Documents/GitHub/Rcourse/"
+source(paste0(workingdir, "workingdir.r"))
+
 load(paste0(workingdir, file.path("processed_data", "unemp_data.rda")))
 
 indiana<-unemp_data %>% filter(State_fips=="18")

@@ -75,10 +75,10 @@ ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
 &lt;div id=&#34;saving-plots&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Saving Plots&lt;/h3&gt;
 &lt;p&gt;Now we have generated a plot we like, let’s save it.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(workingdir, &amp;quot;/figures/indiana_unemp.png&amp;quot;))      # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;))      # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This will take the last graphic in memory and save it in the location we specify. We can also tell ggplot to make the plot specific dimensions which I highly recommend doing. If you do not specify dimensions, they can be dependent on the size of your viewer in RStudio.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(workingdir, &amp;quot;/figures/indiana_unemp.png&amp;quot;),   # 1
-  height = 5, width = 7)                                        # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;),   # 1
+  height = 5, width = 7)                                    # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;scatter-plot-geom_point&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Scatter plot (geom_point)&lt;/h3&gt;

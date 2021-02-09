@@ -880,15 +880,15 @@ Poverty EstimatesWe will be merging poverty estimates for the US counties in 20
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1081,9 +1081,9 @@ Poverty EstimatesWe will be merging poverty estimates for the US counties in 20
 <p>We will be merging poverty estimates for the US counties in 2019. A table prepared by the USDA can be found on <a href="https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/">their website here.</a> Let’s download this and put it into our original_data folder. Now let’s open it and see what the data looks like. One of the first things we can notice is the first 2 lines, United States and Alabama. That is there is county and state level observations in addition to the county level ones. We need to keep this in mind before we merge with our unemployment data.</p>
 <p>Try to figure out how to read this data into R by yourself. If you need to review, go back to <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/">Downloading/Reading Data</a>. Remember using R Studio to assist with this is probably the simplest way until we get very comfortable with the commands.</p>
 <p>Here is the command I use for it:</p>
-<pre class="r"><code>PovertyEstimates &lt;-                                                # 1
-  read_excel(paste0(workingdir, &quot;raw_data/PovertyEstimates.xls&quot;),  # 2
-  skip = 4)                                                        # 3</code></pre>
+<pre class="r"><code>PovertyEstimates &lt;-                                             # 1
+  read_excel(paste0(folder_raw_data, &quot;/PovertyEstimates.xls&quot;),  # 2
+  skip = 4)                                                     # 3</code></pre>
 <p>Make sure we also have our county unemployment data read in. We can observe both of these data.frames now. The way I would clean this data is the following (of course depends on the question/results you are trying to obtain):</p>
 <ul>
 <li>unemployment data:

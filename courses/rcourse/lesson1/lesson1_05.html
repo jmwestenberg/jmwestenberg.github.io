@@ -385,9 +385,9 @@ years&lt;-str_pad(as.character(years), 2, &quot;left&quot;, &quot;0&quot;)      
 years_l&lt;-length(years)                                                          # 6
 for (i in 1:years_l){                                                           # 7
 url&lt;-paste0(&quot;https://www.bls.gov/lau/laucnty&quot;, years[i], &quot;.xlsx&quot;)               # 8
-destination&lt;-paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i], &quot;.xlsx&quot;)      # 9
+destination&lt;-paste0(folder_raw_data, &quot;/bls_unemp_&quot;, years[i], &quot;.xlsx&quot;)          # 9
 download.file(url, destination, mode=&quot;wb&quot;)                                     # 10
-temp_df &lt;- read_excel(paste0(workingdir, &quot;/raw_data/bls_unemp_&quot;, years[i],     # 11
+temp_df &lt;- read_excel(paste0(folder_raw_data, &quot;/bls_unemp_&quot;, years[i],         # 11
   &quot;.xlsx&quot;),col_names=FALSE, skip=5)                                            # 12
 temp_df&lt;-temp_df[,-6]                                                          # 13
 colnames(temp_df)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;,  # 14
@@ -395,7 +395,7 @@ colnames(temp_df)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;Cou
 temp_df&lt;-temp_df[!is.na(temp_df$State_fips),]                                  # 16
 unemp_data&lt;-rbind(county_data, temp_df)                                        # 17
 }                                                                              # 18
-filename&lt;-paste0(workingdir, file.path(&quot;processed_data&quot;, &quot;unemp_data.rda&quot;))    # 19
+filename&lt;-paste0(folder_processed_data, &quot;/unemp_data.rda&quot;)                     # 19
 save(unemp_data, file=filename)                                                # 20</code></pre>
 <p>First let’s think what we are trying to achieve. The links for the downloads are all in the form of <a href="https://www.bls.gov/lau/laucntyZZ.xlsx" class="uri">https://www.bls.gov/lau/laucntyZZ.xlsx</a>, where ZZ is two digits representing the year. These ZZ values run from “90”to “99” for years 1990-1999 and “00” to “19” for years 2000-2019.</p>
 <p>Let’s work through the above code line by line:</p>

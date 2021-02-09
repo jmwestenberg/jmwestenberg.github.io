@@ -2691,9 +2691,9 @@ head(temp)                                              # 4&lt;/code&gt;&lt;/pre
 &lt;p&gt;We will be merging poverty estimates for the US counties in 2019. A table prepared by the USDA can be found on &lt;a href=&#34;https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/&#34;&gt;their website here.&lt;/a&gt; Let’s download this and put it into our original_data folder. Now let’s open it and see what the data looks like. One of the first things we can notice is the first 2 lines, United States and Alabama. That is there is county and state level observations in addition to the county level ones. We need to keep this in mind before we merge with our unemployment data.&lt;/p&gt;
 &lt;p&gt;Try to figure out how to read this data into R by yourself. If you need to review, go back to &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt;. Remember using R Studio to assist with this is probably the simplest way until we get very comfortable with the commands.&lt;/p&gt;
 &lt;p&gt;Here is the command I use for it:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;PovertyEstimates &amp;lt;-                                                # 1
-  read_excel(paste0(workingdir, &amp;quot;raw_data/PovertyEstimates.xls&amp;quot;),  # 2
-  skip = 4)                                                        # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;PovertyEstimates &amp;lt;-                                             # 1
+  read_excel(paste0(folder_raw_data, &amp;quot;/PovertyEstimates.xls&amp;quot;),  # 2
+  skip = 4)                                                     # 3&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Make sure we also have our county unemployment data read in. We can observe both of these data.frames now. The way I would clean this data is the following (of course depends on the question/results you are trying to obtain):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;unemployment data:
@@ -4332,7 +4332,7 @@ NA
 &lt;p&gt;Now let’s load in the package xtable. This package allows us to print data.frames into a tex table environment. Let’s first inspect the output for just running the base function with minimal options.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  xtable(indiana_laborforce)  # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## % latex table generated in R 3.6.3 by xtable 1.8-4 package
-## % Sat Feb 06 18:01:56 2021
+## % Mon Feb 08 20:20:30 2021
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rlrrrrrrrrr}
@@ -4398,7 +4398,7 @@ NA
   align = c(&amp;quot;|c|&amp;quot;,&amp;quot;|c|&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c|&amp;quot;)),   # 6
   table.placement=&amp;quot;H&amp;quot;,                                            # 7
   include.rownames=FALSE,                                         # 8
-  file=paste0(workingdir, &amp;quot;tables/indiana_laborforce.tex&amp;quot;))       # 9&lt;/code&gt;&lt;/pre&gt;
+  file=paste0(folder_tables, &amp;quot;/indiana_laborforce.tex&amp;quot;))          # 9&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;Line #4: Round all digits to the nearest integer.&lt;/li&gt;
 &lt;li&gt;Line #5: add a label to the table which you can then reference to in your main tex document.&lt;/li&gt;

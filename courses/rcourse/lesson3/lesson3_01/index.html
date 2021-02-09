@@ -878,15 +878,15 @@
       
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Project Organization</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_01/">Writing Loops</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">Writing Loops</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a></li>
 
 
 
-  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a></li>
+  <li class=""><a href="/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></li>
 
 
 
@@ -1126,10 +1126,10 @@ ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
 <div id="saving-plots" class="section level3">
 <h3>Saving Plots</h3>
 <p>Now we have generated a plot we like, let’s save it.</p>
-<pre class="r"><code>ggsave(file=paste0(workingdir, &quot;/figures/indiana_unemp.png&quot;))      # 1</code></pre>
+<pre class="r"><code>ggsave(file=paste0(folder_figures, &quot;/indiana_unemp.png&quot;))      # 1</code></pre>
 <p>This will take the last graphic in memory and save it in the location we specify. We can also tell ggplot to make the plot specific dimensions which I highly recommend doing. If you do not specify dimensions, they can be dependent on the size of your viewer in RStudio.</p>
-<pre class="r"><code>ggsave(file=paste0(workingdir, &quot;/figures/indiana_unemp.png&quot;),   # 1
-  height = 5, width = 7)                                        # 2</code></pre>
+<pre class="r"><code>ggsave(file=paste0(folder_figures, &quot;/indiana_unemp.png&quot;),   # 1
+  height = 5, width = 7)                                    # 2</code></pre>
 </div>
 <div id="scatter-plot-geom_point" class="section level3">
 <h3>Scatter plot (geom_point)</h3>

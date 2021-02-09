@@ -13,37 +13,10 @@
     </image>
     
     <item>
-      <title>Project Organization</title>
+      <title>Writing Loops</title>
       <link>/courses/rcourse/lesson1/lesson1_01/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       <guid>/courses/rcourse/lesson1/lesson1_01/</guid>
-      <description>
-
-
-&lt;p&gt;Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.&lt;/li&gt;
-&lt;li&gt;scripts: Where we will save all of our R-scripts in this folder&lt;/li&gt;
-&lt;li&gt;processed_data: If we want to save some intermediate data steps between raw data and our output.&lt;/li&gt;
-&lt;li&gt;tables: Any tex tables we generate we will save to this folder&lt;/li&gt;
-&lt;li&gt;figures: Any figures we generate we will save to this folder&lt;/li&gt;
-&lt;li&gt;tex: Where we can have our paper and/or presentations&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out &lt;a href=&#34;https://econ-project-templates.readthedocs.io/en/stable/index.html&#34;&gt;Templates for Reproducible Research Projects in Economics&lt;/a&gt;.)&lt;/p&gt;
-&lt;p&gt;My project folder now looks like this:
-&lt;img src=&#34;/img/rcourse/folders.PNG&#34; alt=&#34;WD Folder&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Now within R let’s set our working directory to point to the main folder we have. It will be convenient to have this at the top of all of your scripts.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;workingdir&amp;lt;-&amp;quot;PATH_TO_YOUR_WORKING_DIR&amp;quot;  # 1
-setwd(workingdir)                       # 2&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first line above we are saving the path to our folder as a variable name ‘workingdir’, then we are telling R to be in this folder. That is if we had a data file right within our main folder, we could just simply reference that file without any path and it would open. That’s becaause we are telling R to be living in this folder. Note: this can be changed during your script and R reads your script sequentially, thus you need to make sure that you define your working directory before you are trying to open any files while using these paths. That is why it is always a good idea to start your script with this.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Writing Loops</title>
-      <link>/courses/rcourse/lesson1/lesson1_02/</link>
-      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_02/</guid>
       <description>
 
 
@@ -72,9 +45,9 @@ for (i in 1:letters_l){              # 3
     
     <item>
       <title>String Manipulation</title>
-      <link>/courses/rcourse/lesson1/lesson1_03/</link>
+      <link>/courses/rcourse/lesson1/lesson1_02/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
+      <guid>/courses/rcourse/lesson1/lesson1_02/</guid>
       <description>
 
 
@@ -116,6 +89,45 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
     </item>
     
     <item>
+      <title>Project Organization</title>
+      <link>/courses/rcourse/lesson1/lesson1_03/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
+      <description>
+
+
+&lt;p&gt;Before we get started, let’s set up a folder for our project and create subfolders to keep things organized. For this project I recommend the following subfolders, which are a good minimum for organizing any project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;raw_data: This is where we will put our `preprocessed’ data we will be getting from MIT Election Lab.&lt;/li&gt;
+&lt;li&gt;scripts: Where we will save all of our R-scripts in this folder&lt;/li&gt;
+&lt;li&gt;processed_data: If we want to save some intermediate data steps between raw data and our output.&lt;/li&gt;
+&lt;li&gt;tables: Any tex tables we generate we will save to this folder&lt;/li&gt;
+&lt;li&gt;figures: Any figures we generate we will save to this folder&lt;/li&gt;
+&lt;li&gt;tex: Where we can have our paper and/or presentations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can make more folders if you feel it keeps you organized. The main point I want to make here is it is well worth your time to think about how you want to organize your project. Oftentimes if we jump right in without a plan, things become a jumbled mess. (If you want to go further with your organization strategies, I recommend looking into waf, specifically check out &lt;a href=&#34;https://econ-project-templates.readthedocs.io/en/stable/index.html&#34;&gt;Templates for Reproducible Research Projects in Economics&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;My project folder now looks like this:
+&lt;img src=&#34;/img/rcourse/folders.PNG&#34; alt=&#34;WD Folder&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;first-r-script&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;First R script!&lt;/h3&gt;
+&lt;p&gt;Now that we have our folders created, let’s now create paths to those folders with R. Let’s start by creating a variable workingdir which we can define as the path to our main folder.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;workingdir&amp;lt;-&amp;quot;PATH_TO_YOUR_WORKING_DIR&amp;quot;  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we are going to create a script, let’s save it as workingdir.R and place it in our main parent folder. We are then going to be using the path we defined above in this script to create paths to our other folders.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;folder_figures&amp;lt;-paste0(workingdir, &amp;quot;figures&amp;quot;)                # 1
+folder_processed_data&amp;lt;-paste0(workingdir, &amp;quot;processed_data&amp;quot;)  # 2
+folder_raw_data&amp;lt;-paste0(workingdir, &amp;quot;raw_data&amp;quot;)              # 3
+folder_scripts&amp;lt;-paste0(workingdir, &amp;quot;scripts&amp;quot;)                # 4
+folder_tables&amp;lt;-paste0(workingdir, &amp;quot;tables&amp;quot;)                  # 5
+folder_tex&amp;lt;-paste0(workingdir, &amp;quot;tex&amp;quot;)                        # 6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now at the top of all other scripts we can have:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;workingdir&amp;lt;-&amp;quot;PATH_TO_YOUR_WORKING_DIR&amp;quot;    # 1
+source(paste0(workingdir, workingdir.r))  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now all this says is we have a variable named workingdir that points to our main parent folder. We then have a script in which we define paths to all other folders. With this at the front of all of our scripts, we can easily reference them to create easier pathing for ourselves.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Downloading/Reading Data</title>
       <link>/courses/rcourse/lesson1/lesson1_04/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
@@ -126,8 +138,8 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
 &lt;div id=&#34;downloading-within-r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading within R&lt;/h2&gt;
 &lt;p&gt;We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1_01/&#34;&gt;Lesson 1.1&lt;/a&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(&amp;quot;https://www.bls.gov/lau/laucnty90.xlsx&amp;quot;,              # 1
-  paste0(workingdir, &amp;quot;/raw_data/&amp;quot;, &amp;quot;bls_unemp_90.xlsx&amp;quot;), mode=&amp;quot;wb&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(&amp;quot;https://www.bls.gov/lau/laucnty90.xlsx&amp;quot;,     # 1
+  paste0(folder_raw_data, &amp;quot;bls_unemp_90.xlsx&amp;quot;), mode=&amp;quot;wb&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;reading-in-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Reading in Data&lt;/h2&gt;
@@ -143,7 +155,7 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
 &lt;p&gt;Hence we have something that will look like the following for our command for our script.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(readxl)                                                                                                                                     # 1
 workingdir&amp;lt;-&amp;quot;C:/Users/weste/Documents/GitHub/Rcourse&amp;quot;                                                                                               # 2
-bls_unemp_90 &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_90.xlsx&amp;quot;), col_names=FALSE, skip=5)                                              # 3
+bls_unemp_90 &amp;lt;- read_excel(paste0(folder_raw_data, &amp;quot;/bls_unemp_90.xlsx&amp;quot;), col_names=FALSE, skip=5)                                                  # 3
 bls_unemp_90&amp;lt;-bls_unemp_90[,-6]                                                                                                                     # 4
 col_names(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;, &amp;quot;Year&amp;quot;, &amp;quot;Labor_force&amp;quot;, &amp;quot;Employed&amp;quot;, &amp;quot;Unemployed&amp;quot;, &amp;quot;Unemp_rate&amp;quot;)  # 5&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Where the last line above we are giving our columns names based on the names we saw in the excel document.&lt;/p&gt;
@@ -173,9 +185,9 @@ years&amp;lt;-str_pad(as.character(years), 2, &amp;quot;left&amp;quot;, &amp;quo
 years_l&amp;lt;-length(years)                                                          # 6
 for (i in 1:years_l){                                                           # 7
 url&amp;lt;-paste0(&amp;quot;https://www.bls.gov/lau/laucnty&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)               # 8
-destination&amp;lt;-paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)      # 9
+destination&amp;lt;-paste0(folder_raw_data, &amp;quot;/bls_unemp_&amp;quot;, years[i], &amp;quot;.xlsx&amp;quot;)          # 9
 download.file(url, destination, mode=&amp;quot;wb&amp;quot;)                                     # 10
-temp_df &amp;lt;- read_excel(paste0(workingdir, &amp;quot;/raw_data/bls_unemp_&amp;quot;, years[i],     # 11
+temp_df &amp;lt;- read_excel(paste0(folder_raw_data, &amp;quot;/bls_unemp_&amp;quot;, years[i],         # 11
   &amp;quot;.xlsx&amp;quot;),col_names=FALSE, skip=5)                                            # 12
 temp_df&amp;lt;-temp_df[,-6]                                                          # 13
 colnames(temp_df)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&amp;quot;, &amp;quot;County_fips&amp;quot;, &amp;quot;County_name&amp;quot;,  # 14
@@ -183,7 +195,7 @@ colnames(temp_df)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_fips&
 temp_df&amp;lt;-temp_df[!is.na(temp_df$State_fips),]                                  # 16
 unemp_data&amp;lt;-rbind(county_data, temp_df)                                        # 17
 }                                                                              # 18
-filename&amp;lt;-paste0(workingdir, file.path(&amp;quot;processed_data&amp;quot;, &amp;quot;unemp_data.rda&amp;quot;))    # 19
+filename&amp;lt;-paste0(folder_processed_data, &amp;quot;/unemp_data.rda&amp;quot;)                     # 19
 save(unemp_data, file=filename)                                                # 20&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;First let’s think what we are trying to achieve. The links for the downloads are all in the form of &lt;a href=&#34;https://www.bls.gov/lau/laucntyZZ.xlsx&#34; class=&#34;uri&#34;&gt;https://www.bls.gov/lau/laucntyZZ.xlsx&lt;/a&gt;, where ZZ is two digits representing the year. These ZZ values run from “90”to “99” for years 1990-1999 and “00” to “19” for years 2000-2019.&lt;/p&gt;
 &lt;p&gt;Let’s work through the above code line by line:&lt;/p&gt;

@@ -41,9 +41,9 @@ years<-str_pad(as.character(years), 2, "left", "0")
 years_l<-length(years)
 for (i in 1:years_l){
 url<-paste0("https://www.bls.gov/lau/laucnty", years[i], ".xlsx")
-destination<-paste0(workingdir, "/raw_data/bls_unemp_", years[i], ".xlsx")
+destination<-paste0(folder_raw_data, "/bls_unemp_", years[i], ".xlsx")
 download.file(url, destination, mode="wb")
-temp_df <- read_excel(paste0(workingdir, "/raw_data/bls_unemp_", years[i],
+temp_df <- read_excel(paste0(folder_raw_data, "/bls_unemp_", years[i],
   ".xlsx"),col_names=FALSE, skip=5)
 temp_df<-temp_df[,-6]
 colnames(temp_df)<-c("LAUS_code", "State_fips", "County_fips", "County_name",
@@ -51,7 +51,7 @@ colnames(temp_df)<-c("LAUS_code", "State_fips", "County_fips", "County_name",
 temp_df<-temp_df[!is.na(temp_df$State_fips),]
 unemp_data<-rbind(county_data, temp_df)
 }
-filename<-paste0(workingdir, file.path("processed_data", "unemp_data.rda"))
+filename<-paste0(folder_processed_data, "/unemp_data.rda")
 save(unemp_data, file=filename)
 ```
 
