@@ -1097,13 +1097,13 @@ save(unemp_data, file=filename)                                                #
 <li>Lines #1 &amp; #2: load required packages.</li>
 <li>Line #3: Declare unemp_data will be a data.frame. Right now it is empty, but we will add to it.</li>
 <li>Line #4: Define a vector with elements 90-99 and 0-19. (Which will correspond to the years that we will pull)</li>
-<li>Line #5 : We have a vector for years, however if we notice in the url names we need this vector to include a leading 0 in front of the single ‘character’ digits (ie “01” instead of “1”). But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). Go back to the <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_03/">String Manipulation</a> section if you need to refresh on this.</li>
+<li>Line #5 : We have a vector for years, however if we notice in the url names we need this vector to include a leading 0 in front of the single ‘character’ digits (ie “01” instead of “1”). But we don’t want a leading 0 in front of the double ‘character’ digits (ie We DON’T want “090”). Go back to the <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a> section if you need to refresh on this.</li>
 <li>Line #6 : Calculate the length of years and save as years_l</li>
-<li>Line #7 : See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_02/">String Manipulation</a> if defining the for loop does not make sense.</li>
-<li>Line #8 : We are creating the character string for the url for the download link. Since they all take the form of <a href="https://www.bls.gov/lau/laucntyZZ.xlsx" class="uri">https://www.bls.gov/lau/laucntyZZ.xlsx</a>, we can use one element of our years vector at a time. (See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_03/">String Manipulation</a> for explanation on paste0)</li>
+<li>Line #7 : See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_02/">String Manipulation</a> if defining the for loop does not make sense.</li>
+<li>Line #8 : We are creating the character string for the url for the download link. Since they all take the form of <a href="https://www.bls.gov/lau/laucntyZZ.xlsx" class="uri">https://www.bls.gov/lau/laucntyZZ.xlsx</a>, we can use one element of our years vector at a time. (See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/">String Manipulation</a> for explanation on paste0)</li>
 <li>Line #9 : This is of similar spirit to line #4, but this is defining the path/filename of the excel file we will save.</li>
 <li>Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_04/">Downloading/Reading Data</a> if unclear.)</li>
-<li>Lines #11-#16: See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1_04/">Downloading/Reading Data</a> for a direct explanation.</li>
+<li>Lines #11-#16: See <a href="http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/">Downloading/Reading Data</a> for a direct explanation.</li>
 <li>Line #17: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.</li>
 <li>Line #19: Create the filepath (to our processed_data folder) where we will save the file, what the file name and type is.</li>
 <li>Line #20: save the combined data to the location/name we defined above.</li>

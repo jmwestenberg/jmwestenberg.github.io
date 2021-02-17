@@ -1073,7 +1073,7 @@
 
 <div id="downloading-within-r" class="section level2">
 <h2>Downloading within R</h2>
-<p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1_01/">Lesson 1.1</a></p>
+<p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_01/">Lesson 1.1</a></p>
 <pre class="r"><code>download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;,     # 1
   paste0(folder_raw_data, &quot;bls_unemp_90.xlsx&quot;), mode=&quot;wb&quot;)  # 2</code></pre>
 </div>
@@ -1089,11 +1089,11 @@
 <p><img src="/img/rcourse/import_fromexceloptions.PNG" /></p>
 <p>Next we can handle column F that we noticed was blank. This is column 6 and stays consistent across all years (you can check this). Remembering our lessons from the Very Basics section we can subset this dataframe by removing column 6.</p>
 <p>Hence we have something that will look like the following for our command for our script.</p>
-<pre class="r"><code>require(readxl)                                                                                                                                     # 1
-workingdir&lt;-&quot;C:/Users/weste/Documents/GitHub/Rcourse&quot;                                                                                               # 2
-bls_unemp_90 &lt;- read_excel(paste0(folder_raw_data, &quot;/bls_unemp_90.xlsx&quot;), col_names=FALSE, skip=5)                                                  # 3
-bls_unemp_90&lt;-bls_unemp_90[,-6]                                                                                                                     # 4
-col_names(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;, &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)  # 5</code></pre>
+<pre class="r"><code>require(readxl)                                                                                                                                    # 1
+workingdir&lt;-&quot;C:/Users/weste/Documents/GitHub/Rcourse&quot;                                                                                              # 2
+bls_unemp_90 &lt;- read_excel(paste0(folder_raw_data, &quot;/bls_unemp_90.xlsx&quot;), col_names=FALSE, skip=5)                                                 # 3
+bls_unemp_90&lt;-bls_unemp_90[,-6]                                                                                                                    # 4
+colnames(bls_unemp_90)&lt;-c(&quot;LAUS_code&quot;, &quot;State_fips&quot;, &quot;County_fips&quot;, &quot;County_name&quot;, &quot;Year&quot;, &quot;Labor_force&quot;, &quot;Employed&quot;, &quot;Unemployed&quot;, &quot;Unemp_rate&quot;)  # 5</code></pre>
 <p>Where the last line above we are giving our columns names based on the names we saw in the excel document.</p>
 <p>We can then observe our data frame to ssee if it’s fully cleaned. At first it seems so (I actually initially thought so). However when reading in the data, we grabbed 2 extra rows at the end of the file. Hence we have 2 rows at the end of our data frame that are NA’s. Let’s drop these two rows, to do this we can use a command is.na and prior to it include an “!”, saying ‘not is.na’.</p>
 <pre class="r"><code>bls_unemp_90&lt;-bls_unemp_90[!is.na(bls_unemp_90$State_fips),]  # 1</code></pre>
