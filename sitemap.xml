@@ -3,27 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/hobbies/grilling/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/rcourse/intro/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/hobbies/grilling/march2021/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/courses/rcourse/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson0/</loc>
-    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson1/</loc>
-    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson2/</loc>
-    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/rcourse/lesson3/</loc>
+    <loc>/courses/rcourse/tidyverse/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,72 +33,87 @@
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson0/lesson0_01/</loc>
+    <loc>/courses/rcourse/exporting/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson3/lesson3_01/</loc>
+    <loc>/courses/rcourse/intro/lesson0_01/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_pipes/</loc>
+    <loc>/courses/rcourse/tidyverse/ggplot/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1/lesson1_01/</loc>
+    <loc>/courses/rcourse/tidyverse/pipes/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_group_byandsummarise/</loc>
+    <loc>/courses/rcourse/intro/lesson1_01/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1/lesson1_02/</loc>
+    <loc>/courses/rcourse/tidyverse/groupbyandsummarise/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_mutate/</loc>
+    <loc>/courses/rcourse/intro/lesson1_02/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1/lesson1_03/</loc>
+    <loc>/courses/rcourse/tidyverse/mutate/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1/lesson1_04/</loc>
+    <loc>/courses/rcourse/intro/lesson1_03/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_select/</loc>
+    <loc>/courses/rcourse/intro/lesson1_04/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson1/lesson1_05/</loc>
+    <loc>/courses/rcourse/tidyverse/select/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_03/</loc>
+    <loc>/courses/rcourse/intro/lesson1_05/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/courses/rcourse/lesson2/lesson2_04/</loc>
+    <loc>/courses/rcourse/tidyverse/join/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/rcourse/exporting/ggsave/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/rcourse/exporting/xtable/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/courses/</loc>
+    <lastmod>2021-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/hobbies/</loc>
     <lastmod>2021-02-05T00:00:00+00:00</lastmod>
   </url>
   

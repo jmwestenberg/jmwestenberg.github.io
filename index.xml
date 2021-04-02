@@ -14,9 +14,9 @@
     
     <item>
       <title>Very Basics</title>
-      <link>/courses/rcourse/lesson0/lesson0_01/</link>
+      <link>/courses/rcourse/intro/lesson0_01/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson0/lesson0_01/</guid>
+      <guid>/courses/rcourse/intro/lesson0_01/</guid>
       <description>
 
 
@@ -97,9 +97,9 @@ print(x)                     # 2&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>ggplot</title>
-      <link>/courses/rcourse/lesson3/lesson3_01/</link>
+      <link>/courses/rcourse/tidyverse/ggplot/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson3/lesson3_01/</guid>
+      <guid>/courses/rcourse/tidyverse/ggplot/</guid>
       <description>
 
 
@@ -111,7 +111,7 @@ indiana &amp;lt;- unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
     colour=County_fips, group=County_fips))+     # 2
   geom_line()                                    # 3&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Line #1: Tells ggplot we will be using the data.frame indiana. aes is short for aesthetics. This is where we tell ggplot how to map our data into the plots. Here I want ggplot to plot Year on the x-axis, Unemp_rate on the y-axis.&lt;/li&gt;
 &lt;li&gt;Line #2: A continuation of the aesthetic mapping, his line is saying plot separately for each County_fips separately, giving them a different color.&lt;/li&gt;
@@ -122,7 +122,7 @@ indiana &amp;lt;- unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot
     colour=County_fips, group=County_fips))+     # 2
   geom_line(size=0.3)+                           # 3
   theme(legend.position=&amp;quot;none&amp;quot;)                  # 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This already is looking a lot better. But can we do something about the labels on the x axis, they are overlaying on each other. We could make the text smaller but then it would be difficult to see, so let’s just rotate them. Also let’s make the y-axis name a bit more meaningful.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
     colour=County_fips, group=County_fips))+     # 2
@@ -130,7 +130,7 @@ indiana &amp;lt;- unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot
   theme(legend.position=&amp;quot;none&amp;quot;,                  # 4
     axis.text.x=element_text(angle=45)) +        # 5
   ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)    # 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now we’re getting somewhere! But what if we want to emphasize the county Bloomington is in, Monroe County?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;monroecty&amp;lt;-indiana %&amp;gt;% filter(County_fips==&amp;quot;105&amp;quot;)       # 1
                                                         # 2
@@ -143,7 +143,7 @@ ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
   theme(legend.position=&amp;quot;none&amp;quot;,                         # 9
     axis.text.x=element_text(angle=45)) +              # 10
   ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)          # 11&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can make the black line for Monroe County ‘pop’ a bit more too. Let’s change the opacity of the other counties lines. To do this we can set a value, alpha. This takes values 0 to 1 where smaller values are more transparent.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 1
     colour=County_fips, group=County_fips))+            # 2
@@ -154,31 +154,23 @@ ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
   theme(legend.position=&amp;quot;none&amp;quot;,                         # 7
     axis.text.x=element_text(angle=45)) +               # 8
   ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)           # 9&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;div id=&#34;saving-plots&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Saving Plots&lt;/h3&gt;
-&lt;p&gt;Now we have generated a plot we like, let’s save it.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;))      # 1&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will take the last graphic in memory and save it in the location we specify. We can also tell ggplot to make the plot specific dimensions which I highly recommend doing. If you do not specify dimensions, they can be dependent on the size of your viewer in RStudio.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;),   # 1
-  height = 5, width = 7)                                    # 2&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;scatter-plot-geom_point&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Scatter plot (geom_point)&lt;/h3&gt;
 &lt;p&gt;What if we want points to insteaed of lines for each year?&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
   colour=County_fips, group=County_fips))+       # 2
   geom_point()                                   # 3&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/courses/rcourse/lesson3/lesson3_01_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>pipes</title>
-      <link>/courses/rcourse/lesson2/lesson2_pipes/</link>
+      <link>/courses/rcourse/tidyverse/pipes/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_pipes/</guid>
+      <guid>/courses/rcourse/tidyverse/pipes/</guid>
       <description>
 
 
@@ -194,9 +186,9 @@ ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
     
     <item>
       <title>Writing Loops</title>
-      <link>/courses/rcourse/lesson1/lesson1_01/</link>
+      <link>/courses/rcourse/intro/lesson1_01/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_01/</guid>
+      <guid>/courses/rcourse/intro/lesson1_01/</guid>
       <description>
 
 
@@ -225,9 +217,9 @@ for (i in 1:letters_l){              # 3
     
     <item>
       <title>group_by and summarise</title>
-      <link>/courses/rcourse/lesson2/lesson2_group_byandsummarise/</link>
+      <link>/courses/rcourse/tidyverse/groupbyandsummarise/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_group_byandsummarise/</guid>
+      <guid>/courses/rcourse/tidyverse/groupbyandsummarise/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
@@ -2634,9 +2626,9 @@ StDev
     
     <item>
       <title>String Manipulation</title>
-      <link>/courses/rcourse/lesson1/lesson1_02/</link>
+      <link>/courses/rcourse/intro/lesson1_02/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_02/</guid>
+      <guid>/courses/rcourse/intro/lesson1_02/</guid>
       <description>
 
 
@@ -2679,9 +2671,9 @@ print(str_pad(numbvec, 2, &amp;quot;left&amp;quot;, &amp;quot;0&amp;quot;)  )  #
     
     <item>
       <title>mutate</title>
-      <link>/courses/rcourse/lesson2/lesson2_mutate/</link>
+      <link>/courses/rcourse/tidyverse/mutate/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_mutate/</guid>
+      <guid>/courses/rcourse/tidyverse/mutate/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
@@ -2874,9 +2866,9 @@ unemp_rate_calc
     
     <item>
       <title>Project Organization</title>
-      <link>/courses/rcourse/lesson1/lesson1_03/</link>
+      <link>/courses/rcourse/intro/lesson1_03/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_03/</guid>
+      <guid>/courses/rcourse/intro/lesson1_03/</guid>
       <description>
 
 
@@ -2913,9 +2905,9 @@ source(paste0(workingdir, workingdir.r))  # 2&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Downloading/Reading Data</title>
-      <link>/courses/rcourse/lesson1/lesson1_04/</link>
+      <link>/courses/rcourse/intro/lesson1_04/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_04/</guid>
+      <guid>/courses/rcourse/intro/lesson1_04/</guid>
       <description>
 
 
@@ -2955,9 +2947,9 @@ colnames(bls_unemp_90)&amp;lt;-c(&amp;quot;LAUS_code&amp;quot;, &amp;quot;State_
     
     <item>
       <title>select</title>
-      <link>/courses/rcourse/lesson2/lesson2_select/</link>
+      <link>/courses/rcourse/tidyverse/select/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_select/</guid>
+      <guid>/courses/rcourse/tidyverse/select/</guid>
       <description>
 
 
@@ -2996,9 +2988,9 @@ head(temp)                                              # 4&lt;/code&gt;&lt;/pre
     
     <item>
       <title>Download Loop</title>
-      <link>/courses/rcourse/lesson1/lesson1_05/</link>
+      <link>/courses/rcourse/intro/lesson1_05/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson1/lesson1_05/</guid>
+      <guid>/courses/rcourse/intro/lesson1_05/</guid>
       <description>
 
 
@@ -3045,9 +3037,9 @@ save(unemp_data, file=filename)                                                #
     
     <item>
       <title>Merging Datasets</title>
-      <link>/courses/rcourse/lesson2/lesson2_03/</link>
+      <link>/courses/rcourse/tidyverse/join/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_03/</guid>
+      <guid>/courses/rcourse/tidyverse/join/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
@@ -4676,10 +4668,30 @@ NA
     </item>
     
     <item>
-      <title>xtable</title>
-      <link>/courses/rcourse/lesson2/lesson2_04/</link>
+      <title>ggsave</title>
+      <link>/courses/rcourse/exporting/ggsave/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rcourse/lesson2/lesson2_04/</guid>
+      <guid>/courses/rcourse/exporting/ggsave/</guid>
+      <description>
+
+
+&lt;div id=&#34;saving-plots&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Saving Plots&lt;/h3&gt;
+&lt;p&gt;See ggplot section in the tidyverse section previously to learn how to generate a plot. Once we have generated a plot we like, let’s save it.&lt;/p&gt;
+&lt;p&gt;To do this we will use the ggsave command.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;))      # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will take the last graphic in memory and save it in the location we specify. We can also tell ggplot to make the plot specific dimensions which I highly recommend doing. If you do not specify dimensions, they can be dependent on the size of your viewer in RStudio.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(file=paste0(folder_figures, &amp;quot;/indiana_unemp.png&amp;quot;),   # 1
+  height = 5, width = 7)                                    # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>xtable</title>
+      <link>/courses/rcourse/exporting/xtable/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/exporting/xtable/</guid>
       <description>
 
 
@@ -4700,7 +4712,7 @@ NA
 &lt;p&gt;Now let’s load in the package xtable. This package allows us to print data.frames into a tex table environment. Let’s first inspect the output for just running the base function with minimal options.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  xtable(indiana_laborforce)  # 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## % latex table generated in R 3.6.3 by xtable 1.8-4 package
-## % Mon Feb 08 20:20:30 2021
+## % Fri Apr 02 11:12:03 2021
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rlrrrrrrrrr}

@@ -1,6 +1,6 @@
 ---
 # Course title, summary, and position.
-linktitle: "Basic R for Econ"
+linktitle: "R for Econ"
 summary: These notes were designed to assist in lectures given at IU-Bloomington for graduate students. The goal of the lectures and notes are to give graduate students a very prelimenary introduction into coding/working with data in R. Lectures given Spring 2021.
 weight: 1
 

@@ -1,0 +1,4382 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidyverse | Joseph M. Westenberg</title>
+    <link>/courses/rcourse/tidyverse/</link>
+      <atom:link href="/courses/rcourse/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tidyverse</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
+      <title>Tidyverse</title>
+      <link>/courses/rcourse/tidyverse/</link>
+    </image>
+    
+    <item>
+      <title>ggplot</title>
+      <link>/courses/rcourse/tidyverse/ggplot/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/ggplot/</guid>
+      <description>
+
+
+&lt;p&gt;In this lesson we will be plotting the data gathered in previous lessons. ggplot2 is a very popular package for plotting and is now included as part of the tidyverse package. It allows us to make many different kinds of plots and customize them. As it is so popular there are many guides for it. &lt;a href=&#34;https://ggplot2.tidyverse.org/&#34;&gt;Tidyverse’s website&lt;/a&gt; summarizes some very useful resources.&lt;/p&gt;
+&lt;p&gt;As ggplot2 has so many options, we will just be barely skimming the surface in this introduction. Let’s start with a minimal command. First let’s load in ggplot2 filter our data down into just Indiana.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)                                    # 1
+                                                    # 2
+indiana &amp;lt;- unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot;)  # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line()                                    # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Line #1: Tells ggplot we will be using the data.frame indiana. aes is short for aesthetics. This is where we tell ggplot how to map our data into the plots. Here I want ggplot to plot Year on the x-axis, Unemp_rate on the y-axis.&lt;/li&gt;
+&lt;li&gt;Line #2: A continuation of the aesthetic mapping, his line is saying plot separately for each County_fips separately, giving them a different color.&lt;/li&gt;
+&lt;li&gt;Line #3: Tells ggplot to plot the data as lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;First thing after this plot, the legend is excessive. Let’s just suppress it for now. To do this we can define the legend.position in theme as none. The theme command allows for a lot of customization with the plot. If you want to see all options &lt;a href=&#34;https://ggplot2.tidyverse.org/reference/theme.html&#34;&gt;click here.&lt;/a&gt; Let’s also change the thickness of the lines, we can do this with the alpha argument.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line(size=0.3)+                           # 3
+  theme(legend.position=&amp;quot;none&amp;quot;)                  # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This already is looking a lot better. But can we do something about the labels on the x axis, they are overlaying on each other. We could make the text smaller but then it would be difficult to see, so let’s just rotate them. Also let’s make the y-axis name a bit more meaningful.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+    colour=County_fips, group=County_fips))+     # 2
+  geom_line(size=0.3)+                           # 3
+  theme(legend.position=&amp;quot;none&amp;quot;,                  # 4
+    axis.text.x=element_text(angle=45)) +        # 5
+  ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)    # 6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now we’re getting somewhere! But what if we want to emphasize the county Bloomington is in, Monroe County?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;monroecty&amp;lt;-indiana %&amp;gt;% filter(County_fips==&amp;quot;105&amp;quot;)       # 1
+                                                        # 2
+ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 3
+    colour=County_fips, group=County_fips))+            # 4
+  geom_line(size=0.3)+                                  # 5
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate,   # 6
+    colour=County_fips, group=1),                       # 7
+    size=0.6, colour=&amp;#39;black&amp;#39;) +                         # 8
+  theme(legend.position=&amp;quot;none&amp;quot;,                         # 9
+    axis.text.x=element_text(angle=45)) +              # 10
+  ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)          # 11&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can make the black line for Monroe County ‘pop’ a bit more too. Let’s change the opacity of the other counties lines. To do this we can set a value, alpha. This takes values 0 to 1 where smaller values are more transparent.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,          # 1
+    colour=County_fips, group=County_fips))+            # 2
+  geom_line(size=0.3, alpha=0.5)+                       # 3
+  geom_line(data=monroecty, aes(x=Year, y=Unemp_rate,   # 4
+    colour=County_fips, group=1),                       # 5
+    size=0.6, colour=&amp;#39;black&amp;#39;) +                         # 6
+  theme(legend.position=&amp;quot;none&amp;quot;,                         # 7
+    axis.text.x=element_text(angle=45)) +               # 8
+  ylab(&amp;#39;Indiana Unemployment Rate by County&amp;#39;)           # 9&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;scatter-plot-geom_point&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Scatter plot (geom_point)&lt;/h3&gt;
+&lt;p&gt;What if we want points to insteaed of lines for each year?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=indiana, aes(x=Year, y=Unemp_rate,   # 1
+  colour=County_fips, group=County_fips))+       # 2
+  geom_point()                                   # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/courses/rcourse/tidyverse/ggplot_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>pipes</title>
+      <link>/courses/rcourse/tidyverse/pipes/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/pipes/</guid>
+      <description>
+
+
+&lt;div id=&#34;pipe-operator-and-filtering-on-specific-values&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Pipe Operator and Filtering on Specific Values&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indiana&amp;lt;-                                    # 1
+    unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What is going on in this line of code? Let’s start with the second line. The operator %&amp;gt;% is called a pipe. This comes from a package called magittr which is included within tidyverse. Pipes are very handy for neatly writing longer sequences of code. Here we begin with a pretty simple example. We can think of pipes as saying “then”. That is it takes the argument before it and uses it as input in the following command. Here we are using a filter command, so we are saying take our data.frame county_data, then filter or “give us” the values where State_fips is equal to “18” (this is fips code for Indiana. Go Hoosiers!). So in summary we are just filtering out indiana data and saving it as a new data frame (this is line 1). Note: this operation does NOT impact county_data, the only way we ‘over write’ a data frame is to explicitly tell it to. For example the following WOULD overwrite county_data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unemp_data&amp;lt;-unemp_data %&amp;gt;% filter(State_fips==&amp;quot;18&amp;quot;)  # 1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>group_by and summarise</title>
+      <link>/courses/rcourse/tidyverse/groupbyandsummarise/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/groupbyandsummarise/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;p&gt;Our next chunk of code gets a bit more complex, let’s take it peice by peice though.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  indiana %&amp;gt;% group_by(Year) %&amp;gt;%          # 1
+    summarise(Average=mean(Labor_force))  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s again take it from the end and work our ways backwards through it. The 3rd line above is calculating a new variable within a group that is called ‘Average’. The group (line 2) that we are calculating within is each Year for our Indiana data.frame. That is this snippet of code will give us one value back for each year, the average Labor Force level across Indiana’s counties.&lt;/p&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:180px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Year
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Average
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30593.65
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30357.00
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1992
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31058.60
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1993
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32046.84
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1994
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33308.01
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1995
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34078.00
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1996
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33800.80
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1997
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33919.72
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1998
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33947.47
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1999
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33965.91
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33982.50
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34140.32
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2002
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34469.34
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34597.76
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34432.72
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34841.75
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2006
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35164.35
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2007
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34866.21
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2008
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35131.49
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2009
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34717.45
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2010
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34512.97
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2011
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34586.91
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2012
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34454.88
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2013
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34656.59
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2014
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35052.00
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2015
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35508.30
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2016
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36178.11
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2017
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36243.96
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2018
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36756.59
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2019
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36819.25
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;This group_by command paired with summarise is quite useful. For example going back to our original data.frame, county_data. Suppose we wanted to do what we just did but for all states. That is calculate within each state and year combination. With the group_by command this is quite simple! (I print the first 100 lines of output below)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unemp_data %&amp;gt;%                          # 1
+  group_by(Year, State_fips) %&amp;gt;%        # 2
+  summarise(Average=mean(Labor_force))  # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` has grouped output by &amp;#39;Year&amp;#39;. You can override using the `.groups` argument.&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:290px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Year
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Average
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+28468.343
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10323.923
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+119079.067
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15091.147
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+261007.414
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27557.641
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+227471.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+120074.667
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+328924.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+96480.269
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20653.579
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+137730.500
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11193.045
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58304.049
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30593.652
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14664.212
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12119.305
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14619.667
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+29216.547
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39563.625
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+107919.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+229027.357
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+55509.072
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27573.690
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14438.854
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22737.852
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7198.929
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8871.215
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39407.176
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+62009.100
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+193117.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+21630.061
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+142149.565
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34765.130
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5985.226
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+61586.670
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19786.338
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41408.833
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+86992.045
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+105072.600
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+37903.326
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5260.303
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25207.768
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33932.858
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+28352.138
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+21768.214
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+24452.541
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+64751.974
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+54
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13857.600
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35970.542
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+56
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10259.348
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14517.090
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+28665.134
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10626.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+120334.200
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15060.213
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+260801.552
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+28035.766
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+230137.750
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+120571.333
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+321433.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+97499.104
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20619.044
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+142897.250
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11547.432
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58277.431
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30357.000
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14896.960
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12190.105
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14689.508
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+29804.094
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+40318.625
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+109023.333
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+228211.357
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+55369.482
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27903.586
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14439.512
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+23000.835
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7247.179
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8992.527
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41338.118
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+61429.900
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+193610.571
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+21974.485
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+140985.613
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35380.200
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5947.509
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+61726.409
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19575.922
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+42135.556
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+87390.030
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+103603.400
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+38234.348
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5303.182
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25407.611
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34512.854
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+29390.414
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+21683.857
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25107.677
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65281.667
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Average is just one statistic we may want to calculate, how about percentiles, minimum, maximum, standard deviation. our summarise command will accept more than one argument, we just have to separate by a comma. Let’s also save this as a new data.frame for use in future lessons.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indiana_laborforce&amp;lt;-                       # 1
+  indiana %&amp;gt;% group_by(Year) %&amp;gt;%           # 2
+  summarise(Min=min(Labor_force),          # 3
+    p10th=quantile(Labor_force, c(0.1)),   # 4
+    p25th=quantile(Labor_force, c(0.25)),  # 5
+    p50th=quantile(Labor_force, c(0.5)),   # 6
+    p75th=quantile(Labor_force, c(0.75)),  # 7
+    p90th=quantile(Labor_force, c(0.9)),   # 8
+    Max=max(Labor_force),                  # 9
+    Average=mean(Labor_force),            # 10
+    StDev=sd(Labor_force))                # 11&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Year
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Min
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+p10th
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+p25th
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+p50th
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+p75th
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+p90th
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Max
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Average
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+StDev
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1990
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2629
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6639.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9617.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14858.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30089.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+60784.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+424053
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30593.65
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52989.19
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2541
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6380.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9480.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14713.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30131.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+62309.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+421789
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30357.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52670.08
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1992
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2550
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6284.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9615.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15169.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31117.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63623.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+429239
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31058.60
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+53551.02
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1993
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2607
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6200.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10037.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15652.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32034.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+64549.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+438377
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32046.84
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+54683.97
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1994
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2681
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6453.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10480.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16472.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33808.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+66506.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+453457
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33308.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56427.35
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1995
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2714
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6543.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10994.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16648.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34588.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+67364.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+459603
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34078.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57219.27
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1996
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2724
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6522.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10827.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16551.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34597.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+66487.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+453728
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33800.80
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56670.37
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1997
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2698
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6585.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10966.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16671.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34786.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+66195.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+453928
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33919.72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56870.28
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1998
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2701
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6629.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11008.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16660.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34150.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65887.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+452412
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33947.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56827.82
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1999
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2691
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6496.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10986.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16958.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33968.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65196.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+448732
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33965.91
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56434.89
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2985
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7053.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10816.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16984.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34996.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63718.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+455135
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33982.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+56818.02
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2982
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7085.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10709.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17127.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34674.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+64832.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+459505
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34140.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57318.59
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2002
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3051
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7040.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10802.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17244.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34974.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+66572.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+462330
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34469.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57807.67
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3092
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6941.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10709.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17199.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34514.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+67751.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+464331
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34597.76
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58056.22
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3109
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6815.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10547.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17083.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33431.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+68476.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+459140
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34432.72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57583.09
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3152
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7075.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10702.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17357.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33606.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+69985.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+459492
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34841.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57925.42
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2006
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3107
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6883.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10620.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17326.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34554.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+72792.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+461468
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35164.35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58484.53
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2007
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3026
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6816.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10447.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16881.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34304.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+73128.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+460046
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34866.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58342.88
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2008
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3044
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6816.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10488.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16673.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34065.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+75072.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+463200
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35131.49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58819.13
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2009
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3088
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6758.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10434.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16452.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33700.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+74434.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+457524
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34717.45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58083.80
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2010
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3263
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6440.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10308.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16622.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33921.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+74406.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+452836
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34512.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+57806.16
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2011
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3210
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6459.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10184.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16630.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33804.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+75620.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+456011
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34586.91
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58199.53
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2012
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3181
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6336.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10058.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16453.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32924.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+76458.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+458377
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34454.88
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58388.80
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2013
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3165
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6325.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9900.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16289.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33053.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+78149.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+463346
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+34656.59
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58983.65
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2014
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3216
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6401.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9851.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16524.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33215.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+80113.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+467169
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35052.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+59579.47
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2015
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3178
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6341.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9924.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+16908.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33960.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+82327.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+472330
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35508.30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+60275.44
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2016
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3226
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6444.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9930.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17093.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35149.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+85223.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+481434
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36178.11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+61517.07
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2017
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3153
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6512.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9783.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17119.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35516.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+85487.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+483607
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36243.96
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+61840.36
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2018
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3189
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6561.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9943.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17334.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36211.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+86905.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+488698
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36756.59
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+62659.34
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2019
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3201
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6615.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9812.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17243.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36470.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+87146.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+492967
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+36819.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63114.77
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>mutate</title>
+      <link>/courses/rcourse/tidyverse/mutate/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/mutate/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;p&gt;How about if we don’t want to calculate summary statistics within a group, but just want to calculate a new variable from each observation? Consider if we had unemployed and labor force levels but did not have unemployment rate, how could we go about calculating it with mutate?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;indiana&amp;lt;-                                                                # 1
+  indiana %&amp;gt;%                                                            # 2
+  mutate(unemp_rate_calc=round((Unemployed/Labor_force)*100, digits=1))  # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note since we are defining our new data frame as indiana, the one we are manipulating, we are in this case overwriting the indiana data.frame. Since the unemployment rate in our file was listed as percent and rounded to the nearest tenth, I did the same for our calculated. (digits=1 means one decimal place)&lt;/p&gt;
+&lt;p&gt;Now let’s compare the first 20 rows of the given unemployment rate with the one we just calculated.&lt;/p&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:280px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;position: sticky; top:0; background-color: #FFFFFF;&#34;&gt;
+unemp_rate_calc
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.5
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.1
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.8
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.4
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.2
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.4
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.5
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.1
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.8
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.9
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.0
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.6
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.0
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.2
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4.2
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6.0
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.6
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.2
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.5
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>select</title>
+      <link>/courses/rcourse/tidyverse/select/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/select/</guid>
+      <description>
+
+
+&lt;p&gt;How can we go about dropping or keeping certain variables?&lt;/p&gt;
+&lt;p&gt;Say we wanted to drop the unemp_rate_calc, Labor_force, and Employed?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;temp&amp;lt;-                                                 # 1
+  indiana %&amp;gt;%                                          # 2
+  select(-c(unemp_rate_calc, Labor_force,  Employed))  # 3
+head(temp)                                             # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 7
+##   LAUS_code    State_fips County_fips County_name    Year  Unemployed Unemp_rate
+##   &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;
+## 1 CN180010000~ 18         001         Adams County,~ 1990         998        6.5
+## 2 CN180030000~ 18         003         Allen County,~ 1990        8317        5.1
+## 3 CN180050000~ 18         005         Bartholomew C~ 1990        1632        4.8
+## 4 CN180070000~ 18         007         Benton County~ 1990         156        3.4
+## 5 CN180090000~ 18         009         Blackford Cou~ 1990         643        9.2
+## 6 CN180110000~ 18         011         Boone County,~ 1990         483        2.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now what if we wanted to keep just State_fips, County_fips, Year, and Unemp_rate?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;temp&amp;lt;-                                                  # 1
+  indiana %&amp;gt;%                                           # 2
+  select(c(State_fips, County_fips, Year, Unemp_rate))  # 3
+head(temp)                                              # 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
+##   State_fips County_fips Year  Unemp_rate
+##   &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;      &amp;lt;dbl&amp;gt;
+## 1 18         001         1990         6.5
+## 2 18         003         1990         5.1
+## 3 18         005         1990         4.8
+## 4 18         007         1990         3.4
+## 5 18         009         1990         9.2
+## 6 18         011         1990         2.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That is if we include the “-” before our variables, we are telling dplyr through our select argument to drop the variables we list. While if we don’t have the “-”, we are telling dplyr to keep only these variables.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Merging Datasets</title>
+      <link>/courses/rcourse/tidyverse/join/</link>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/courses/rcourse/tidyverse/join/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;p&gt;What if we have 2 data sets, both county level. How could we combine them?&lt;/p&gt;
+&lt;div id=&#34;poverty-estimates&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Poverty Estimates&lt;/h3&gt;
+&lt;p&gt;We will be merging poverty estimates for the US counties in 2019. A table prepared by the USDA can be found on &lt;a href=&#34;https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/&#34;&gt;their website here.&lt;/a&gt; Let’s download this and put it into our original_data folder. Now let’s open it and see what the data looks like. One of the first things we can notice is the first 2 lines, United States and Alabama. That is there is county and state level observations in addition to the county level ones. We need to keep this in mind before we merge with our unemployment data.&lt;/p&gt;
+&lt;p&gt;Try to figure out how to read this data into R by yourself. If you need to review, go back to &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/&#34;&gt;Downloading/Reading Data&lt;/a&gt;. Remember using R Studio to assist with this is probably the simplest way until we get very comfortable with the commands.&lt;/p&gt;
+&lt;p&gt;Here is the command I use for it:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;PovertyEstimates &amp;lt;-                                             # 1
+  read_excel(paste0(folder_raw_data, &amp;quot;/PovertyEstimates.xls&amp;quot;),  # 2
+  skip = 4)                                                     # 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Make sure we also have our county unemployment data read in. We can observe both of these data.frames now. The way I would clean this data is the following (of course depends on the question/results you are trying to obtain):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;unemployment data:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;restrict to 2019 data (as our other county data is just 2019)&lt;/li&gt;
+&lt;li&gt;Drop Year variable (as we only have one year now)&lt;/li&gt;
+&lt;li&gt;Drop Puerto Rico (State FIPS 72)&lt;/li&gt;
+&lt;li&gt;combine state_fips and county_fips into a FIPStxt variable (this is a variable in our poverty data which we will later be using as an ID to merge data on.)&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;poverty data:
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;filter out state/country level observations, leaving just county level.&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here is the code I use for this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unem_2019&amp;lt;-county_data %&amp;gt;%                                                            # 1
+  filter(Year==2019, State_fips!=72) %&amp;gt;% #restrict sample to only year 2019, drop PR  # 2
+  select(-Year) %&amp;gt;% #drop the variable Year                                           # 3
+  mutate(FIPStxt=paste0(State_fips, County_fips)) #Create variable to merge on        # 4
+                                                                                      # 5
+pov_2019 &amp;lt;- PovertyEstimates %&amp;gt;%                                                      # 6
+  filter(substr(FIPStxt, str_length(FIPStxt)-2, str_length(FIPStxt))!=&amp;quot;000&amp;quot;)          # 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now if we observe both data frames we are left with what we want to merge. We have defined a variable FIPStxt which we would like to join observations on. That is for a given FIPStxt ID in our unemployment data, we would like to find the row with that FIPStxt ID in our poverty data, then add the variables in the poverty data to our unemployment data. Then do this for all iterations of our FIPStxt ID.&lt;/p&gt;
+&lt;p&gt;There are join commands for this in the dplyr package. The clearest join command is full_join. This matches data frames based on common variable names (or defined variable names to match on.) I print the first 3 rows below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clean_full&amp;lt;-                         # 1
+  unem_2019 %&amp;gt;% full_join(pov_2019)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26172
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25458
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+714
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6723
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7929
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2040
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1472
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2608
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1376
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+902
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1850
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58233
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63949
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+97328
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+94675
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2653
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22360
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+18541
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26179
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6323
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4521
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8125
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4641
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3295
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5987
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+59871
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+54593
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65149
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8537
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8213
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+324
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5909
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4787
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7031
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2050
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1560
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2540
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1468
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1114
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+49.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35972
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+40122
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;left_join&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;left_join&lt;/h3&gt;
+&lt;p&gt;While the above full_join command is probably the ‘safest’ route since it prints all of the variables and rows of both data frames, knowing more about other joins can save us some time.&lt;/p&gt;
+&lt;p&gt;For example, consider above when we first loaded in our poverty data. It had observations at state and country wide levels in addition to the county level data we wanted. We would ideally want a command that took in the county unemployment data, matched the poverty data based on FIPStxt, and then just exclude any extras from the poverty data. We can do this with left (or right) join.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unclean_left&amp;lt;-                               # 1
+  unem_2019 %&amp;gt;% left_join(PovertyEstimates)  # 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26172
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+25458
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+714
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Autauga County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6723
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7929
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2040
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1472
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2608
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1376
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+902
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1850
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+19.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+58233
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+52517
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+63949
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+97328
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+94675
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2653
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Baldwin County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22360
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+18541
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+26179
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6323
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4521
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8125
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4641
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3295
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5987
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+13.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+17.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+59871
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+54593
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+65149
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN0100500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County, AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8537
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8213
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+324
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+01005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+AL
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Barbour County
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5909
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4787
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7031
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+22.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+32.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2050
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1560
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2540
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+41.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1468
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1114
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+39.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+30.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+49.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+35972
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+31822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+40122
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;In this case we are starting with our unemployment data, and then telling R to match all possible values by our common variable (FIPStxt here), then we don’t care about any poverty estimate observations that can’t be matched. However what about unemployment observations that can’t be? We simply fill these values with NA’s. For example, if we DON’T exclude Puerto Rico, it would be in our unemployment data, but not in our poverty data. Let’s see what happens:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unem_2019_pr&amp;lt;-county_data %&amp;gt;%                      # 1
+  filter(Year==2019) %&amp;gt;%                           # 2
+  select(-Year) %&amp;gt;%                                # 3
+  mutate(FIPStxt=paste0(State_fips, County_fips))  # 4
+pr&amp;lt;-                                               # 5
+  unem_2019_pr %&amp;gt;%                                 # 6
+  left_join(PovertyEstimates) %&amp;gt;%                  # 7
+  filter(State_fips==72)                           # 8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;FIPStxt&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; &#34;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+LAUS_code
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_fips
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+County_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Labor_force
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Employed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemployed
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Unemp_rate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+FIPStxt
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Stabr
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Area_name
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2003
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Rural-urban_Continuum_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Urban_Influence_Code_2013
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOVALL_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBALLP_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV017_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB017P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV517_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB517P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MEDHHINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UBINC_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+POV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+PCTPOV04_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90LB04P_2019
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+CI90UB04P_2019
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200100000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Adjuntas Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4115
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3485
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+630
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+15.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72001
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200300000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Aguada Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+11743
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10553
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1190
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72003
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+CN7200500000000
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Aguadilla Municipio, PR
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+14350
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+12881
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1469
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72005
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;additional-resources&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Additional Resources&lt;/h3&gt;
+&lt;p&gt;In addition to full and left join shown here, there is also inner join and right join. Details of these can be &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34;&gt;found here.&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
