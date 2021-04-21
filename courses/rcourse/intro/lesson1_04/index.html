@@ -1073,7 +1073,7 @@
 
 <div id="downloading-within-r" class="section level2">
 <h2>Downloading within R</h2>
-<p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/">Project Organization</a></p>
+<p>We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in <a href="https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_03/">Project Organization</a></p>
 <pre class="r"><code>download.file(&quot;https://www.bls.gov/lau/laucnty90.xlsx&quot;,     # 1
   paste0(folder_raw_data, &quot;bls_unemp_90.xlsx&quot;), mode=&quot;wb&quot;)  # 2</code></pre>
 </div>

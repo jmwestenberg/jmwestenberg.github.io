@@ -2911,7 +2911,7 @@ source(paste0(workingdir, workingdir.r))  # 2&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div id=&#34;downloading-within-r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading within R&lt;/h2&gt;
-&lt;p&gt;We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/&#34;&gt;Project Organization&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We can use R to with a direct link to download. The first argument the download.file() command takes that we will use is the url of the xslx document and the second argument is the destination it will be saved. The last argument is basically telling R that the excel docs are not plain text. (Don’t forget to have workingdir defined as we did in &lt;a href=&#34;https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_03/&#34;&gt;Project Organization&lt;/a&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(&amp;quot;https://www.bls.gov/lau/laucnty90.xlsx&amp;quot;,     # 1
   paste0(folder_raw_data, &amp;quot;bls_unemp_90.xlsx&amp;quot;), mode=&amp;quot;wb&amp;quot;)  # 2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
