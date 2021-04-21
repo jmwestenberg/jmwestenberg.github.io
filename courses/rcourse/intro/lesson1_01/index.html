@@ -34,7 +34,7 @@
   
     
   
-  <meta name="description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes).">
+  <meta name="description" content="letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # 1letters_l&lt;-length(letters) # 2for (i in 1:letters_l){ # 3print(letters[i]) # 4} # 5## [1] &quot;a&quot;## [1] &quot;b&quot;## [1] &quot;c&quot;## [1] &quot;d&quot;## [1] &quot;e&quot;Going line by line:">
 
   
   <link rel="alternate" hreflang="en-us" href="/courses/rcourse/intro/lesson1_01/">
@@ -324,7 +324,7 @@
   <meta property="og:site_name" content="Joseph M. Westenberg">
   <meta property="og:url" content="/courses/rcourse/intro/lesson1_01/">
   <meta property="og:title" content="Writing Loops | Joseph M. Westenberg">
-  <meta property="og:description" content="We will be using county level employment/labor force data from BLS. We will be using the Labor force data by county, yearly annual averages. There is data from 1990-2019 (as of writing these notes)."><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
+  <meta property="og:description" content="letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # 1letters_l&lt;-length(letters) # 2for (i in 1:letters_l){ # 3print(letters[i]) # 4} # 5## [1] &quot;a&quot;## [1] &quot;b&quot;## [1] &quot;c&quot;## [1] &quot;d&quot;## [1] &quot;e&quot;Going line by line:"><meta property="og:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -845,7 +845,7 @@
 
     
       <div class="docs-toc-item">
-        <a class="docs-toc-link " href="/courses/rcourse/">R for Econ</a>
+        <a class="docs-toc-link " href="/courses/rcourse/">Intro to Data Science</a>
     
       
         <ul class="nav docs-sidenav">
@@ -921,11 +921,11 @@
       
 
 
+  <li class=""><a href="/courses/rcourse/tidyverse/pipes/">pipes and filtering</a></li>
+
+
+
   <li class=""><a href="/courses/rcourse/tidyverse/ggplot/">ggplot</a></li>
-
-
-
-  <li class=""><a href="/courses/rcourse/tidyverse/pipes/">pipes</a></li>
 
 
 
@@ -1041,7 +1041,7 @@
   <li class="breadcrumb-item">
     <a href="/courses/rcourse/">
       
-        R for Econ
+        Intro to Data Science
       
     </a>
   </li>
@@ -1071,8 +1071,6 @@
             
 
 
-<p>We will be using <a href="https://www.bls.gov/lau/home.htm">county level employment/labor force data from BLS</a>. We will be using the <strong>Labor force data by county, yearly annual averages</strong>. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.</p>
-<p>We could download these all one by one, or we could write a simple loop to read them in for us. To do this let’s first look at a very simple loop structure:</p>
 <pre class="r numCode R numberLines"><code>letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)  # 1
 letters_l&lt;-length(letters)           # 2
 for (i in 1:letters_l){              # 3

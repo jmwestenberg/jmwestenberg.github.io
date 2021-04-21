@@ -30,7 +30,9 @@ local({
   })
 })
 ```
+In the next sections we will be using [county level employment/labor force data from BLS](https://www.bls.gov/lau/home.htm) to learn more about working with actual data. We will be using the **Labor force data by county, yearly annual averages**. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.
 
+We can use a loop to download/clean our data such as this:
 
 ```{r eval=FALSE}
 require(stringr)
@@ -55,20 +57,20 @@ filename<-paste0(folder_processed_data, "/unemp_data.rda")
 save(unemp_data, file=filename)
 ```
 
-First let's think what we are trying to achieve. The links for the downloads are all in the form of https://www.bls.gov/lau/laucntyZZ.xlsx, where ZZ is two digits representing the year. These ZZ values run from "90"to "99" for years 1990-1999 and "00" to "19" for years 2000-2019.
+To work through this first let's think what we are trying to achieve. The links for the downloads are all in the form of [https://www.bls.gov/lau/laucntyZZ.xlsx](https://www.bls.gov/lau/home.htm), where ZZ is two digits representing the year. These ZZ values run from "90"to "99" for years 1990-1999 and "00" to "19" for years 2000-2019.
 
 Let's work through the above code line by line:
 
 - Lines #1 & #2: load required packages.
 - Line #3: Declare unemp_data will be a data.frame. Right now it is empty, but we will add to it.
 - Line #4: Define a vector with elements 90-99 and 0-19. (Which will correspond to the years that we will pull)
-- Line #5 : We have a vector for years, however if we notice in the url names we need this vector to include a leading 0 in front of the single 'character' digits (ie "01" instead of "1"). But we don't want a leading 0 in front of the double 'character' digits (ie We DON'T want "090"). Go back to the [String Manipulation](http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/) section if you need to refresh on this.
+- Line #5 : We have a vector for years, however if we notice in the url names we need this vector to include a leading 0 in front of the single 'character' digits (ie "01" instead of "1"). But we don't want a leading 0 in front of the double 'character' digits (ie We DON'T want "090"). Go back to the [String Manipulation](https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_02/) section if you need to refresh on this.
 - Line #6 : Calculate the length of years and save as years_l
-- Line #7 : See [String Manipulation](http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_02/) if defining the for loop does not make sense.
-- Line #8 : We are creating the character string for the url for the download link. Since they all take the form of https://www.bls.gov/lau/laucntyZZ.xlsx, we can use one element of our years vector at a time. (See [String Manipulation](http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_03/) for explanation on paste0)
+- Line #7 : See [String Manipulation](https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_02/) if defining the for loop does not make sense.
+- Line #8 : We are creating the character string for the url for the download link. Since they all take the form of https://www.bls.gov/lau/laucntyZZ.xlsx, we can use one element of our years vector at a time. (See [String Manipulation](https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_02/) for explanation on paste0)
 - Line #9 : This is of similar spirit to line #4, but this is defining the path/filename of the excel file we will save. 
-- Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see [Downloading/Reading Data](http://jmwestenberg.github.io/courses/rcourse/lesson1_04/) if unclear.)
-- Lines #11-#16: See [Downloading/Reading Data](http://jmwestenberg.github.io/courses/rcourse/lesson1/lesson1_04/) for a direct explanation.
+- Line #10 : This line is just telling R to download the file at that url, save it to the defined location/name, and to read it as a non-raw text form. (see [Downloading/Reading Data](https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_04/) if unclear.)
+- Lines #11-#16: See [Downloading/Reading Data](https://jmwestenberg.github.io/courses/rcourse/intro/lesson1_04/) for a direct explanation.
 - Line #17: rbind appends data. Hence since all of our data has the same format and has a variable indicating the year, we can simply append.
 - Line #19: Create the filepath (to our processed_data folder) where we will save the file, what the file name and type is.
 - Line #20: save the combined data to the location/name we defined above.

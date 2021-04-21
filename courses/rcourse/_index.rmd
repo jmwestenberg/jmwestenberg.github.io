@@ -1,7 +1,7 @@
 ---
 # Course title, summary, and position.
-linktitle: "R for Econ"
-summary: These notes were designed to assist in lectures given at IU-Bloomington for graduate students. The goal of the lectures and notes are to give graduate students a very prelimenary introduction into coding/working with data in R. Lectures given Spring 2021.
+linktitle: "Intro to Data Science"
+summary: These notes were designed to assist in lectures given at IU-Bloomington for graduate students in Economics. The goal of the lectures and notes are to give graduate students a very prelimenary introduction into coding/working with data in R. Lectures given Spring 2021.
 weight: 1
 
 # Page metadata.
@@ -27,7 +27,7 @@ An example of my code for this course is avaialabe on my github repository at <h
 
 The goal of these short courses are to give graduate students a very prelimenary introduction into coding in R. While having an 'instructor' teach you these things may be helpful, in my belief, coding, like math, you have to learn by doing. So I highly encourage following these notes, but then play around with the code. Change things and see how it changes the output. I think this is the best way to learn.
 
-Over the next 3 'sessions' we will be looking into county level unemployment data. The goal will be to provide examples and descriptions of the commands and techniques I have discovered to be most useful while working with data. Specifically the goal is by the end of the 3 sessions you will know how to:
+Over the next 5 'sessions' we will be looking into county level unemployment data. The goal will be to provide examples and descriptions of the commands and techniques I have discovered to be most useful while working with data. Specifically the goal is by the end of the 3 sessions you will know how to:
 
 - download data straight into R
 - read in data (Rda, csv, xlsx, dta)

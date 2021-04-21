@@ -377,8 +377,6 @@ summary {
 </div>
 
 
-<p>We will be using <a href="https://www.bls.gov/lau/home.htm">county level employment/labor force data from BLS</a>. We will be using the <strong>Labor force data by county, yearly annual averages</strong>. There is data from 1990-2019 (as of writing these notes). To start we are going to download this data and then read it into R.</p>
-<p>We could download these all one by one, or we could write a simple loop to read them in for us. To do this let’s first look at a very simple loop structure:</p>
 <pre class="r numCode R numberLines"><code>letters&lt;-c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)  # 1
 letters_l&lt;-length(letters)           # 2
 for (i in 1:letters_l){              # 3

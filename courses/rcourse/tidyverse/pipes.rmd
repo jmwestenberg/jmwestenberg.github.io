@@ -1,6 +1,6 @@
 ---
-title: pipes
-linktitle: pipes
+title: pipes and filtering
+linktitle: pipes and filtering
 toc: false
 type: book
 date: "2021-02-05T00:00:00Z"
@@ -11,9 +11,9 @@ draft: false
 menu:
   rcourse:
     parent: Tidyverse
-    weight: 20
+    weight: 10
 
-weight: 20
+weight: 10
 ---
 
 ```{r, include=FALSE}
