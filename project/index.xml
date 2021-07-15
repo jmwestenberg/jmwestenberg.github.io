@@ -1,27 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects | Joseph M. Westenberg</title>
+    <title>Projects on Joseph M. Westenberg</title>
     <link>/project/</link>
-      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
-    <description>Projects</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Joseph Westenberg 2021</copyright><lastBuildDate>Wed, 23 Dec 2020 00:00:00 +0000</lastBuildDate>
-    <image>
-      <url>/images/icon_huc1be9e4e3ae24305730dfe0ccc5f8623_97775_512x512_fill_lanczos_center_2.png</url>
-      <title>Projects</title>
-      <link>/project/</link>
-    </image>
-    
+    <description>Recent content in Projects on Joseph M. Westenberg</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Section 301 and Politics: Analysis of Tariff Exemptions</title>
-      <link>/project/sect_301/</link>
-      <pubDate>Wed, 23 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>/project/sect_301/</guid>
-      <description>
-
-
-&lt;p&gt;Submitted on 12/23/2020.&lt;/p&gt;
-</description>
+      <title>Introduction to Data Science</title>
+      <link>/project/datasciencebook/</link>
+      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/project/datasciencebook/</guid>
+      <description>An example of the code that is built through the workshops can be found on my GitHub.   More detailed notes as well as executed code can be found in my notes.    The goal of these short workshops is to give graduate students a very prelimenary introduction into coding in R. While having an instructor teach you these things may be helpful, in my belief, coding, like math, you have to learn by doing.</description>
     </item>
     
   </channel>

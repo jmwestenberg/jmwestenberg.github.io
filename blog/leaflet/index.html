@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  
+                           
+     
+
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.85.0" />
+<title>Mapping with Leaflet | Joseph M. Westenberg</title>
+
+
+<meta property="twitter:site" content="@jmwestenberg">
+<meta property="twitter:creator" content="@jmwestenberg">
+
+
+
+
+
+
+
+  
+    
+  
+<meta name="description" content="Simple example of using Leaflet to plot shapefiles.">
+
+
+<meta property="og:site_name" content="Joseph M. Westenberg">
+<meta property="og:title" content="Mapping with Leaflet | Joseph M. Westenberg">
+<meta property="og:description" content="Simple example of using Leaflet to plot shapefiles." />
+<meta property="og:type" content="page" />
+<meta property="og:url" content="/blog/leaflet/" />
+<meta property="og:locale" content="en">
+
+
+
+
+    
+        <meta property="og:image" content="/blog/leaflet/featured.PNG" >
+        <meta property="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="/blog/leaflet/featured.PNG" >
+    
+    
+  <meta itemprop="name" content="Mapping with Leaflet">
+<meta itemprop="description" content="This post assumes a basic knowledge of R.
+Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I was looking into some questions regarding schools and state government. The shapefiles I will be using are the lower and upper legislatures for the state of Wisconsin. The points I will be mapping in the second post of this series will be specific school locations."><meta itemprop="datePublished" content="2021-07-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-07-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1013"><meta itemprop="image" content="/blog/leaflet/featured.PNG">
+<meta itemprop="keywords" content="" />
+  
+  <!--[if IE]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+  <link rel="icon" href="/img/icon.png" type="image/x-icon">
+  
+  
+  <link rel="stylesheet" href="/style.main.min.f8b9f7b9099d008e162ddea585037101ba8a70faece06d1af1b0856d501a9052.css" integrity="sha256-&#43;Ln3uQmdAI4WLd6lhQNxAbqKcPrs4G0a8bCFbVAakFI=" media="screen">
+  
+  
+  <script src="/panelset.min.078a92db9bd3228df502db3d9e0453c3cf3d910abe3f8deca0ad196c7071ad41.js" type="text/javascript"></script>
+  
+  
+  <script src="/main.min.38a0323c5b0bbb611c4874ba2d8fdaba57d20cc2b0d704b30250c235ba8b6d49.js" type="text/javascript"></script>
+</head>
+<body>
+      <div class="grid-container single">
+<header class="site-header pt4 pb2 mb4 bb b--transparent ph5 headroom z-max" role="banner">
+  <nav class="site-nav db dt-l w-100" role="navigation">
+    <a class="site-brand db dtc-l v-mid link no-underline w-100 w-33-l tc tl-l" href="/" title="Home">
+      <img src="/img/icon.png" class="dib db-l h2 w-auto" alt="Joseph M. Westenberg">
+    </a>
+    <div class="site-links db dtc-l v-mid w-100 w-47-l tc tr-l mt3 mt0-l ttu tracked">
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/about/" title="About Joe">About</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/publications/" title="Publications and Working Papers">Research</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 active" href="/blog/" title="Blog">Blog</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/project/" title="Project Portfolio">Projects</a>
+      
+      
+    </div>
+  </nav>
+</header>
+
+<main class="page-main pa4" role="main">
+  <section class="page-content mw7 center">
+    <article class="post-content pa0 ph4-l">
+      <header class="post-header">
+        <h1 class="f1 lh-solid measure-narrow mb3 fw4">Mapping with Leaflet</h1>
+        
+        <p class="f6 measure lh-copy mv1">By Joseph M. Westenberg</p>
+        <p class="f7 db mv0 ttu">July 14, 2021</p>
+
+      
+
+      </header>
+      <section class="post-body pt5 pb4">
+        <script src="/blog/leaflet/index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="/blog/leaflet/index_files/pymjs/pym.v1.js"></script>
+<script src="/blog/leaflet/index_files/widgetframe-binding/widgetframe.js"></script>
+<script src="/blog/leaflet/index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="/blog/leaflet/index_files/pymjs/pym.v1.js"></script>
+<script src="/blog/leaflet/index_files/widgetframe-binding/widgetframe.js"></script>
+<script src="/blog/leaflet/index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="/blog/leaflet/index_files/pymjs/pym.v1.js"></script>
+<script src="/blog/leaflet/index_files/widgetframe-binding/widgetframe.js"></script>
+<p>This post assumes a basic knowledge of R.</p>
+<p>Using leaflet we can map shapefiles and specific points. As an illustrative example I will be using code I wrote earlier this year when I was looking into some questions regarding schools and state government. The shapefiles I will be using are the lower and upper legislatures for the state of Wisconsin. The points I will be mapping in the second post of this series will be specific school locations.Si</p>
+<p>The goal of this post is to explain how to make an interactive map as below. This map allows user interaction: zooming in and out, clicking on areasto show details of that area, removing or adding of layers (top right corner).</p>
+<div id="htmlwidget-1" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-2.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>The main libraries we will be using are 
+<a href="https://cran.r-project.org/web/packages/tigris/tigris.pdf" target="_blank" rel="noopener">tigris</a>
+and 
+<a href="https://cran.r-project.org/web/packages/leaflet/leaflet.pdf" target="_blank" rel="noopener">leaflet</a>.
+Let’s start by loading these packages and then downloading the lower and upper legislative
+district shapefiles via tigris.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#900;font-weight:bold">library</span>(tigris)
+<span style="color:#900;font-weight:bold">library</span>(leaflet)
+WiscoCdUpper<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">state_legislative_districts</span>(state<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;WI&#34;</span>, house <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;upper&#34;</span>, 
+  year<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2013</span>, cb<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">TRUE</span>)
+WiscoCdLower<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">state_legislative_districts</span>(state<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;WI&#34;</span>, house <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;lower&#34;</span>, 
+  year<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2013</span>, cb<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">TRUE</span>)
+centerLNG<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#099">-90</span>
+centerLAT<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#099">44.8</span>
+</code></pre></div><p>The arguments arguments are fairly self explanatory:</p>
+<ul>
+<li><strong>state</strong>: the state that you want to retrieve shapefiles for. Accepts State FIPS or state abbreviation.</li>
+<li><strong>house</strong>: indicates which legislative districts you want. Takes lower or upper as an argument</li>
+<li><strong>year</strong>: the districts that were active in this year</li>
+<li><strong>cb</strong>: an argument for adjusting level of detail. FALSE is default and is the high detail map. TRUE returns a less detailed map.</li>
+</ul>
+<p>The variables centerLNG and centerLAT are longitude and latitude coordinate that I will be using to center my map around.</p>
+<p>The interactive mapping package I use is leaflet, it will allow us to layer different shapefiles
+over a base map.</p>
+<p>I first want to store this information that will be popping up to a vector to feed into leaflet’s
+command. Now within our spatial polygon data frame, we can access the ID of each shape. these
+take the form of SSDDD where SS is a two digit state FIPS code, and DDD is a 3 digit district
+number.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">districtinfo <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#900;font-weight:bold">paste0</span>(<span style="color:#d14">&#34;Lower District: &#34;</span>, <span style="color:#900;font-weight:bold">substr</span>(WiscoCdLower<span style="color:#000;font-weight:bold">$</span>GEOID, <span style="color:#099">3</span>, <span style="color:#099">5</span>))
+mapcolors<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">rainbow</span>(<span style="color:#900;font-weight:bold">length</span>(WiscoCdLower<span style="color:#000;font-weight:bold">$</span>GEOID))
+rnum<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">sample</span>(<span style="color:#900;font-weight:bold">nrow</span>(WiscoCdLower))
+pal <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#900;font-weight:bold">colorFactor</span>(mapcolors[rnum], WiscoCdLower<span style="color:#000;font-weight:bold">$</span>GEOID)
+lowermap<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">leaflet</span>(options <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">leafletOptions</span>(minZoom <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">4</span>)) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addProviderTiles</span>(<span style="color:#d14">&#34;CartoDB.Positron&#34;</span>, group <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;base&#34;</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">setView</span>(centerLNG, centerLAT, zoom <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">6</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">setMaxBounds</span>(<span style="color:#099">-94</span>, <span style="color:#099">41</span>, <span style="color:#099">-85</span>, <span style="color:#099">48</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addPolygons</span>(data <span style="color:#000;font-weight:bold">=</span> WiscoCdLower, color <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;white&#34;</span>, weight <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>,
+    fillColor <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">~</span><span style="color:#900;font-weight:bold">pal</span>(GEOID), fillOpacity <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.5</span>, popup <span style="color:#000;font-weight:bold">=</span> districtinfo, 
+    group <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;Lower&#34;</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addLayersControl</span>(baseGroups <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">c</span>(<span style="color:#d14">&#34;base&#34;</span>), overlayGroups <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">c</span>(<span style="color:#d14">&#34;Lower&#34;</span>))
+</code></pre></div><p>Going line by line:</p>
+<ol>
+<li>Define the text that we want to appear in the information when users click an area of the map</li>
+<li>Define a vector of colors with length equal to the number of districts</li>
+<li>Since our code in line 2 would have similar colors next to each other, I want to shuffle the colors
+to make it look better (more info 
+<a href="https://campus.datacamp.com/courses/machine-learning-with-caret-in-r/regression-models-fitting-them-and-evaluating-their-performance?ex=6" target="_blank" rel="noopener">here</a>)</li>
+<li>Create a dataframe with color information and an id for each district.</li>
+<li>Leaflet conveniently allows for piping. To start the map generation, lets limit users to only be able to zoom out so far.</li>
+<li>This provides a base map where we will lay our other shapes on top of. We can label this so we can refer to
+it later (in line 12).</li>
+<li>This sets the initial view, centered on a latitude and longitude point with a certain initial zoom</li>
+<li>To restrict the user from venturing too far from your area of interest you can restrict the frame of the map.
+To see this, try to pull the map in any direction, you can’t get too far until it bounces you back to a relevant frame.</li>
+<li>Here is where we layer our district shapefile on top of that base map we established in line 6.
+Leaflet recognizes the Spatial Polygon Dataframe as such and knows how to handle it. The color option sets the
+color of the border of the districts and the weight is how thick these borders are.</li>
+<li>Continuing with the district shapefile options. To fill the shapes with different colors,
+we use the colors we generated in lines 2-4. The fillOpacity command allows you to adjust
+how much you can see through the shape. Notice how you can still make out information on
+the base map? That’s because we set this option to less than 1. The popup option is telling
+leaflet we want to see districtinfo for the area we are clicking on in the map.</li>
+<li>We can label this layer as “Lower,” this allows us to refer to it in the layers control below.</li>
+<li>Lastly, this layer control allows us to tell leaflet that we want the “base” to always be
+visible on the map, but we can add/remove “Lower.” To see this in the map below click the icon
+in the upper right corner. Notice how we can uncheck and recheck “Lower?” But we can’t do that
+with the base map.</li>
+</ol>
+<div id="htmlwidget-2" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>We can then add an additional layer to this map with the upper house as well.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">districtinfo <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#900;font-weight:bold">paste0</span>(<span style="color:#d14">&#34;Lower District: &#34;</span>, <span style="color:#900;font-weight:bold">substr</span>(WiscoCdLower<span style="color:#000;font-weight:bold">$</span>GEOID,<span style="color:#099">3</span>,<span style="color:#099">5</span>),
+  <span style="color:#d14">&#34; &lt;br&gt; &#34;</span>, <span style="color:#d14">&#34;Upper District: &#34;</span>, <span style="color:#900;font-weight:bold">substr</span>(WiscoCdUpper<span style="color:#000;font-weight:bold">$</span>GEOID,<span style="color:#099">3</span>,<span style="color:#099">5</span>))
+loweranduppermap<span style="color:#000;font-weight:bold">&lt;-</span><span style="color:#900;font-weight:bold">leaflet</span>(options <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">leafletOptions</span>(minZoom <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">4</span>)) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addProviderTiles</span>(<span style="color:#d14">&#34;CartoDB.Positron&#34;</span>, group <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;base&#34;</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">setView</span>(centerLNG, centerLAT, zoom <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">6</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">setMaxBounds</span>(<span style="color:#099">-94</span>, <span style="color:#099">41</span>, <span style="color:#099">-85</span>, <span style="color:#099">48</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addPolygons</span>(data <span style="color:#000;font-weight:bold">=</span> WiscoCdLower, color <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;white&#34;</span>, weight <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">2</span>,
+    fillColor <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">~</span><span style="color:#900;font-weight:bold">pal</span>(GEOID), fillOpacity <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0.5</span>, 
+    popup <span style="color:#000;font-weight:bold">=</span> districtinfo, group <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;Lower&#34;</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addPolygons</span>(data <span style="color:#000;font-weight:bold">=</span> WiscoCdUpper, weight <span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>, opacity <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">1</span>,
+    color <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;black&#34;</span>, fill <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">FALSE</span>, group <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;Upper&#34;</span>) <span style="color:#000;font-weight:bold">%&gt;%</span>
+  <span style="color:#900;font-weight:bold">addLayersControl</span>(baseGroups <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">c</span>(<span style="color:#d14">&#34;base&#34;</span>), 
+    overlayGroups <span style="color:#000;font-weight:bold">=</span> <span style="color:#900;font-weight:bold">c</span>(<span style="color:#d14">&#34;Upper&#34;</span>, <span style="color:#d14">&#34;Lower&#34;</span>))
+</code></pre></div><p>There are only a few changes we needed to make. In line 1 and 2 we define our pop up
+to show information on both the lower and upper legislative districts. In lines 10 and 11
+we add in the upper house as an additional layer. Setting fill to false we can just have the
+boundary of the upper legislative districts, this will allow us to see through to the lower
+legislative district layer. And lastly in line 12 and 13 we add our upper legislative districts
+into the map. Notice if you open the layer control in the map below (upper right corner), you
+can now check/uncheck both the lower and the upper legislative districts.</p>
+<div id="htmlwidget-3" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-9.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+
+        
+        <details closed class="f6 fw7 input-reset">
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Posted on:</dt>
+    <dd class="fw5 ml0">July 14, 2021</dd>
+  </dl>
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Length:</dt>
+    <dd class="fw5 ml0">5 minute read, 1013 words</dd>
+  </dl>
+  
+  
+  
+  <dl class="f6 lh-copy">
+    <dt class="fw7">See Also:</dt>
+    
+  </dl>
+</details>
+
+      </section>
+      <footer class="post-footer">
+        <div class="post-pagination dt w-100 mt4 mb2">
+  
+  
+  
+  
+    <a class="next dtc pl2 tr v-top fw6"
+    href="/blog/pastgrill/">Past Grill Photos &rarr;</a>
+  
+</div>
+
+      </footer>
+    </article>
+    
+      
+<div class="post-comments pa0 pa4-l mt4">
+  
+  <script src="https://utteranc.es/client.js"
+          repo="jmwestenberg/apero_web"
+          issue-term="pathname"
+          theme="boxy-light"
+          label="comments :crystal_ball:"
+          crossorigin="anonymous"
+          async
+          type="text/javascript">
+  </script>
+  
+</div>
+
+    
+  </section>
+</main>
+<footer class="site-footer pv4 bt b--transparent ph5" role="contentinfo">
+  <nav class="db dt-l w-100">
+    <p class="site-copyright f7 db dtc-l v-mid w-100 w-33-l tc tl-l pv2 pv0-l mv0 lh-copy">
+      &copy; 2021 Joseph M. Westenberg, Bloomington, IN
+      <span class="middot-divider"></span>
+      Made with <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/hugo-apero/" rel="dct:source">Hugo Apéro</a></span>.
+      <br />
+      
+Based on <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/formspree/blogophonic-hugo" rel="dct:source">Blogophonic</a></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://formspree.io" property="cc:attributionName" rel="cc:attributionURL">Formspree</a>.
+    </p>
+    
+    <div class="site-social-links db dtc-l v-mid w-100 w-33-l tc pv2 pv0-l mv0">
+      <div class="social-icon-links" aria-hidden="true">
+  
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://github.com/jmwestenberg" title="github" target="_blank" rel="noopener">
+      <i class="fab fa-github fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="http://orcid.org/0000-0002-1368-7038" title="orcid" target="_blank" rel="noopener">
+      <i class="ai ai-orcid fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://scholar.google.com/citations?user=-QlG0yMAAAAJ&amp;hl=en#" title="google-scholar" target="_blank" rel="noopener">
+      <i class="ai ai-google-scholar fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://www.linkedin.com/in/westenbergj" title="linkedin" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://twitter.com/jmwestenberg" title="twitter" target="_blank" rel="noopener">
+      <i class="fab fa-twitter fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="mailto:jwesten@iu.edu" title="envelope" >
+      <i class="fas fa-envelope fa-lg fa-fw"></i>
+    </a>
+  
+</div>
+
+    </div>
+    
+    <div class="site-links f6 db dtc-l v-mid w-100 w-67-l tc tr-l pv2 pv0-l mv0">
+      
+      <a class="dib pv1 ph2 link" href="/contact/" title="Contact form">Contact</a>
+      
+    </div>
+  </nav>
+</footer>
+
+      </div>
+    </body>
+</html>
