@@ -29,7 +29,7 @@
     <loc>/categories/hobbies/</loc>
     <lastmod>2021-07-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/project/datasciencebook/</loc>
+    <loc>/teaching/datasciencebook/</loc>
     <lastmod>2021-07-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/blog/</loc>
@@ -44,9 +44,6 @@
     <loc>/blog/pastgrill/</loc>
     <lastmod>2021-07-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/project/</loc>
-    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/r/</loc>
     <lastmod>2021-07-14T00:00:00+00:00</lastmod>
   </url><url>
@@ -55,6 +52,18 @@
   </url><url>
     <loc>/tags/</loc>
     <lastmod>2021-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/teaching/</loc>
+    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/teaching/interecon/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/syllabus/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/syllabus/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/contact/</loc>
     <lastmod>2019-02-25T13:38:41-06:00</lastmod>

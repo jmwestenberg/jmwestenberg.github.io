@@ -9,11 +9,25 @@
     <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/courses/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to Data Science</title>
-      <link>/project/datasciencebook/</link>
+      <link>/teaching/datasciencebook/</link>
       <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>/project/datasciencebook/</guid>
+      <guid>/teaching/datasciencebook/</guid>
       <description>An example of the code that is built through the workshops can be found on my GitHub.   More detailed notes as well as executed code can be found in my notes.    The goal of these short workshops is to give graduate students a very prelimenary introduction into coding in R. While having an instructor teach you these things may be helpful, in my belief, coding, like math, you have to learn by doing.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to International Economics</title>
+      <link>/teaching/interecon/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/interecon/</guid>
+      <description>Instructor: Joseph Westenberg (jwesten@iu.edu)
+Office Hours: T 1:00 - 3:00 PM (or by appointment) in Wylie Hall 244
+Class: T &amp;amp; Th 4:00 - 5:15 PM in Ballantine Hall 342
+Prerequisites: Intro to Microeconomics (E201) OR Intro to Microeconomics: Honors (S201)
+Text: James Gerber&amp;rsquo;s &amp;ldquo;International Economics&amp;rdquo;, Seventh Edition
+Course Description     This course provides a moderately in-depth look at some of the major topics in international economics that are quintessential for the economics major.</description>
     </item>
     
   </channel>
