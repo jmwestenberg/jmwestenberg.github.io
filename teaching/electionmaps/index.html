@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  
+                           
+     
+
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.85.0" />
+<title>Election Maps | Joseph M. Westenberg</title>
+
+
+<meta property="twitter:site" content="@jmwestenberg">
+<meta property="twitter:creator" content="@jmwestenberg">
+
+
+
+
+
+
+
+  
+    
+  
+<meta name="description" content="GIS Maps">
+
+
+<meta property="og:site_name" content="Joseph M. Westenberg">
+<meta property="og:title" content="Election Maps | Joseph M. Westenberg">
+<meta property="og:description" content="GIS Maps" />
+<meta property="og:type" content="page" />
+<meta property="og:url" content="/teaching/electionmaps/" />
+<meta property="og:locale" content="en">
+
+
+
+
+    
+        <meta property="og:image" content="/teaching/electionmaps/featured-hex.png" >
+        <meta property="twitter:card" content="summary">
+        <meta name="twitter:image" content="/teaching/electionmaps/featured-hex.png" >
+    
+    
+  <meta itemprop="name" content="Election Maps">
+<meta itemprop="description" content="After discovering the availability of some historical shapefiles from NHGIS and election data back to 2000 for many local elections from OpenElections, I wanted to assemble it for my personal research projects. While in the process of this I have started to map this data and make it available for readers to visualize patterns across time.
+US Level Maps   For the following graphic the percentage of total vote the runner up received was subtracted from the percentage of vote that the victor received."><meta itemprop="datePublished" content="2022-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="398"><meta itemprop="image" content="/teaching/electionmaps/featured-hex.png">
+<meta itemprop="keywords" content="redistricting,project,elections," />
+  
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-165021462-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  <!--[if IE]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+  <link rel="icon" href="/img/icon.png" type="image/x-icon">
+  
+  
+  <link rel="stylesheet" href="/style.main.min.4033daa889507ae7c8a9b45df1133cd0eb4586711c1b36a1984be0a78c93df77.css" integrity="sha256-QDPaqIlQeufIqbRd8RM80OtFhnEcGzahmEvgp4yT33c=" media="screen">
+  
+  
+  <script src="/panelset.min.078a92db9bd3228df502db3d9e0453c3cf3d910abe3f8deca0ad196c7071ad41.js" type="text/javascript"></script>
+  
+  
+  <script src="/main.min.38a0323c5b0bbb611c4874ba2d8fdaba57d20cc2b0d704b30250c235ba8b6d49.js" type="text/javascript"></script>
+</head>
+<body>
+      <div class="grid-container single">
+<header class="site-header pt4 pb2 mb4 bb b--transparent ph5 headroom z-max" role="banner">
+  <nav class="site-nav db dt-l w-100" role="navigation">
+    <a class="site-brand db dtc-l v-mid link no-underline w-100 w-33-l tc tl-l" href="/" title="Home">
+      <img src="/img/icon.png" class="dib db-l h2 w-auto" alt="Joseph M. Westenberg">
+    </a>
+    <div class="site-links db dtc-l v-mid w-100 w-47-l tc tr-l mt3 mt0-l ttu tracked">
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/about/" title="About Joe">About</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/publications/" title="Publications and Working Papers">Research</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 active" href="/teaching/" title="Teaching">Teaching</a>
+      
+        
+        
+        
+      <a class="link f6 f5-l dib pv1 ph2 " href="/blog/" title="Blog">Blog</a>
+      
+      
+    </div>
+  </nav>
+</header>
+
+<main class="page-main pa4" role="main">
+  <section class="page-content mw7 center">
+    <article class="post-content pa0 ph4-l">
+      <header class="post-header">
+        <h1 class="f1 lh-solid measure-narrow mb3 fw4">Election Maps</h1>
+        <h4 class="f4 mt0 mb4 lh-title measure">GIS Maps</h4>
+        <p class="f6 measure lh-copy mv1">By Joseph M. Westenberg in <a href="/categories/redistricting">redistricting</a>  <a href="/categories/project">project</a>  <a href="/categories/elections">elections</a> </p>
+        <p class="f7 db mv0 ttu">January 29, 2022</p>
+
+      
+
+      </header>
+      <section class="post-body pt5 pb4">
+        <p>After discovering the availability of some historical shapefiles from NHGIS and election data back to 2000 for many local elections from OpenElections, I wanted to assemble it for my personal research projects. While in the process of this I have started to map this data and make it available for readers to visualize patterns across time.</p>
+
+
+
+
+<h1 id="us-level-maps">US Level Maps
+  <a href="#us-level-maps"></a>
+</h1>
+<p>For the following graphic the percentage of total vote the runner up received was subtracted from the percentage of vote that the victor received. Dark colors indicate competitive races, light colors are less competitive. For areas that are almost white/cream color, this probably indicates this election was uncontested. Election data comes from MIT Election Lab for US House Elections. Shapefiles from NHGIS.
+<img src="https://jmwestenberg.github.io/uscong/uscong1992to2020.gif" alt=""></p>
+
+
+
+
+<h2 id="availability-and-links-to-individual-images">Availability and Links to Individual Images
+  <a href="#availability-and-links-to-individual-images"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Year</th>
+<th style="text-align:center">House Map</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1992</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_1992.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">1994</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_1994.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">1996</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_1996.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_1998.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2000.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2002.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2004</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2004.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2006.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2008</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2008.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2010.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2012.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2014.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2016.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2018.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+<tr>
+<td style="text-align:center">2020</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/uscong/ushouse_2020.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h1 id="state-level-maps">State Level Maps
+  <a href="#state-level-maps"></a>
+</h1>
+
+
+
+
+<h3 id="percentage-of-vote-won-by">Percentage of Vote Won By
+  <a href="#percentage-of-vote-won-by"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h3>
+<p>For the following graphic the percentage of total vote the runner up received was subtracted from the percentage of vote that the victor received. Dark colors indicate competitive races, light colors are less competitive. For areas that are almost white/cream color, this probably indicates this election was uncontested. Election data comes from OpenElections. Shapefiles from NHGIS.
+<img src="https://jmwestenberg.github.io/lowerstate/wi/wiassembly.gif" alt=""></p>
+
+
+
+
+<h3 id="partisan-skew">Partisan Skew
+  <a href="#partisan-skew"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h3>
+<p>I take the above defined measure and assign negative value if it is not a Republican who won. In this case, dark red means the race went highly in favor of a Republican, dark blue indicates that it went highly in favor of a non-Republican (Democrat in most cases). White or light colors indicate competitive races. Election data comes from OpenElections. Shapefiles from NHGIS.</p>
+<p><img src="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly.gif" alt=""></p>
+
+
+
+
+<h2 id="availability-and-links-to-individual-images-1">Availability and Links to Individual Images
+  <a href="#availability-and-links-to-individual-images-1"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h2>
+
+
+
+
+<h3 id="lower-legislative-body">Lower Legislative Body
+  <a href="#lower-legislative-body"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">State</th>
+<th style="text-align:center">2000</th>
+<th style="text-align:center">2002</th>
+<th style="text-align:center">2004</th>
+<th style="text-align:center">2006</th>
+<th style="text-align:center">2008</th>
+<th style="text-align:center">2010</th>
+<th style="text-align:center">2012</th>
+<th style="text-align:center">2014</th>
+<th style="text-align:center">2016</th>
+<th style="text-align:center">2018</th>
+<th style="text-align:center">2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">WI</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2000.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2002.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2004.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2006.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2008.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2010.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2012.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2014.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2016.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2018.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2020.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h3 id="lower-legislative-body---partisan-skew">Lower Legislative Body - Partisan Skew
+  <a href="#lower-legislative-body---partisan-skew"><svg class="anchor-symbol" aria-hidden="true" height="26" width="26" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="currentColor"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg></a>
+</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">State</th>
+<th style="text-align:center">2000</th>
+<th style="text-align:center">2002</th>
+<th style="text-align:center">2004</th>
+<th style="text-align:center">2006</th>
+<th style="text-align:center">2008</th>
+<th style="text-align:center">2010</th>
+<th style="text-align:center">2012</th>
+<th style="text-align:center">2014</th>
+<th style="text-align:center">2016</th>
+<th style="text-align:center">2018</th>
+<th style="text-align:center">2020</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">WI</td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2000.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2002.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2004.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2006.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2008.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2010.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2012.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2014.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2016.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2018.png" target="_blank" rel="noopener">X</a></td>
+<td style="text-align:center">
+<a href="https://jmwestenberg.github.io/lowerstate/wi/partisan/wiassembly_2020.png" target="_blank" rel="noopener">X</a></td>
+</tr>
+</tbody>
+</table>
+<p>Going forward I will try to make more and more maps available. To start I am just starting with states I have personal interest in. If you are however interested in seeing a particular state&rsquo;s results, please email me at <a href="mailto:jwesten@iu.edu">jwesten@iu.edu</a> and let me know.</p>
+
+        
+        <details closed class="f6 fw7 input-reset">
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Posted on:</dt>
+    <dd class="fw5 ml0">January 29, 2022</dd>
+  </dl>
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Length:</dt>
+    <dd class="fw5 ml0">2 minute read, 398 words</dd>
+  </dl>
+  
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Categories:</dt>
+    <dd class="fw5 ml0"> <a href="/categories/redistricting">redistricting</a>  <a href="/categories/project">project</a>  <a href="/categories/elections">elections</a> </dd>
+  </dl>
+  
+  
+  
+  <dl class="f6 lh-copy">
+    <dt class="fw7">Tags:</dt>
+    <dd class="fw5 ml0"> <a href="/tags/redistricting">redistricting</a>  <a href="/tags/project">project</a>  <a href="/tags/elections">elections</a> </dd>
+  </dl>
+  
+  <dl class="f6 lh-copy">
+    <dt class="fw7">See Also:</dt>
+    
+  </dl>
+</details>
+
+      </section>
+      <footer class="post-footer">
+        <div class="post-pagination dt w-100 mt4 mb2">
+  
+  
+  
+  
+    <a class="next dtc pl2 tr v-top fw6"
+    href="/teaching/datasciencebook/">Introduction to Data Science &rarr;</a>
+  
+</div>
+
+      </footer>
+    </article>
+    
+  </section>
+</main>
+<footer class="site-footer pv4 bt b--transparent ph5" role="contentinfo">
+  <nav class="db dt-l w-100">
+    <p class="site-copyright f7 db dtc-l v-mid w-100 w-33-l tc tl-l pv2 pv0-l mv0 lh-copy">
+      &copy; 2022 Joseph M. Westenberg, Bloomington, IN
+      <span class="middot-divider"></span>
+      Made with <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/hugo-apero/" rel="dct:source">Hugo Apéro</a></span>.
+      <br />
+      
+Based on <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/formspree/blogophonic-hugo" rel="dct:source">Blogophonic</a></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://formspree.io" property="cc:attributionName" rel="cc:attributionURL">Formspree</a>.
+    </p>
+    
+    <div class="site-social-links db dtc-l v-mid w-100 w-33-l tc pv2 pv0-l mv0">
+      <div class="social-icon-links" aria-hidden="true">
+  
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="/cv/cv.pdf" title="cv" >
+      <i class="ai ai-cv fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://github.com/jmwestenberg" title="github" target="_blank" rel="noopener">
+      <i class="fab fa-github fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="http://orcid.org/0000-0002-1368-7038" title="orcid" target="_blank" rel="noopener">
+      <i class="ai ai-orcid fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://scholar.google.com/citations?user=-QlG0yMAAAAJ&amp;hl=en#" title="google-scholar" target="_blank" rel="noopener">
+      <i class="ai ai-google-scholar fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://www.linkedin.com/in/westenbergj" title="linkedin" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="https://twitter.com/jmwestenberg" title="twitter" target="_blank" rel="noopener">
+      <i class="fab fa-twitter fa-lg fa-fw"></i>
+    </a>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <a class="link dib h1 w1 ml0 mr2 f6 o-90 glow" href="mailto:jwesten@iu.edu" title="envelope" >
+      <i class="fas fa-envelope fa-lg fa-fw"></i>
+    </a>
+  
+</div>
+
+    </div>
+    
+    <div class="site-links f6 db dtc-l v-mid w-100 w-67-l tc tr-l pv2 pv0-l mv0">
+      
+      <a class="dib pv1 ph2 link" href="/contact/" title="Contact form">Contact</a>
+      
+    </div>
+  </nav>
+</footer>
+
+      </div>
+    </body>
+</html>

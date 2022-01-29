@@ -6,7 +6,17 @@
     <description>Recent content on Joseph M. Westenberg</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Election Maps</title>
+      <link>/teaching/electionmaps/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/electionmaps/</guid>
+      <description>After discovering the availability of some historical shapefiles from NHGIS and election data back to 2000 for many local elections from OpenElections, I wanted to assemble it for my personal research projects. While in the process of this I have started to map this data and make it available for readers to visualize patterns across time.
+US Level Maps   For the following graphic the percentage of total vote the runner up received was subtracted from the percentage of vote that the victor received.</description>
+    </item>
+    
     <item>
       <title>Introduction to Data Science</title>
       <link>/teaching/datasciencebook/</link>
