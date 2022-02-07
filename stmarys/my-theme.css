@@ -84,3 +84,13 @@ th, td { padding: 5px; }
     color: #FFFFFF; /* white */
     opacity: 1; /* default: 0.5 */
   }
+
+.large { font-size: 130% }
+.small { font-size: 70% }
+.center {
+    text-align: center;
+}
+h1 {
+    text-align: center;}
+h2 {
+    text-align: center;}
