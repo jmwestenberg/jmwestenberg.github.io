@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Research Presentation/Agenda   St. Mary’s College</title>
+    <title>Local Election Mapping Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="Joseph M. Westenberg" />
     <script src="libs/header-attrs-2.10/header-attrs.js"></script>
@@ -11,35 +11,69 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Research Presentation/Agenda <br> St. Mary’s College
+# Local Election Mapping Project
 ### Joseph M. Westenberg
-### Indiana University
+### Indiana University - Bloomington
 ### 2022/02/11
 
 ---
 
-class: center, middle
+## Coding/Data Gathering Problem
 
-# In General:
+### Lack of Availability of:
+.large[
+- Historical state legislative district shapefiles
+- Standardized historical state legislative election results
+]
 
-## Applied Micro and Data Oriented
+---
+## Current Availability
 
-## Political Influences
+### Shapefiles
+.large[
+- NHGIS (IPUMS) has *some* state's shapefiles back to 1990 redistricting
+]
+
+
+### Election Results
+.large[
+- No real standard dataset
+- OpenElections
+]
+
+---
+## Goals
+
+.large[
+1. Standardize OpenElections Data and Pair with NHGIS Shapefiles
+2. Help OpenElections gather data back to 1992
+3. (Wishful) Start pushing data and shapefiles back further
+]
+
+---
+
+## Where I am at
+
+.center[Lower Legislative Body]
+
+|State|2000|2002|2004|2006|2008|2010|2012|2014|2016|2018|2020|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|IA| ||[X](https://jmwestenberg.github.io/lowerstate/ia/house_2004.png)|[X](https://jmwestenberg.github.io/lowerstate/ia/house_2006.png)|[X](https://jmwestenberg.github.io/lowerstate/ia/house_2008.png)| | |[X](https://jmwestenberg.github.io/lowerstate/ia/house_2014.png)|[X](https://jmwestenberg.github.io/lowerstate/ia/house_2016.png)|[X](https://jmwestenberg.github.io/lowerstate/ia/house_2018.png)|[X](https://jmwestenberg.github.io/lowerstate/ia/house_2020.png)|
+|IL| | | | |[X](https://jmwestenberg.github.io/lowerstate/il/house_2008.png)|[X](https://jmwestenberg.github.io/lowerstate/il/house_2010.png)|[X](https://jmwestenberg.github.io/lowerstate/il/house_2012.png)|[X](https://jmwestenberg.github.io/lowerstate/il/house_2014.png)|[X](https://jmwestenberg.github.io/lowerstate/il/house_2016.png)|[X](https://jmwestenberg.github.io/lowerstate/il/house_2018.png)| |
+|IN| |[X](https://jmwestenberg.github.io/lowerstate/in/house_2002.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2004.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2006.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2008.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2010.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2012.png)|[X](https://jmwestenberg.github.io/lowerstate/in/house_2014.png)| | | |
+|MN| | | | | | |[X](https://jmwestenberg.github.io/lowerstate/mn/house_2012.png)|[X](https://jmwestenberg.github.io/lowerstate/mn/house_2014.png)|[X](https://jmwestenberg.github.io/lowerstate/mn/house_2016.png)|[X](https://jmwestenberg.github.io/lowerstate/mn/house_2018.png)|[X](https://jmwestenberg.github.io/lowerstate/mn/house_2020.png)|
+|WI|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2000.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2002.png)| |[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2006.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2008.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2010.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2012.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2014.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2016.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2018.png)|[X](https://jmwestenberg.github.io/lowerstate/wi/wiassembly_2020.png)|
+|ALL|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2000.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2002.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2004.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2006.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2008.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2010.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2012.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2014.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2016.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2018.png)|[X](https://jmwestenberg.github.io/lowerstate/all/lower_2020.png)|
+
+---
+## Indiana
+
+![](https://jmwestenberg.github.io/lowerstate/in/house.gif)
 
 ---
 class: center, middle
 
-## Projects:
-
-#### [Section 301 and Politics: Analysis of Tariff Exclusions](https://jmwestenberg.github.io/stmarys/jmp.html)
-
-#### [Political Incentives and Air Pollution](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3885900)
-
-#### [Racial Disparities in Congressional Redistricting](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3885900)
-
-#### [Local Election Mapping Project (Open Source)](https://jmwestenberg.github.io/stmarys/elections.html)
-
-
+### [Back to Other Projects](https://jmwestenberg.github.io/stmarys/presentation.html#3)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
