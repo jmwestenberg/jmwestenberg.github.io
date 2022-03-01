@@ -3,7 +3,8 @@
   <head>
     <title>SEC Job Market Talk</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Beverly Mendoza (SF Austin)   Joseph M. Westenberg (IUB)   Nikita Lopatin (Ashland)" />
+    <meta name="author" content="Joseph M. Westenberg" />
+    <meta name="date" content="2022-03-03" />
     <script src="libs/header-attrs-2.10/header-attrs.js"></script>
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
   </head>
@@ -12,9 +13,28 @@
 class: center, middle, inverse, title-slide
 
 # SEC Job Market Talk
-## Section 301 and Politics: <br> Analysis of Tariff Exclusions
-### Beverly Mendoza (SF Austin) <br> Joseph M. Westenberg (IUB) <br> Nikita Lopatin (Ashland)
-### 2022/02/23
+## (Indiana University-Bloomington)
+### Joseph M. Westenberg
+### 03/03/2022
+
+---
+
+## About Me
+
+### Applied Microeconomist
+
+### Data-Centric Research 
+
+### Coding ([see github: jmwestenberg](https://github.com/jmwestenberg))
+
+### Government/Policy Interest
+
+---
+class: inverse, center, middle
+
+# Section 301 and Politics: &lt;br&gt; Analysis of Tariff Exclusions
+
+### Project with Beverly Mendoza (SF Austin) and Nikita Lopatin (Ashland)
 
 ---
 
@@ -27,6 +47,7 @@ class: center, middle, inverse, title-slide
 - Could cause 'severe economic harm' to US firms]
 
 ---
+
 ## Setting
 
 ### Trump Administration imposed (Section 301) tariffs on China in retaliation for unfair trade practices
@@ -41,6 +62,7 @@ class: center, middle, inverse, title-slide
 - Process and decision put forth by the Office of the United States Trade Representative (USTR)]
 
 ---
+
 ## Political Motivation?
 
 ### Tariffs on Chinese imports 
@@ -49,6 +71,7 @@ class: center, middle, inverse, title-slide
 - Fajgelbaum et al (2020) find that politically-mixed areas receive the largest degree of protection from import tariffs]
 
 ---
+
 ## Political Motivation?
 
 ### Tariffs on Chinese imports 
@@ -63,6 +86,7 @@ class: center, middle, inverse, title-slide
 - Fetzer and Schwarz (2021) shows evidence that China's retaliation is targeted against the core Republican voter base]
 
 ---
+
 ## Politics in Exclusion Process?
 
 ### Government Accountability Office Report (2021)
@@ -73,6 +97,7 @@ class: center, middle, inverse, title-slide
 - "USTR officials said they did not specifically define what they meant by `severe economic harm.' Instead, they applied their judgement by considering the size of the requesting company's operations, level of imports, and ability to absorb the tariffs."]
 
 ---
+
 ## Politics in Exclusion Process?
 
 ### Government Accountability Office Report (2021)
@@ -85,6 +110,7 @@ class: center, middle, inverse, title-slide
 ### United States Trade Representative is a direct political appointee of President
 
 ---
+
 ## Main Research Question
 
 ### Does the exclusion process from import tariffs on Chinese goods have a political bias?
@@ -94,6 +120,7 @@ class: center, middle, inverse, title-slide
 - Targeting of core Republican base?]
 
 ---
+
 ## Main Research Question
 
 ### Does the exclusion process from import tariffs on Chinese goods have a political bias?
@@ -109,6 +136,7 @@ class: center, middle, inverse, title-slide
 - No support for targeting mixed areas]
 
 ---
+
 ## Core of Data: Tariff Exclusion Requests
 
 ### Main Components of Data:
@@ -120,6 +148,7 @@ class: center, middle, inverse, title-slide
 - Approved or Denied]
 
 ---
+
 ## Core of Data: Tariff Exclusion Requests
 
 ### Main Components of Data:
@@ -139,6 +168,7 @@ class: center, middle, inverse, title-slide
 - Request Denied]
 
 ---
+
 ## What is a HS Code?
 
 ### In short:
@@ -148,6 +178,7 @@ class: center, middle, inverse, title-slide
 - More Digits = More detail!]
 
 ---
+
 ## What is a HS Code?
 
 ### In short:
@@ -161,47 +192,57 @@ class: center, middle, inverse, title-slide
 - 10 digit HS Code 8528520000 is: &lt;br&gt; Monitors and projectors, not incorporating television reception apparatus for television, whether or not incorporating radio-broadcast receivers or sound or video recording or reproducing apparatus. Other monitors: Capable of directly connecting to and designed for use with an automatic data processing machine of heading 8471
 
 ---
+
 ## Supplementing Exclusion Data
 
 ### To HS Codes
-
+.large[
 - Yearly value of US Imports (HS10)
 - Yearly value of US Imports from China (HS10)
+]
 
 ---
+
 ## Supplementing Exclusion Data
 
 ### To HS Codes
-
+.large[
 - Yearly value of US Imports (HS10)
 - Yearly value of US Imports from China (HS10)
+]
 
 ### To Firms
-
+.large[
 - Firm location
-- Firm Size
+- Firm Size]
+
 ---
+
 ## Supplementing Exclusion Data
 
 ### To HS Codes
 
+.large[
 - Yearly value of US Imports (HS10)
 - Yearly value of US Imports from China (HS10)
+]
 
 ### To Firms
-
+.large[
 - Firm location
-- Firm Size
+- Firm Size]
 
 ### To Firm Locations
-
-- County voting (2016 Presidential)
+.large[
+- County voting (2016 Presidential)]
 
 ---
+
 ## Evaluating Hypotheses
 
 ### Recall 2 Hypotheses
 
+.large[
 - Targeting of core Republican base?
   - Linear Probability
   - Defining Republican share in bins
@@ -209,8 +250,10 @@ class: center, middle, inverse, title-slide
 - Targeting of mixed areas?
   - Cubic in Republican share
   - Defining Republican share in bins
+]
 
 ---
+
 ## Main Results - Linear
 
 ![](timg/linreg.PNG)
@@ -220,6 +263,7 @@ class: center, middle, inverse, title-slide
 ## Main Results - Cubic
 
 ![](timg/cubicfit_1.png)
+
 ---
 
 ## Main Results - Bins
@@ -249,7 +293,9 @@ class: center
 
 ### Is politics in process known and/or expected?
 
+.large[
 - Expected bias can influence selection **even if there is no bias in process**
+]
 
 ### How does this expectation influence choice to apply?
 
@@ -259,38 +305,55 @@ class: center
 
 ### Value of Exclusion
 
-- Exclusion `\(i\)` (if approved) would have some positive value `\(v_i\)` to the firm
+.large[
+- For all potential exclusion request `\(i\)`, there would be some positive value `\(v_i\)` to the firm if approved
 
-Normalize this:
-- `\(\exists \  \ \bar{v} \text{ s.t. } v_i \leq \bar{v}\)` so let's denote `\(l_i = \frac{v_i}{\bar{v}} \in [0,1]\)`
+- Normalize this: `\(\exists \  \ \bar{v} \text{ s.t. } v_i \leq \bar{v}\)` so let's denote `\(l_i = \frac{v_i}{\bar{v}} \in [0,1]\)`
 
-### Exclusion Legitimacy
-
-- This is intrinsically linked to 'legitimacy' of the request (controlling for firm size)
 - Consider applications `\(j\)` and `\(k\)`, such that `\(v_j &gt; v_k\)`, then:
   - tariff was costlier in case `\(j\)` than `\(k\)`
   - more of a case for exclusion
+]
+
 
 ---
+
 ## Modeling Conceptual Framework
 
 ### Selection into Applying
+.large[
+- Conditional on firm size, if an exclusion from an import tariff would be of high value to the firm, then the firm would have a legitimate case that the import tariff severely harmed their business.]
 
-- Based on distribution and expectations (remain agnostic for now) `\(\exists \hat{l} \in [0,1]\)` such that
-  - for `\(v_i&gt;\hat{l}\)`, application is filed
-  - for `\(v_i \leq \hat{l}\)`, application is not filed
+.large[
+- `\(\exists \hat{l} \in [0,1]\)` such that
+  - for `\(l_i&gt;\hat{l}\)`, application is filed
+  - for `\(l_i \leq \hat{l}\)`, application is not filed
 
-"Severe Economic Harm"
+- Based on distribution and expectations (remain agnostic for now)
+]
 
-- Linked to `\(l_i\)`
+---
+
+## Modeling Conceptual Framework
 
 ### Agency Decision
 
+.large[
 There exists some threshold `\(\tau\)` in which agency decides application `\(i\)` is:
-- declined if `\(v_i &lt; \tau\)`
-- approved if `\(v_i \geq \tau\)`
+- declined if `\(l_i &lt; \tau\)`
+- approved if `\(l_i \geq \tau\)`
+]
 
 ---
+
+## Modeling Conceptual Framework
+
+### Putting it Together
+
+![](timg/basiclegitcutoffs.PNG)
+
+---
+
 ## Modeling Conceptual Framework
 
 ### Putting it Together
@@ -298,25 +361,49 @@ There exists some threshold `\(\tau\)` in which agency decides application `\(i\
 ![](timg/basiclegitcutoffs.PNG)
 
 ### Useful Derivation
-
+.large[
 Approval Rate:
 `$$r=\frac{1-\tau}{1-\hat{l}}$$`
----
-## Complications to Model
+]
 
-1. Hypothesis was to check for political bias, in terms of our model:
-  - `\(\tau\)` for Republicans `\(\neq \tau\)` for Democrats (going forward `\(\tau_R\)` and `\(\tau_D\)`)
-2. If 1. is true, was this expected? If so, selection effect? How does this impact estimates?
+---
+
+## 2 Party Model
 
 ![](timg/basiclegitcutoffs_randddiff.PNG)
 
+.large[
+- Assumptions:
+  - Equal legitimacy distribution for Republican and Democrats
+  - No expectations of bias
+  - No bias in the process
+
+- Approval Rates R and D equal
+]
 
 ---
-## Policy Implication
+
+## Complications to Model
+
+![](timg/basiclegitcutoffs_randddiff.PNG)
+
+.large[
+1. Hypothesis was to check for political bias, in terms of our model:
+  - `\(\tau\)` for Republicans `\(\neq \tau\)` for Democrats
+2. If 1. is true, was this expected? If so, selection effect?
+]
+
+---
+
+## Implications of Model
 
 .large[
 - Policy design
-- Policy implementation]
+- Policy implementation
+
+
+Polarization in Model
+- Expectations of Bias?]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
