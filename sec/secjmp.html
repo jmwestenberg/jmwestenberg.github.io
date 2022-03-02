@@ -62,28 +62,27 @@ class: inverse, center, middle
 - Process and decision put forth by the Office of the United States Trade Representative (USTR)]
 
 ---
-
-## Political Motivation?
-
-### Tariffs on Chinese imports 
+## Why Study?
 
 .large[
-- Fajgelbaum et al (2020) find that politically-mixed areas receive the largest degree of protection from import tariffs]
+- Tariffs on only certain goods causes heterogeneity among firms in production costs
+
+- Exclusions can further this]
 
 ---
 
 ## Political Motivation?
 
 ### Tariffs on Chinese imports 
-
 .large[
-- Fajgelbaum et al (2020) find that politically-mixed areas receive the largest degree of protection from import tariffs]
+- Politically-mixed areas receive the largest degree of protection from import tariffs (Fajgelbaum et al 2020)
 
-### Subsequent (tariff) retaliations against the US
+- Republican areas experience more harm from retaliatory tariffs(Fetzer and Schwarz 2021, Fajgelbaum et al 2020)]
 
-.large[
-- Fajgelbaum et al (2020) find that Republican areas experience more harm from retaliatory tariffs.
-- Fetzer and Schwarz (2021) shows evidence that China's retaliation is targeted against the core Republican voter base]
+---
+
+![](timg/relationship.png)
+
 
 ---
 
@@ -108,6 +107,16 @@ class: inverse, center, middle
 - "USTR officials said they did not specifically define what they meant by `severe economic harm.' Instead, they applied their judgement by considering the size of the requesting company's operations, level of imports, and ability to absorb the tariffs."]
 
 ### United States Trade Representative is a direct political appointee of President
+
+---
+## Background Summary
+
+.large[
+- Imposition of Tariffs Politically motivated
+- Unclear exclusion process
+- Political Appointee in charge
+]
+
 
 ---
 
@@ -162,7 +171,7 @@ class: inverse, center, middle
 ### Example:
 
 .large[
-- Kohler Co - From Wisconsin!
+- Kohler Co - From Wisconsin
 - HTSUS 3924905650 
 - The product in question is a showerhead with a max water flow rate of 2.5 gallons per minute.
 - Request Denied]
@@ -237,6 +246,20 @@ class: inverse, center, middle
 - County voting (2016 Presidential)]
 
 ---
+class: center
+
+## 2016 Republican Vote Share
+
+![](timg/repvotemap.PNG)
+
+---
+class: center
+
+## Approvals
+
+![](timg/appr_vote.png)
+
+---
 
 ## Evaluating Hypotheses
 
@@ -251,6 +274,13 @@ class: inverse, center, middle
   - Cubic in Republican share
   - Defining Republican share in bins
 ]
+
+---
+## Main Specification
+
+.large[
+`\(1\{Approval_{ifpc}\}=\beta_0 + \beta_1 \text{Republican share}_{c} + \beta_2 \text{China Import Share}_{p}\)`
+`\(\ \ + \beta_3 log(\text{Value of Imports})_{p} + \Omega P_p + \Gamma F_f + \Phi C_c + \epsilon_{ifpc}\)`]
 
 ---
 
@@ -289,15 +319,32 @@ class: center
 
 ## Conceptual Framework
 
-### Polarization
-
 ### Is politics in process known and/or expected?
 
+### How does this expectation influence choice to apply?
+
+---
+
+## Modeling Conceptual Framework
+
+### Value of Exclusion
+
 .large[
-- Expected bias can influence selection **even if there is no bias in process**
+- For all potential exclusion request `\(i\)`, there would be some positive value `\(v_i\)` to the firm if approved
 ]
 
-### How does this expectation influence choice to apply?
+---
+
+## Modeling Conceptual Framework
+
+### Value of Exclusion
+
+.large[
+- For all potential exclusion request `\(i\)`, there would be some positive value `\(v_i\)` to the firm if approved
+
+- Normalize this: `\(\exists \  \ \bar{v} \text{ s.t. } v_i \leq \bar{v}\)` so let's denote `\(l_i = \frac{v_i}{\bar{v}} \in [0,1]\)`
+
+]
 
 ---
 
@@ -315,6 +362,13 @@ class: center
   - more of a case for exclusion
 ]
 
+---
+
+## Modeling Conceptual Framework
+
+### Selection into Applying
+.large[
+- Conditional on firm size, if an exclusion from an import tariff would be of high value to the firm, then the firm would have a legitimate case that the import tariff severely harmed their business.]
 
 ---
 
@@ -325,11 +379,9 @@ class: center
 - Conditional on firm size, if an exclusion from an import tariff would be of high value to the firm, then the firm would have a legitimate case that the import tariff severely harmed their business.]
 
 .large[
-- `\(\exists \hat{l} \in [0,1]\)` such that
-  - for `\(l_i&gt;\hat{l}\)`, application is filed
-  - for `\(l_i \leq \hat{l}\)`, application is not filed
-
-- Based on distribution and expectations (remain agnostic for now)
+- `\(\exists l \in [0,1]\)` such that
+  - for `\(l_i&gt; l\)`, application is filed
+  - for `\(l_i \leq l\)`, application is not filed
 ]
 
 ---
@@ -397,14 +449,23 @@ Approval Rate:
 
 ## Implications of Model
 
-.large[
-- Policy design
-- Policy implementation
+### Polarization?
+### Policy Design
+### Policy Implementation
 
+---
 
-Polarization in Model
-- Expectations of Bias?]
+class: center, middle
 
+# Other Projects
+
+### [Political Incentives and Air Pollution](https://jmwestenberg.github.io/sec/pollution)
+
+### [Local Elections Project (with OpenElections Data)](https://jmwestenberg.github.io/sec/elections)
+
+### Redistricting Outcomes and Race
+
+### An Empirical Test of a Loss-Leader Hypothesis
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
